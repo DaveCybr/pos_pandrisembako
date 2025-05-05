@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class ConnectionDB {
     static Connection con;
-    private static final String URL = "jdbc:mysql://localhost:3306/db_posapotek";
+    private static final String URL = "jdbc:mysql://localhost:3306/projek";
     private static final String USER = "root";
     private static final String PASSWORD = "";
     
