@@ -4,6 +4,14 @@
  */
 package com.app.form.supplier;
 
+import com.app.dao.SupplierDAO;
+import com.app.model.ModelSupplier;
+import com.app.service.ServiceSupplier;
+import com.app.tablemodel.TableModelSupplier;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableColumnModel;
+
 /**
  *
  * @author Rohim
@@ -13,8 +21,22 @@ public class FormSupplier extends javax.swing.JPanel {
     /**
      * Creates new form FormSupplier
      */
+    
+    private final TableModelSupplier tblModel = new TableModelSupplier();
+    private final ServiceSupplier servis = new SupplierDAO();
+    
     public FormSupplier() {
         initComponents();
+        tbl_dataSupplier.setModel(tblModel);
+        loadData();
+        setLebarKolom();
+    }
+    
+    private void setLebarKolom() {
+        TableColumnModel kolom = tbl_dataSupplier.getColumnModel();
+        kolom.getColumn(0).setPreferredWidth(50);
+        kolom.getColumn(0).setMaxWidth(50);
+        kolom.getColumn(0).setMinWidth(50);
     }
 
     /**
@@ -26,30 +48,243 @@ public class FormSupplier extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btn_tambah = new com.raven.swing.ButtonGradient();
+        btn_perbarui = new com.raven.swing.ButtonGradient();
+        btn_hapus = new com.raven.swing.ButtonGradient();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        panel1 = new com.raven.swing.Panel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbl_dataSupplier = new com.raven.swing.Table();
+        txt_search = new com.raven.swing.TextField();
 
-        jLabel1.setText("Ini Supplier");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(70, 70));
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Supplier");
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel2.setText("List Supplier");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        btn_tambah.setText("TAMBAH");
+        btn_tambah.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_tambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tambahActionPerformed(evt);
+            }
+        });
+
+        btn_perbarui.setText("PERBARUI");
+        btn_perbarui.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_perbarui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_perbaruiActionPerformed(evt);
+            }
+        });
+
+        btn_hapus.setText("HAPUS");
+        btn_hapus.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_hapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_hapusActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel3.setText("Search:");
+
+        tbl_dataSupplier.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbl_dataSupplier.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        tbl_dataSupplier.setPreferredSize(new java.awt.Dimension(1000, 1000));
+        tbl_dataSupplier.setRowHeight(30);
+        jScrollPane2.setViewportView(tbl_dataSupplier);
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        txt_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_searchKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jLabel1)
-                .addContainerGap(184, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+            .addComponent(jSeparator1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(jLabel1)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tambahActionPerformed
+        // TODO add your handling code here:
+        tambahData();
+    }//GEN-LAST:event_btn_tambahActionPerformed
+
+    private void btn_perbaruiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_perbaruiActionPerformed
+        // TODO add your handling code here:
+        perbaruiData();
+    }//GEN-LAST:event_btn_perbaruiActionPerformed
+
+    private void btn_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hapusActionPerformed
+        // TODO add your handling code here:
+        hapusData();
+    }//GEN-LAST:event_btn_hapusActionPerformed
+
+    private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
+        // TODO add your handling code here:
+        pencarianData();
+    }//GEN-LAST:event_txt_searchKeyReleased
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.raven.swing.ButtonGradient btn_hapus;
+    private com.raven.swing.ButtonGradient btn_perbarui;
+    private com.raven.swing.ButtonGradient btn_tambah;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private com.raven.swing.Panel panel1;
+    private com.raven.swing.Table tbl_dataSupplier;
+    private com.raven.swing.TextField txt_search;
     // End of variables declaration//GEN-END:variables
+
+
+    private void loadData() {
+        List<ModelSupplier> list = servis.tampilData();
+        tblModel.setData(list);
+    }
+    
+    private void pencarianData() {
+        List<ModelSupplier> list = servis.pencarianData(txt_search.getText());
+        tblModel.setData(list);
+    }
+
+    private void tambahData() {
+        FormInputSupplier formInput = new FormInputSupplier(null, true, 1, null, this);
+        formInput.setVisible(true);
+        loadData();
+    }
+
+    private void perbaruiData() {
+        int row = tbl_dataSupplier.getSelectedRow();
+        if(row != -1){
+            ModelSupplier model = tblModel.getData(row);
+            FormInputSupplier formInput = new FormInputSupplier(null, true, row, model, this);
+            formInput.setVisible(true);
+            loadData();
+        }else{
+            JOptionPane.showMessageDialog(null, "Pilih data yang akan diperbarui");
+        }
+    }
+
+    private void hapusData() {
+        int row = tbl_dataSupplier.getSelectedRow();
+        if(row != -1){
+            ModelSupplier model = tblModel.getData(row);
+            if(JOptionPane.showConfirmDialog(null, "Yakin Ingin Menhapus Data ini? ",
+                    "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
+            {
+                servis.hapusData(model);
+                tblModel.deleteData(row);
+                loadData();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus");
+        }
+    }
+    
+    void refreshTable() {
+        loadData();
+    }
 }
