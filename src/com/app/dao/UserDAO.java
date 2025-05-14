@@ -261,26 +261,25 @@ public class UserDAO implements ServiceUser {
         }
     }
 
-    public int getLastUserId() {
-        int lastId = 0;
-        String sql = "SELECT MAX(id_user) FROM tbl_user";
-        try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                lastId = rs.getInt(1); // Jika tabel kosong, lastId tetap 0
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return lastId;
-    }
-
-    public String generateRFID() {
-        int lastId = getLastUserId(); // Ambil ID terakhir dari database
-        int nextId = lastId + 1; // ID berikutnya
-        String rfid = String.format("RF%04d", nextId); // Format RFID dengan 4 digit angka
-        return rfid;
-    }
-
+//    public int getLastUserId() {
+//        int lastId = 0;
+//        String sql = "SELECT MAX(id_user) FROM tbl_user";
+//        try (PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+//            if (rs.next()) {
+//                lastId = rs.getInt(1); // Jika tabel kosong, lastId tetap 0
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return lastId;
+//    }
+//
+//    public String generateRFID() {
+//        int lastId = getLastUserId(); // Ambil ID terakhir dari database
+//        int nextId = lastId + 1; // ID berikutnya
+//        String rfid = String.format("RF%04d", nextId); // Format RFID dengan 4 digit angka
+//        return rfid;
+//    }
     public List<ModelUser> detailuser() {
         PreparedStatement st = null;
         ResultSet rs = null;
@@ -308,6 +307,33 @@ public class UserDAO implements ServiceUser {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public ModelUser loginByRFID(String rfid) throws SQLException {
+        Connection conn = ConnectionDB.getConnection();
+        
+        String sql = "SELECT * FROM tbl_user WHERE rfid = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, rfid);
+        ResultSet rs = pst.executeQuery();
+
+        ModelUser user = null;
+
+        if (rs.next()) {
+            user = new ModelUser();
+            user.setIdUser(rs.getInt("id_user"));
+            user.setNama(rs.getString("nama"));
+            user.setUsername(rs.getString("username"));
+            user.setRole(rs.getString("role"));
+            user.setRfidUid(rs.getString("rfid"));
+            // tambahkan data lain kalau perlu
+        }
+
+        rs.close();
+        pst.close();
+        conn.close();
+
+        return user;
     }
 
 }

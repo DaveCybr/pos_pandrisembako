@@ -271,9 +271,6 @@
     <Component class="javax.swing.JTextField" name="txt_notelp">
     </Component>
     <Component class="javax.swing.JTextField" name="txt_rfid">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>

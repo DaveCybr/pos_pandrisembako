@@ -159,8 +159,6 @@ public class FormInputUser extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel8.setText("No Telepon");
 
-        txt_rfid.setEditable(false);
-
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel9.setText("RFID");
 
@@ -345,7 +343,7 @@ public class FormInputUser extends javax.swing.JDialog {
     private void simpanData() {
         if (validasiInput()) {
             String nama = txt_nama.getText();
-            String rfid = txt_rfid.getText().trim().isEmpty() ? servis.generateRFID() : txt_rfid.getText();
+            String rfid = txt_rfid.getText();
             String username = txt_username.getText();
             String password = j_password.getText();
             String no_telepon = txt_notelp.getText();
@@ -424,10 +422,10 @@ public class FormInputUser extends javax.swing.JDialog {
         }
     }
 
-    private void generateRFIDOtomatis() {
-        UserDAO userDAO = new UserDAO();
-        String rfid = userDAO.generateRFID(); 
-        txt_rfid.setText(rfid);  
-        txt_rfid.setEditable(false); 
-    }
+//    private void generateRFIDOtomatis() {
+//        UserDAO userDAO = new UserDAO();
+//        String rfid = userDAO.generateRFID(); 
+//        txt_rfid.setText(rfid);  
+//        txt_rfid.setEditable(false); 
+//    }
 }
