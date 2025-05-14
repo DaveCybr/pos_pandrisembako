@@ -2,38 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.app.form.user;
+package com.app.form.barang;
 
-import com.app.dao.UserDAO;
-import com.app.model.ModelUser;
-import com.app.service.ServiceUser;
-import com.app.tablemodel.TableModelUser;
+import com.app.dao.BarangDAO;
+import com.app.model.ModelBarang;
+import com.app.service.ServiceBarang;
+import com.app.tablemodel.TableModelBarang;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
 
 /**
  *
  * @author Rohim
  */
-public class FormUser extends javax.swing.JPanel {
+public class FormBarang extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FormUser
-     */
+    private final TableModelBarang tblModel = new TableModelBarang();
+    private final ServiceBarang servis = new BarangDAO();
     
-    private final TableModelUser tblModel = new TableModelUser();
-    private final ServiceUser servis = new UserDAO();
-    
-    public FormUser() {
+    public FormBarang() {
         initComponents();
-        tbl_datauser.setModel(tblModel);
+        tbl_data.setModel(tblModel);
         loadData();
         setLebarKolom();
     }
     
     private void setLebarKolom() {
-        TableColumnModel kolom = tbl_datauser.getColumnModel();
+        TableColumnModel kolom = tbl_data.getColumnModel();
         kolom.getColumn(0).setPreferredWidth(50);
         kolom.getColumn(0).setMaxWidth(50);
         kolom.getColumn(0).setMinWidth(50);
@@ -58,7 +53,7 @@ public class FormUser extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         panel1 = new com.raven.swing.Panel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_datauser = new com.raven.swing.Table();
+        tbl_data = new com.raven.swing.Table();
         txt_search = new com.raven.swing.TextField();
         btn_detail = new com.raven.swing.ButtonGradient();
 
@@ -70,7 +65,7 @@ public class FormUser extends javax.swing.JPanel {
         jLabel1.setText("user");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel2.setText("List User");
+        jLabel2.setText("List Barang");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,7 +115,7 @@ public class FormUser extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setText("Search:");
 
-        tbl_datauser.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_data.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -131,10 +126,10 @@ public class FormUser extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_datauser.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        tbl_datauser.setPreferredSize(new java.awt.Dimension(1000, 1000));
-        tbl_datauser.setRowHeight(30);
-        jScrollPane2.setViewportView(tbl_datauser);
+        tbl_data.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        tbl_data.setPreferredSize(new java.awt.Dimension(1000, 1000));
+        tbl_data.setRowHeight(30);
+        jScrollPane2.setViewportView(tbl_data);
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -171,7 +166,7 @@ public class FormUser extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 897, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -184,7 +179,7 @@ public class FormUser extends javax.swing.JPanel {
                         .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(btn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,68 +248,44 @@ public class FormUser extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private com.raven.swing.Panel panel1;
-    private com.raven.swing.Table tbl_datauser;
+    private com.raven.swing.Table tbl_data;
     private com.raven.swing.TextField txt_search;
     // End of variables declaration//GEN-END:variables
 
 
     private void loadData() {
-        List<ModelUser> list = servis.tampilData();
+        List<ModelBarang> list = servis.tampilData();
         tblModel.setData(list);
     }
     
-    private void pencarianData() {
-        List<ModelUser> list = servis.pencarianData(txt_search.getText());
-        tblModel.setData(list);
-    }
-
+//    private void pencarianData() {
+//        List<ModelUser> list = servis.pencarianData(txt_search.getText());
+//        tblModel.setData(list);
+//    }
+    
     private void tambahData() {
-        FormInputUser formInput = new FormInputUser(null, true, 1, null, this);
+        FormInputBarang formInput = new FormInputBarang(null, true, 1, null, this);
         formInput.setVisible(true);
         loadData();
     }
 
     private void perbaruiData() {
-        int row = tbl_datauser.getSelectedRow();
-        if(row != -1){
-            ModelUser model = tblModel.getData(row);
-            FormInputUser formInput = new FormInputUser(null, true, row, model, this);
-            formInput.setVisible(true);
-            loadData();
-        }else{
-            JOptionPane.showMessageDialog(null, "Pilih data yang akan diperbarui");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     private void hapusData() {
-        int row = tbl_datauser.getSelectedRow();
-        if(row != -1){
-            ModelUser model = tblModel.getData(row);
-            if(JOptionPane.showConfirmDialog(null, "Yakin Ingin Menhapus Data ini? ",
-                    "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
-            {
-                servis.hapusData(model);
-                tblModel.deleteData(row);
-                loadData();
-            }
-        }else{
-            JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     private void detailuser() {
-        int row = tbl_datauser.getSelectedRow();
-        if(row != -1){
-            ModelUser model = tblModel.getData(row);
-            FormDetailUser formDetail = new FormDetailUser(null, true, row, model, this);
-            formDetail.setVisible(true);
-            loadData();
-        } else {
-            JOptionPane.showMessageDialog(null, "Pilih data terlebih dahulu");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    private void pencarianData() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     void refreshTable() {
-        loadData();
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
