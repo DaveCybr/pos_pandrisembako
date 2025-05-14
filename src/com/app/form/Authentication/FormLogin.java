@@ -59,10 +59,10 @@ public class FormLogin extends javax.swing.JPanel {
         // Validasi input sebelum melanjutkan
         if (!validasiInput()) {
             JOptionPane.showMessageDialog(
-                null, 
-                "Harap isi Username dan Password!", 
-                "Validasi Input", 
-                JOptionPane.WARNING_MESSAGE
+                    null,
+                    "Harap isi Username dan Password!",
+                    "Validasi Input",
+                    JOptionPane.WARNING_MESSAGE
             );
             return;
         }
@@ -83,19 +83,19 @@ public class FormLogin extends javax.swing.JPanel {
             // Login berhasil
             FormMenuUtama.login(hasilLogin);
             JOptionPane.showMessageDialog(
-                null, 
-                "Login berhasil! Selamat datang, " + hasilLogin.getNama()+ ".", 
-                "Login Sukses", 
-                JOptionPane.INFORMATION_MESSAGE
+                    null,
+                    "Login berhasil! Selamat datang, " + hasilLogin.getNama() + ".",
+                    "Login Sukses",
+                    JOptionPane.INFORMATION_MESSAGE
             );
             resetForm();
         } else {
             // Login gagal
             JOptionPane.showMessageDialog(
-                null, 
-                "Username atau Password salah. Silakan coba lagi.", 
-                "Login Gagal", 
-                JOptionPane.ERROR_MESSAGE
+                    null,
+                    "Username atau Password salah. Silakan coba lagi.",
+                    "Login Gagal",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }
@@ -114,30 +114,46 @@ public class FormLogin extends javax.swing.JPanel {
         lbUsername = new javax.swing.JLabel();
         lbTitle = new javax.swing.JLabel();
         lbPassword = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
         lbLogo = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
+        btn_logrfid = new com.raven.swing.ButtonGradient();
+        btnLogin = new com.raven.swing.ButtonGradient();
 
+        txtUsername.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        lbUsername.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lbUsername.setText("Username");
 
+        lbTitle.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTitle.setText("Login");
 
+        lbPassword.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lbPassword.setText("Password");
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
 
         lbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/drugstore.png"))); // NOI18N
 
+        txtPassword.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
+            }
+        });
+
+        btn_logrfid.setText("RFID");
+        btn_logrfid.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_logrfid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logrfidActionPerformed(evt);
+            }
+        });
+
+        btnLogin.setText("LOGIN");
+        btnLogin.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -148,15 +164,16 @@ public class FormLogin extends javax.swing.JPanel {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                     .addComponent(txtUsername)
                     .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_logrfid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelLoginLayout.createSequentialGroup()
                         .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbPassword)
-                            .addComponent(lbUsername))
+                            .addComponent(lbUsername)
+                            .addComponent(lbPassword))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -164,20 +181,22 @@ public class FormLogin extends javax.swing.JPanel {
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(lbUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLogin)
-                .addGap(26, 26, 26))
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_logrfid, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -185,30 +204,43 @@ public class FormLogin extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(125, 125, 125)
                 .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(40, 40, 40)
                 .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        prosesLogin();
-    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        prosesLogin();
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btn_logrfidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logrfidActionPerformed
+        // TODO add your handling code here:
+        java.awt.Window parentWindow = javax.swing.SwingUtilities.getWindowAncestor(this);
+
+        if (parentWindow instanceof java.awt.Frame) {
+            RfidLogin rfidDialog = new RfidLogin((java.awt.Frame) parentWindow, true);
+            rfidDialog.setLocationRelativeTo(parentWindow);
+            rfidDialog.setVisible(true);
+        }
+    }//GEN-LAST:event_btn_logrfidActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private com.raven.swing.ButtonGradient btnLogin;
+    private com.raven.swing.ButtonGradient btn_logrfid;
     private javax.swing.JLabel lbLogo;
     private javax.swing.JLabel lbPassword;
     private javax.swing.JLabel lbTitle;
@@ -217,43 +249,43 @@ public class FormLogin extends javax.swing.JPanel {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
-    private void setLayoutForm () {
+    private void setLayoutForm() {
         setLayout(new FormLoginLayout());
         panelLogin.setLayout(new LayoutLogin());
         lbTitle.putClientProperty(FlatClientProperties.STYLE, "font:h1.font");
         panelLogin.putClientProperty(FlatClientProperties.STYLE, ""
-                    + "background:$Login.background;"
-                    + "arc:20;"
-                    + "border:30,40,50,30;");
-        txtPassword.putClientProperty(FlatClientProperties.STYLE, "" 
-                    + "showRevealButton:true;" 
-                    + "showCapsLock:true");
-        
+                + "background:$Login.background;"
+                + "arc:20;"
+                + "border:30,40,50,30;");
+        txtPassword.putClientProperty(FlatClientProperties.STYLE, ""
+                + "showRevealButton:true;"
+                + "showCapsLock:true");
+
     }
-    
+
     private class FormLoginLayout implements LayoutManager {
 
         @Override
         public void addLayoutComponent(String name, Component comp) {
-            
+
         }
 
         @Override
         public void removeLayoutComponent(Component comp) {
-            
+
         }
 
         @Override
         public Dimension preferredLayoutSize(Container parent) {
-             synchronized (parent.getTreeLock()) {
-                return new Dimension(0,0);
+            synchronized (parent.getTreeLock()) {
+                return new Dimension(0, 0);
             }
         }
 
         @Override
         public Dimension minimumLayoutSize(Container parent) {
-             synchronized (parent.getTreeLock()) {
-                return new Dimension(0,0);
+            synchronized (parent.getTreeLock()) {
+                return new Dimension(0, 0);
             }
         }
 
@@ -270,14 +302,14 @@ public class FormLogin extends javax.swing.JPanel {
             }
         }
     }
-    
+
     private class LayoutLogin implements LayoutManager {
 
         private final int titleGap = 10;
         private final int textGap = 10;
         private final int labelGap = 10;
         private final int buttonGap = 10;
-        
+
         @Override
         public void addLayoutComponent(String name, Component comp) {
             throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -290,28 +322,30 @@ public class FormLogin extends javax.swing.JPanel {
 
         @Override
         public Dimension preferredLayoutSize(Container parent) {
-           synchronized (parent.getTreeLock()) {
-               Insets insets = parent.getInsets();
-               int height = insets.top + insets.bottom;
-               
-               height += lbLogo.getPreferredSize().height;
-               height += UIScale.scale(titleGap);
-               height += lbTitle.getPreferredSize().height;
-               height += UIScale.scale(titleGap);
-               height += lbUsername.getPreferredSize().height;
-               height += UIScale.scale(labelGap);
-               height += txtUsername.getPreferredSize().height;
-               height += UIScale.scale(textGap);
-               
-               height += txtPassword.getPreferredSize().height;
-               height += UIScale.scale(textGap);
-               height += lbPassword.getPreferredSize().height;
-               height += UIScale.scale(labelGap);
-               height += btnLogin.getPreferredSize().height;
-               height += UIScale.scale(buttonGap);
-               
-               return new Dimension(0, height);
-           }
+            synchronized (parent.getTreeLock()) {
+                Insets insets = parent.getInsets();
+                int height = insets.top + insets.bottom;
+
+                height += lbLogo.getPreferredSize().height;
+                height += UIScale.scale(titleGap);
+                height += lbTitle.getPreferredSize().height;
+                height += UIScale.scale(titleGap);
+                height += lbUsername.getPreferredSize().height;
+                height += UIScale.scale(labelGap);
+                height += txtUsername.getPreferredSize().height;
+                height += UIScale.scale(textGap);
+
+                height += txtPassword.getPreferredSize().height;
+                height += UIScale.scale(textGap);
+                height += lbPassword.getPreferredSize().height;
+                height += UIScale.scale(labelGap);
+                height += btnLogin.getPreferredSize().height;
+                height += UIScale.scale(buttonGap);
+                height += btn_logrfid.getPreferredSize().height;
+                height += UIScale.scale(buttonGap);
+
+                return new Dimension(0, height);
+            }
         }
 
         @Override
@@ -353,10 +387,13 @@ public class FormLogin extends javax.swing.JPanel {
 
                 // Layout btnLogin
                 btnLogin.setBounds(x, y, width, btnLogin.getPreferredSize().height);
+                y += btnLogin.getPreferredSize().height + UIScale.scale(buttonGap);
+
+                // Layout btn_logrfid
+                btn_logrfid.setBounds(x, y, width, btn_logrfid.getPreferredSize().height);
             }
         }
-        
+
     }
-    
-    
+
 }

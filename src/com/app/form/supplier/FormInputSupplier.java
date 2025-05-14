@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package com.app.form.user;
+package com.app.form.supplier;
 
-import com.app.dao.UserDAO;
-import com.app.model.ModelUser;
-import com.app.service.ServiceUser;
-import com.app.tablemodel.TableModelUser;
+import com.app.dao.SupplierDAO;
+import com.app.model.ModelSupplier;
+import com.app.service.ServiceSupplier;
+import com.app.tablemodel.TableModelSupplier;
 import com.formdev.flatlaf.FlatClientProperties;
 import java.util.HashMap;
 import java.util.List;
@@ -19,25 +19,25 @@ import javax.swing.SwingUtilities;
  *
  * @author Rohim
  */
-public class FormInputUser extends javax.swing.JDialog {
+public class FormInputSupplier extends javax.swing.JDialog {
 
     /**
-     * Creates new form FormInputUser
+     * Creates new form FormInputSupplier
      */
-    private TableModelUser tblModel = new TableModelUser();
-    private ServiceUser servis = new UserDAO();
-    private ModelUser user;
-    private int idUser;
+    private TableModelSupplier tblModel = new TableModelSupplier();
+    private ServiceSupplier servis = new SupplierDAO();
+    private ModelSupplier Supplier;
+    private int idSupplier;
     private int row;
-    private FormUser formuser;
+    private FormSupplier FormSupplier;
 
-    public FormInputUser(java.awt.Frame parent, boolean modal, int row, ModelUser user, FormUser formuser) {
+    public FormInputSupplier(java.awt.Frame parent, boolean modal, int row, ModelSupplier Supplier, FormSupplier FormSupplier) {
         super(parent, modal);
-        this.user = user;
+        this.Supplier = Supplier;
         this.row = row;
-        this.formuser = formuser;
+        this.FormSupplier = FormSupplier;
         initComponents();
-        if (user != null) {
+        if (Supplier != null) {
             dataTable();
         }
         loaddata();
@@ -45,14 +45,9 @@ public class FormInputUser extends javax.swing.JDialog {
     }
 
     private void setLayoutForm() {
-        j_password.putClientProperty(FlatClientProperties.STYLE, ""
-                + "showRevealButton:true;"
-                + "showCapsLock:true");
+        
 
         txt_nama.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan Nama");
-        txt_rfid.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan RFID");
-        txt_username.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan Username");
-        j_password.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan Password");
         txt_notelp.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan No Telepon");
         txt_alamat.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan Alamat");
     }
@@ -71,20 +66,12 @@ public class FormInputUser extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         btn_simpan = new com.raven.swing.ButtonGradient();
         btn_batal = new com.raven.swing.ButtonGradient();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txt_username = new javax.swing.JTextField();
-        j_password = new javax.swing.JPasswordField();
-        cb_role = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txt_nama = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txt_alamat = new javax.swing.JTextField();
         txt_notelp = new javax.swing.JTextField();
-        txt_rfid = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -138,18 +125,6 @@ public class FormInputUser extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel3.setText("Username");
-
-        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setText("Password");
-
-        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel5.setText("Role");
-
-        cb_role.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        cb_role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Role", "admin", "kasir", "gudang" }));
-
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel6.setText("Nama");
 
@@ -159,8 +134,11 @@ public class FormInputUser extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel8.setText("No Telepon");
 
-        jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel9.setText("RFID");
+        txt_alamat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_alamatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,69 +148,44 @@ public class FormInputUser extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel9)
                     .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_nama)
-                            .addComponent(txt_rfid)
-                            .addComponent(txt_username)
-                            .addComponent(j_password)
-                            .addComponent(txt_notelp)
-                            .addComponent(txt_alamat)
-                            .addComponent(cb_role, 0, 240, Short.MAX_VALUE))
-                        .addGap(0, 70, Short.MAX_VALUE))))
+                    .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txt_nama, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                        .addComponent(txt_notelp)))
+                .addGap(0, 3, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_rfid, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(j_password, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_notelp, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_role, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                .addGap(266, 266, 266))
         );
 
         pack();
@@ -257,14 +210,18 @@ public class FormInputUser extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btn_batalActionPerformed
 
+    private void txt_alamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_alamatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_alamatActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormUser formuser = new FormUser();
-                FormInputUser dialog = new FormInputUser(new javax.swing.JFrame(), true, 1, null, formuser);
+                FormSupplier FormSupplier = new FormSupplier();
+                FormInputSupplier dialog = new FormInputSupplier(new javax.swing.JFrame(), true, 1, null, FormSupplier);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -279,37 +236,26 @@ public class FormInputUser extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.ButtonGradient btn_batal;
     private com.raven.swing.ButtonGradient btn_simpan;
-    private javax.swing.JComboBox<String> cb_role;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField j_password;
     private javax.swing.JTextField txt_alamat;
     private javax.swing.JTextField txt_nama;
     private javax.swing.JTextField txt_notelp;
-    private javax.swing.JTextField txt_rfid;
-    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 
     private void loaddata() {
-        List<ModelUser> list = servis.tampilData();
+        List<ModelSupplier> list = servis.tampilData();
         tblModel.setData(list);
     }
 
     private void resetForm() {
         txt_nama.setText("");
-        txt_username.setText("");
-        j_password.setText("");
         txt_notelp.setText("");
         txt_alamat.setText("");
-        cb_role.setSelectedIndex(0);
     }
 
     private boolean validasiInput() {
@@ -318,14 +264,6 @@ public class FormInputUser extends javax.swing.JDialog {
         if (txt_nama.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Nama Tidak Boleh Kosong");
             System.out.println("Validasi gagal: Nama kosong");
-        } else if (txt_username.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Username Tidak Boleh Kosong");
-            System.out.println("Validasi gagal: Username kosong");
-        } else if (j_password.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Password Tidak Boleh Kosong");
-            System.out.println("Validasi gagal: Password kosong");
-        } else if (cb_role.getSelectedItem().equals("Pilih Role")) {
-            JOptionPane.showMessageDialog(null, "Silahkan Pilih Role");
             System.out.println("Validasi gagal: Role belum dipilih");
         } else if (txt_notelp.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "No Telepon Tidak Boleh Kosong");
@@ -343,25 +281,17 @@ public class FormInputUser extends javax.swing.JDialog {
     private void simpanData() {
         if (validasiInput()) {
             String nama = txt_nama.getText();
-            String rfid = txt_rfid.getText();
-            String username = txt_username.getText();
-            String password = j_password.getText();
             String no_telepon = txt_notelp.getText();
             String alamat = txt_alamat.getText();
-            String Role = cb_role.getSelectedItem().toString();
 
-            ModelUser model = new ModelUser();
+            ModelSupplier model = new ModelSupplier();
             model.setNama(nama);
-            model.setRfidUid(rfid); // Gunakan RFID otomatis jika kosong
-            model.setUsername(username);
-            model.setPassword(password);
-            model.setNo_telepon(no_telepon);
+            model.setNo_hp(no_telepon);
             model.setAlamat(alamat);
-            model.setRole(Role);
 
             servis.tambahData(model); // Menambahkan data ke database
             tblModel.insertData(model); // Menambahkan data ke tabel model
-            formuser.refreshTable(); // Menyegarkan tabel
+            FormSupplier.refreshTable(); // Menyegarkan tabel
             resetForm(); // Reset form input
             dispose(); // Menutup form
         }
@@ -370,16 +300,11 @@ public class FormInputUser extends javax.swing.JDialog {
     private void dataTable() {
         btn_simpan.setText("PERBARUI");
 
-        idUser = user.getIdUser();
-        jLabel4.setVisible(false);
-        j_password.setVisible(false);
+        idSupplier = Supplier.getId_supplier();
 
-        txt_nama.setText(user.getNama());
-        txt_rfid.setText(user.getRfidUid());
-        txt_username.setText(user.getUsername());
-        txt_notelp.setText(user.getNo_telepon());
-        txt_alamat.setText(user.getAlamat());
-        cb_role.setSelectedItem(user.getRole());
+        txt_nama.setText(Supplier.getNama());
+        txt_notelp.setText(Supplier.getNo_hp());
+        txt_alamat.setText(Supplier.getAlamat());
 
         jLabel1.setText("MASTER > Manajemen Karyawan > Perbarui");
         jLabel2.setText("PERBARUI DATA KARYAWAN");
@@ -387,45 +312,18 @@ public class FormInputUser extends javax.swing.JDialog {
 
     private void perbaruiData() {
         String nama = txt_nama.getText();
-        String rfid = txt_rfid.getText(); // Tidak mengubah RFID yang sudah ada
-        String username = txt_username.getText();
         String alamat = txt_alamat.getText();
         String no_telepon = txt_notelp.getText();
-        String Role = cb_role.getSelectedItem().toString();
 
-        ModelUser model = new ModelUser();
-        model.setIdUser(idUser); // Pastikan ID sudah di-set
+        ModelSupplier model = new ModelSupplier();
+        model.setId_supplier(idSupplier); // Pastikan ID sudah di-set
         model.setNama(nama);
-        model.setRfidUid(rfid); // Jangan mengubah RFID
-        model.setUsername(username);
-        model.setNo_telepon(no_telepon);
+        model.setNo_hp(no_telepon);
         model.setAlamat(alamat);
-        model.setRole(Role);
 
         servis.perbaruiData(model); // Perbarui data di database
         tblModel.updateData(row, model); // Perbarui data di tabel model
         resetForm(); // Reset form input
         dispose(); // Menutup form
     }
-
-    public void setRole(String role) {
-        if (cb_role.getItemCount() == 0) {
-            cb_role.addItem("admin");
-            cb_role.addItem("kasir");
-            cb_role.addItem("gudang");
-        }
-
-        if (role == null || role.isEmpty()) {
-            cb_role.setSelectedIndex(0); // Pilih default
-        } else {
-            cb_role.setSelectedItem(role); // Pilih sesuai data
-        }
-    }
-
-//    private void generateRFIDOtomatis() {
-//        UserDAO userDAO = new UserDAO();
-//        String rfid = userDAO.generateRFID(); 
-//        txt_rfid.setText(rfid);  
-//        txt_rfid.setEditable(false); 
-//    }
 }
