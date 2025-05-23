@@ -4,18 +4,24 @@
  */
 package com.app.model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Rohim
  */
 public class ModelUser {
+
     private int idUser;
+    private String rfid_uid;
     private String nama;
     private String username;
     private String password;
+    private String role;
     private String alamat;
     private String no_telepon;
-    private String role;
+    private Timestamp created_at;
+    private Timestamp updated_at;
 
     public int getIdUser() {
         return idUser;
@@ -23,6 +29,14 @@ public class ModelUser {
 
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    public String getRfidUid() {
+        return rfid_uid;
+    }
+
+    public void setRfidUid(String rfid_uid) {
+        this.rfid_uid = rfid_uid;
     }
 
     public String getNama() {
@@ -49,6 +63,14 @@ public class ModelUser {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getAlamat() {
         return alamat;
     }
@@ -65,12 +87,20 @@ public class ModelUser {
         this.no_telepon = no_telepon;
     }
 
-    public String getRole() {
-        return role;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.created_at = createdAt;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updated_at = updatedAt;
     }
-    
+
+    public Timestamp getCreatedAt() {
+        return created_at;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updated_at;
+    }
+
 }

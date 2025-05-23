@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="897" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" pref="912" max="32767" attributes="0"/>
           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
@@ -27,7 +27,9 @@
                       <Component id="btn_perbarui" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="btn_hapus" min="-2" pref="100" max="-2" attributes="0"/>
-                      <EmptySpace pref="192" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Component id="btn_detail" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace pref="82" max="32767" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txt_search" min="-2" pref="243" max="-2" attributes="0"/>
@@ -55,6 +57,7 @@
                       <Component id="btn_hapus" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btn_perbarui" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btn_tambah" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btn_detail" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
@@ -109,7 +112,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Supplier"/>
+            <Property name="text" type="java.lang.String" value="user"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -117,7 +120,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="SansSerif" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="List Supplier"/>
+            <Property name="text" type="java.lang.String" value="List Barang"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -195,7 +198,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="com.raven.swing.Table" name="tbl_dataSupplier">
+            <Component class="com.raven.swing.Table" name="tbl_data">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
@@ -248,6 +251,17 @@
     <Component class="com.raven.swing.TextField" name="txt_search">
       <Events>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_searchKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="com.raven.swing.ButtonGradient" name="btn_detail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="DETAIL"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="12" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_detailActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -21,6 +21,8 @@ public interface ServiceUser {
     
     String generateSHA256(String password);
     ModelUser prosesLogin(ModelUser model);
+//    String generateRFID();
+
     
     boolean validasiPasswordLama(String username, String passwordLama);
     boolean pergantianPassword(String username, String passwordLama, String passwordBaru);

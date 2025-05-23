@@ -1,10 +1,10 @@
 package com.app.main;
 
 import com.app.form.FormDashboard;
+import com.app.form.barang.FormBarang;
 import com.app.form.laporan.FormLaporan;
 import com.app.form.pembelian.FormPembelian;
 import com.app.form.penjualan.FormPenjualan;
-import com.app.form.produk.FormProduk;
 import com.app.form.supplier.FormSupplier;
 import com.app.form.user.FormUser;
 //import com.app.form.FormKasir1;
@@ -80,17 +80,17 @@ public class Main extends JLayeredPane {
             if (index == 0) {
                 FormMenuUtama.showForm(new FormDashboard());
             } else if (index == 1) {
-                FormMenuUtama.showForm(new FormPenjualan());
-            } else if (index == 2) {
-                FormMenuUtama.showForm(new FormPembelian());
-            } else if (index == 3) {
-                FormMenuUtama.showForm(new FormProduk());
-            } else if (index == 4) {
-                FormMenuUtama.showForm(new FormSupplier());
-            } else if (index == 5) {
-                FormMenuUtama.showForm(new FormUser());
-            } else if (index == 6) {
                 FormMenuUtama.showForm(new FormLaporan());
+            } else if (index == 2) {
+                FormMenuUtama.showForm(new FormBarang());
+            } else if (index == 3) {
+                FormMenuUtama.showForm(new FormSupplier());
+            } else if (index == 4) {
+                FormMenuUtama.showForm(new FormPembelian());
+            } else if (index == 5) {
+                FormMenuUtama.showForm(new FormPenjualan());
+            } else if (index == 6) {
+                FormMenuUtama.showForm(new FormUser());
             } else if (index == 7) {
                 FormMenuUtama.logout();
             } else {
