@@ -8,6 +8,7 @@ import com.app.config.ConnectionDB;
 
 import com.app.config.ConnectionDB;
 import com.app.model.ModelBarang;
+import com.app.model.ModelSupplier;
 import com.app.model.ModelUser;
 import com.app.service.ServiceBarang;
 import java.security.MessageDigest;
@@ -41,8 +42,10 @@ public class BarangDAO implements ServiceBarang {
             rs = st.executeQuery();
             while (rs.next()) {
                 ModelBarang model = new ModelBarang();
-                model.setIdBarang((char) rs.getInt("id_barang"));
+                model.setIdBarang(rs.getString("id_barang"));
                 model.setNama_barang(rs.getString("nama_barang"));
+                model.setBarcode(rs.getString("barcode"));
+                model.setHarga(rs.getInt("harga"));
                 model.setSatuan(rs.getString("satuan"));
                 model.setStok(rs.getDouble("stok"));
                 list.add(model);
@@ -57,11 +60,14 @@ public class BarangDAO implements ServiceBarang {
     @Override
     public void tambahData(ModelBarang model) {
         try {
-            String sql = "INSERT INTO tbl_master_barang (nama_barang, satuan, stok) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO tbl_master_barang (id_barang, nama_barang, barcode, harga, satuan, stok) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, model.getNama_barang());
-            stmt.setString(2, model.getSatuan());
-            stmt.setDouble(3, model.getStok());
+            stmt.setString(1, model.getIdBarang());
+            stmt.setString(2, model.getNama_barang());
+            stmt.setString(3, model.getBarcode());
+            stmt.setInt(4, model.getHarga());
+            stmt.setString(5, model.getSatuan());
+            stmt.setDouble(6, model.getStok());
 
             stmt.executeUpdate();
             stmt.close();
@@ -74,15 +80,36 @@ public class BarangDAO implements ServiceBarang {
 
 
 
-    @Override
-    public void perbaruiData(ModelBarang model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  
+   public void perbaruiData(ModelBarang model) {
+        PreparedStatement st = null;
+        try {
+            String sql = "UPDATE tbl_master_barang SET nama_barang=?, harga=?, satuan=?, WHERE id_barang";
 
-    @Override
-    public void hapusData(ModelBarang model) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            st = conn.prepareStatement(sql);
+            st.setString(1, model.getNama_barang());
+            st.setInt(2, model.getHarga());
+            st.setString(3, model.getSatuan());
+            st.executeUpdate();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+    @Override
+      public void hapusData(ModelBarang model) {
+        PreparedStatement st = null;
+        String sql = "DELETE FROM tbl_master_barang WHERE id_barang=?";
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, model.getIdBarang());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+      
+      
 
     @Override
     public List<ModelBarang> pencarianData(String id) {

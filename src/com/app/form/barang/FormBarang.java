@@ -6,9 +6,11 @@ package com.app.form.barang;
 
 import com.app.dao.BarangDAO;
 import com.app.model.ModelBarang;
+import com.app.model.ModelSupplier;
 import com.app.service.ServiceBarang;
 import com.app.tablemodel.TableModelBarang;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
 
 /**
@@ -270,11 +272,24 @@ public class FormBarang extends javax.swing.JPanel {
     }
 
     private void perbaruiData() {
+        
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void hapusData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+     private void hapusData() {
+        int row = tbl_data.getSelectedRow();
+        if(row != -1){
+            ModelBarang model = tblModel.getData(row);
+            if(JOptionPane.showConfirmDialog(null, "Yakin Ingin Menhapus Data ini? ",
+                    "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
+            {
+                servis.hapusData(model);
+                tblModel.deleteData(row);
+                loadData();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus");
+        }
     }
 
     private void detailuser() {

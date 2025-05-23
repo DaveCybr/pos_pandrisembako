@@ -52,7 +52,7 @@ public class TableModelBarang extends AbstractTableModel {
         JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
     }
 
-    private final String[] columnNames = {"ID", "Nama Barang", "Satuan", "Stok"};
+    private final String[] columnNames = {"ID", "Nama Barang", "Barcode", "Harga", "Satuan", "Stok"};
 
     @Override
     public int getRowCount() {
@@ -69,30 +69,36 @@ public class TableModelBarang extends AbstractTableModel {
         ModelBarang model = list.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return rowIndex + 1;
+                return model.getIdBarang();
             case 1:
                 return model.getNama_barang();
-            case 3:
-                return model.getStok();
             case 2:
+                return model.getBarcode();
+            case 3:
+                return model.getHarga();
+            case 4:
                 return model.getSatuan();
+            case 5:
+                return model.getStok();
             default:
                 return null;
         }
     }
 
-    public String getFormattedDetail(int index) {
-        ModelBarang model = list.get(index);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        StringBuilder detail = new StringBuilder();
-        detail.append("ID Barang   : ").append(model.getIdBarang()).append("\n");
-        detail.append("Nama Barang : ").append(model.getNama_barang()).append("\n");
-        detail.append("Satuan      : ").append(model.getSatuan()).append("\n");
-        detail.append("Stok        : ").append(model.getStok()).append("\n");
-        
-        return detail.toString();
-    }
+//    public String getFormattedDetail(int index) {
+//        ModelBarang model = list.get(index);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//        StringBuilder detail = new StringBuilder();
+//        detail.append("ID Barang   : ").append(model.getIdBarang()).append("\n");
+//        detail.append("Nama Barang : ").append(model.getNama_barang()).append("\n");
+//        detail.append("Satuan      : ").append(model.getSatuan()).append("\n");
+//          detail.append("Satuan      : ").append(model.getSatuan()).append("\n");
+//        detail.append("Satuan      : ").append(model.getSatuan()).append("\n");
+//        detail.append("Stok        : ").append(model.getStok()).append("\n");
+//        
+//        return detail.toString();
+//    }
 
     @Override
     public String getColumnName(int column) {

@@ -11,16 +11,18 @@ import java.sql.Timestamp;
  * @author queen
  */
 public class ModelBarang {
-    private char idBarang;
+    private String idBarang;
     private String nama_barang;
+    private String barcode;
+    private int harga;
     private String satuan;
     private double stok;
 
-    public char getIdBarang() {
+    public String getIdBarang() {
         return idBarang;
     }
 
-    public void setIdBarang(char idBarang) {
+    public void setIdBarang(String idBarang) {
         this.idBarang = idBarang;
     }
 
@@ -30,6 +32,22 @@ public class ModelBarang {
 
     public void setNama_barang(String nama_barang) {
         this.nama_barang = nama_barang;
+    }
+    
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+    
+    public int getHarga() {
+        return harga;
+    }
+
+    public void setHarga(int harga) {
+        this.harga = harga;
     }
 
     public String getSatuan() {
