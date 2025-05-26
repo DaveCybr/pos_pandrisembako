@@ -40,6 +40,7 @@ public class Menu extends JPanel {
         {"Pembelian"},
         {"Penjualan"},
         {"User"},
+        {"GantiPassword"},
         {"Keluar"}
     };
 
@@ -87,7 +88,7 @@ public class Menu extends JPanel {
                 + "background:$Menu.background;"
                 + "arc:10");
         header = new JLabel(headerName);
-        header.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/drugstore.png")));
+        header.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/Logopandrinew2.jpg")));
         header.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$Menu.header.font;"
                 + "foreground:$Menu.foreground");

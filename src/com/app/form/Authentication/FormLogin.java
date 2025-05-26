@@ -14,6 +14,7 @@ import com.formdev.flatlaf.util.UIScale;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.sql.Connection;
@@ -119,12 +120,12 @@ public class FormLogin extends javax.swing.JPanel {
         btn_logrfid = new com.raven.swing.ButtonGradient();
         btnLogin = new com.raven.swing.ButtonGradient();
 
-        txtUsername.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        txtUsername.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
         lbUsername.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         lbUsername.setText("Username");
 
-        lbTitle.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        lbTitle.setFont(new java.awt.Font("SansSerif", 2, 14)); // NOI18N
         lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTitle.setText("Login");
 
@@ -132,9 +133,9 @@ public class FormLogin extends javax.swing.JPanel {
         lbPassword.setText("Password");
 
         lbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/drugstore.png"))); // NOI18N
+        lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/logopandrinew1.png"))); // NOI18N
 
-        txtPassword.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        txtPassword.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -142,7 +143,7 @@ public class FormLogin extends javax.swing.JPanel {
         });
 
         btn_logrfid.setText("RFID");
-        btn_logrfid.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_logrfid.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btn_logrfid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_logrfidActionPerformed(evt);
@@ -150,7 +151,7 @@ public class FormLogin extends javax.swing.JPanel {
         });
 
         btnLogin.setText("LOGIN");
-        btnLogin.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btnLogin.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -162,10 +163,10 @@ public class FormLogin extends javax.swing.JPanel {
         panelLoginLayout.setHorizontalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoginLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtUsername)
                     .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,14 +176,14 @@ public class FormLogin extends javax.swing.JPanel {
                             .addComponent(lbUsername)
                             .addComponent(lbPassword))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(10, 10, 10))
         );
         panelLoginLayout.setVerticalGroup(
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTitle)
                 .addGap(12, 12, 12)
                 .addComponent(lbUsername)
@@ -196,7 +197,7 @@ public class FormLogin extends javax.swing.JPanel {
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_logrfid, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -204,27 +205,22 @@ public class FormLogin extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
+                .addGap(100, 100, 100)
                 .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        prosesLogin();
-    }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btn_logrfidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logrfidActionPerformed
         // TODO add your handling code here:
@@ -236,6 +232,11 @@ public class FormLogin extends javax.swing.JPanel {
             rfidDialog.setVisible(true);
         }
     }//GEN-LAST:event_btn_logrfidActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        prosesLogin();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -249,10 +250,9 @@ public class FormLogin extends javax.swing.JPanel {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
-    private void setLayoutForm() {
+   private void setLayoutForm() {
         setLayout(new FormLoginLayout());
         panelLogin.setLayout(new LayoutLogin());
-        lbTitle.putClientProperty(FlatClientProperties.STYLE, "font:h1.font");
         panelLogin.putClientProperty(FlatClientProperties.STYLE, ""
                 + "background:$Login.background;"
                 + "arc:20;"
@@ -261,6 +261,20 @@ public class FormLogin extends javax.swing.JPanel {
                 + "showRevealButton:true;"
                 + "showCapsLock:true");
 
+        lbTitle.putClientProperty(FlatClientProperties.STYLE, ""
+                + "font: bold +28;"
+                + "foreground: #2c3e50;"
+                + "margin:10,0,20,0;");
+
+        txtUsername.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:10;" // biar melengkung
+                + "font: +6;");
+
+        txtPassword.putClientProperty(FlatClientProperties.STYLE, ""
+                + "showRevealButton:true;"
+                + "showCapsLock:true;"
+                + "arc:10;"
+                + "font: +6;");
     }
 
     private class FormLoginLayout implements LayoutManager {
@@ -294,10 +308,13 @@ public class FormLogin extends javax.swing.JPanel {
             synchronized (parent.getTreeLock()) {
                 int width = parent.getWidth();
                 int height = parent.getHeight();
-                int loginWidth = UIScale.scale(300);
+
+                int loginWidth = Math.min(UIScale.scale(350), width - 40); // responsive dengan batas minimum margin
                 int loginHeight = panelLogin.getPreferredSize().height;
+
                 int x = (width - loginWidth) / 2;
                 int y = (height - loginHeight) / 2;
+
                 panelLogin.setBounds(x, y, loginWidth, loginHeight);
             }
         }

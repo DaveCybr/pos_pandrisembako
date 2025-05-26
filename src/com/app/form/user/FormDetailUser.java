@@ -45,9 +45,9 @@ public class FormDetailUser extends javax.swing.JDialog {
     }
 
     private void setLayoutForm() {
-        j_password.putClientProperty(FlatClientProperties.STYLE, ""
-                + "showRevealButton:true;"
-                + "showCapsLock:true");
+//        j_password.putClientProperty(FlatClientProperties.STYLE, ""
+//                + "showRevealButton:true;"
+//                + "showCapsLock:true");
     }
 
     /**
@@ -64,19 +64,24 @@ public class FormDetailUser extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         btn_batal = new com.raven.swing.ButtonGradient();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txt_username = new javax.swing.JTextField();
-        j_password = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txt_nama = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txt_alamat = new javax.swing.JTextField();
-        txt_notelp = new javax.swing.JTextField();
-        txt_rfid = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        cb_role = new javax.swing.JTextField();
+        txt_nama = new javax.swing.JLabel();
+        txt_rfid = new javax.swing.JLabel();
+        txt_username = new javax.swing.JLabel();
+        txt_notelp = new javax.swing.JLabel();
+        txt_alamat = new javax.swing.JLabel();
+        cb_role = new javax.swing.JLabel();
+        lbLogo = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -86,7 +91,7 @@ public class FormDetailUser extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("User > Form Detail User");
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("INFORMASI PENGGUNA");
 
@@ -95,14 +100,13 @@ public class FormDetailUser extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jLabel2)))
+                .addContainerGap()
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(97, 97, 97))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,17 +129,8 @@ public class FormDetailUser extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel3.setText("Username");
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        jLabel4.setText("Password");
-
         jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel5.setText("Role");
-
-        txt_username.setEditable(false);
-        txt_username.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        j_password.setEditable(false);
-        j_password.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel6.setText("Nama");
@@ -143,96 +138,130 @@ public class FormDetailUser extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel7.setText("Alamat");
 
-        txt_nama.setEditable(false);
-        txt_nama.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel8.setText("No Telepon");
-
-        txt_alamat.setEditable(false);
-        txt_alamat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        txt_notelp.setEditable(false);
-        txt_notelp.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        txt_rfid.setEditable(false);
-        txt_rfid.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel9.setText("RFID");
 
-        cb_role.setEditable(false);
-        cb_role.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txt_nama.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        txt_nama.setText("jLabel4");
+
+        txt_rfid.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        txt_rfid.setText("jLabel10");
+
+        txt_username.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        txt_username.setText("jLabel11");
+
+        txt_notelp.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        txt_notelp.setText("jLabel12");
+
+        txt_alamat.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        txt_alamat.setText("jLabel13");
+
+        cb_role.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        cb_role.setText("jLabel14");
+
+        lbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/drugstore.png"))); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel4.setText(":");
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel10.setText(":");
+
+        jLabel11.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel11.setText(":");
+
+        jLabel12.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel12.setText(":");
+
+        jLabel13.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel13.setText(":");
+
+        jLabel14.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel14.setText(":");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_nama, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(txt_rfid)
-                            .addComponent(txt_username)
-                            .addComponent(j_password)
-                            .addComponent(txt_notelp)
-                            .addComponent(txt_alamat)
-                            .addComponent(cb_role, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(0, 70, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_nama)
+                    .addComponent(txt_rfid)
+                    .addComponent(txt_username)
+                    .addComponent(txt_notelp)
+                    .addComponent(txt_alamat)
+                    .addComponent(cb_role))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_rfid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(j_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_nama)
                     .addComponent(jLabel4))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_notelp, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel9)
+                    .addComponent(txt_rfid)
+                    .addComponent(jLabel10))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_username)
+                    .addComponent(jLabel11))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txt_notelp)
+                    .addComponent(jLabel12))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txt_alamat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(cb_role, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                    .addComponent(txt_alamat)
+                    .addComponent(jLabel13))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cb_role)
+                    .addComponent(jLabel14))
+                .addGap(32, 32, 32)
+                .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -267,8 +296,13 @@ public class FormDetailUser extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.ButtonGradient btn_batal;
-    private javax.swing.JTextField cb_role;
+    private javax.swing.JLabel cb_role;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -278,12 +312,12 @@ public class FormDetailUser extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField j_password;
-    private javax.swing.JTextField txt_alamat;
-    private javax.swing.JTextField txt_nama;
-    private javax.swing.JTextField txt_notelp;
-    private javax.swing.JTextField txt_rfid;
-    private javax.swing.JTextField txt_username;
+    private javax.swing.JLabel lbLogo;
+    private javax.swing.JLabel txt_alamat;
+    private javax.swing.JLabel txt_nama;
+    private javax.swing.JLabel txt_notelp;
+    private javax.swing.JLabel txt_rfid;
+    private javax.swing.JLabel txt_username;
     // End of variables declaration//GEN-END:variables
 
     private void loaddata() {
@@ -294,8 +328,8 @@ public class FormDetailUser extends javax.swing.JDialog {
     private void dataTable() {
 
         idUser = user.getIdUser();
-        jLabel4.setVisible(false);
-        j_password.setVisible(false);
+//        jLabel4.setVisible(false);
+//        j_password.setVisible(false);
 
         txt_nama.setText(user.getNama());
         txt_rfid.setText(user.getRfidUid());

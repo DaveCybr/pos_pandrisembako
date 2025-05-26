@@ -134,6 +134,11 @@ public class FormUser extends javax.swing.JPanel {
         tbl_datauser.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         tbl_datauser.setPreferredSize(new java.awt.Dimension(1000, 1000));
         tbl_datauser.setRowHeight(30);
+        tbl_datauser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_datauserMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tbl_datauser);
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
@@ -238,6 +243,10 @@ public class FormUser extends javax.swing.JPanel {
         // TODO add your handling code here:
         detailuser();
     }//GEN-LAST:event_btn_detailActionPerformed
+
+    private void tbl_datauserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_datauserMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbl_datauserMouseClicked
 
 
 

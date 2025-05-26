@@ -7,6 +7,7 @@ import com.app.form.pembelian.FormPembelian;
 import com.app.form.penjualan.FormPenjualan;
 import com.app.form.supplier.FormSupplier;
 import com.app.form.user.FormUser;
+import com.app.form.user.GantiPassword;
 //import com.app.form.FormKasir1;
 //import com.app.form.FormUser;
 import com.app.menu.Menu;
@@ -92,6 +93,9 @@ public class Main extends JLayeredPane {
             } else if (index == 6) {
                 FormMenuUtama.showForm(new FormUser());
             } else if (index == 7) {
+                ModelUser loginUser = FormMenuUtama.getUserLogin();
+                FormMenuUtama.showForm(new GantiPassword(loginUser.getUsername()));
+            } else if (index == 8) {
                 FormMenuUtama.logout();
             } else {
                 action.cancel();

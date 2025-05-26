@@ -7,11 +7,14 @@ package com.app.form.Authentication;
 import com.app.config.ConnectionDB;
 import com.app.main.FormMenuUtama;
 import com.app.model.ModelUser;
+import com.formdev.flatlaf.FlatClientProperties;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -25,6 +28,8 @@ public class RfidLogin extends javax.swing.JDialog {
     public RfidLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        txt_rfid.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Tempelkan Kartu RFID...");
 
         txt_rfid.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
             private void checkInput() {
@@ -59,56 +64,106 @@ public class RfidLogin extends javax.swing.JDialog {
     private void initComponents() {
 
         panel2 = new com.raven.swing.Panel();
+        panel1 = new com.raven.swing.Panel();
         txt_rfid = new com.raven.swing.TextField();
+        jLabel2 = new javax.swing.JLabel();
+        lbLogo = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        btn_batal = new com.raven.swing.ButtonGradient();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("rfid");
+        panel2.setBackgroundColor(new java.awt.Color(242, 242, 242));
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel2.setText("PANDRI SEMBAKO");
+
+        lbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/icon/drugstore.png"))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 2, 18)); // NOI18N
+        jLabel1.setText("Login dengan RFID");
+
+        btn_batal.setText("BATAL");
+        btn_batal.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(94, Short.MAX_VALUE)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(txt_rfid, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(120, 120, 120))))
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addComponent(lbLogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(txt_rfid, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
 
         javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(txt_rfid, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panel2Layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(jLabel1)))
-                .addContainerGap(59, Short.MAX_VALUE))
+            .addComponent(panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel2Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(txt_rfid, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+            .addComponent(panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+            .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+            .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        FormLogin formlogin = new FormLogin();
+        formlogin.setVisible(true);
+    }//GEN-LAST:event_btn_batalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +196,7 @@ public class RfidLogin extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 RfidLogin dialog = new RfidLogin(new javax.swing.JFrame(), true);
+                dialog.setUndecorated(true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -153,46 +209,52 @@ public class RfidLogin extends javax.swing.JDialog {
     }
 
     private void prosesLoginDenganRFID(String rfid) {
-    try (Connection conn = ConnectionDB.getConnection()) {
-        String sql = "SELECT * FROM tbl_user WHERE rfid_uid = ?";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, rfid);
-        ResultSet rs = pst.executeQuery();
+        try (Connection conn = ConnectionDB.getConnection()) {
+            String sql = "SELECT * FROM tbl_user WHERE rfid_uid = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, rfid);
+            ResultSet rs = pst.executeQuery();
 
-        if (rs.next()) {
-            // Ambil data user
-            ModelUser user = new ModelUser();
-            user.setIdUser(rs.getInt("id_user")); // Sesuaikan kolom
-            user.setNama(rs.getString("nama"));
-            user.setUsername(rs.getString("username"));
-            user.setRole(rs.getString("role"));
+            if (rs.next()) {
+                // Ambil data user
+                ModelUser user = new ModelUser();
+                user.setIdUser(rs.getInt("id_user"));
+                user.setNama(rs.getString("nama"));
+                user.setUsername(rs.getString("username"));
+                user.setRole(rs.getString("role"));
 
-            // Login sukses → simpan user yang login
-            FormMenuUtama.login(user); // Pastikan method ini ada
+                FormMenuUtama.login(user);
 
-            JOptionPane.showMessageDialog(this,
-                    "Login Berhasil\nSelamat datang, " + user.getNama() + " (" + user.getRole() + ")");
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Login berhasil! Selamat datang, " + user.getNama() + ".",
+                        "Login Sukses",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
 
-            // Tampilkan menu utama jika belum muncul
-            FormMenuUtama menu = new FormMenuUtama();
-            menu.setVisible(true);
+                FormMenuUtama menu = new FormMenuUtama();
+                menu.setVisible(true);
 
-            // Tutup dialog login RFID
-            dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "RFID tidak terdaftar di database!");
-            txt_rfid.setText("");
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "RFID tidak terdaftar di database!");
+                txt_rfid.setText("");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengakses database: " + e.getMessage());
+            e.printStackTrace();
         }
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengakses database: " + e.getMessage());
-        e.printStackTrace();
     }
-}
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.raven.swing.ButtonGradient btn_batal;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbLogo;
+    private com.raven.swing.Panel panel1;
     private com.raven.swing.Panel panel2;
     private com.raven.swing.TextField txt_rfid;
     // End of variables declaration//GEN-END:variables

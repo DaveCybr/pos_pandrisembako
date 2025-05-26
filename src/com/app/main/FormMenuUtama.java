@@ -1,6 +1,5 @@
 package com.app.main;
 
-
 import com.app.form.Authentication.FormLogin;
 import com.app.model.ModelUser;
 import com.formdev.flatlaf.FlatLaf;
@@ -12,10 +11,11 @@ import javax.swing.SwingUtilities;
 
 public class FormMenuUtama extends javax.swing.JFrame {
 
-   private final FormLogin formlogin;
+    private final FormLogin formlogin;
     private static FormMenuUtama app;
     private final Main mainForm;
-    
+    private static ModelUser userLogin;
+
     public FormMenuUtama() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -23,7 +23,6 @@ public class FormMenuUtama extends javax.swing.JFrame {
         mainForm = new Main();
         setContentPane(formlogin);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -49,12 +48,13 @@ public class FormMenuUtama extends javax.swing.JFrame {
         app.setContentPane(app.mainForm);
         app.mainForm.applyComponentOrientation(app.getComponentOrientation());
         app.mainForm.getModelUser(modelUs);
+        setUserLogin(modelUs); // <- simpan user login di sini
         setSelectedMenu(0, 0);
         app.mainForm.hideMenu();
         SwingUtilities.updateComponentTreeUI(app.mainForm);
         FlatAnimatedLafChange.hideSnapshotWithAnimation();
     }
-    
+
     public static void logout() {
         FlatAnimatedLafChange.showSnapshot();
         app.setContentPane(app.formlogin);
@@ -62,26 +62,34 @@ public class FormMenuUtama extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(app.formlogin);
         FlatAnimatedLafChange.hideSnapshotWithAnimation();
     }
-    
-     public static void showForm(Component component) {
+
+    public static void showForm(Component component) {
         component.applyComponentOrientation(app.getComponentOrientation());
         app.mainForm.showForm(component);
     }
-      
+
     public static void setSelectedMenu(int index, int subIndex) {
         app.mainForm.setSelectedMenu(index, subIndex);
     }
-    
+
+    public static void setUserLogin(ModelUser user) {
+        userLogin = user;
+    }
+
+    public static ModelUser getUserLogin() {
+        return userLogin;
+    }
+
     public static void main(String args[]) {
         FlatLaf.registerCustomDefaultsSource("com.app.theme");
         FlatLightLaf.setup();
-        
-        java.awt.EventQueue.invokeLater(()-> {
+
+        java.awt.EventQueue.invokeLater(() -> {
             app = new FormMenuUtama();
             app.setVisible(true);
         });
     }
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

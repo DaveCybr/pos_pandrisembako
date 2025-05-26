@@ -100,6 +100,7 @@ public class UserDAO implements ServiceUser {
                 model.setRfidUid(rs.getString("rfid_uid"));
                 model.setNama(rs.getString("nama"));
                 model.setUsername(rs.getString("username"));
+//                model.setPassword(rs.getString("password"));
                 model.setRole(rs.getString("role"));
                 model.setNo_telepon(rs.getString("no_telepon"));
                 model.setAlamat(rs.getString("alamat"));
@@ -112,6 +113,35 @@ public class UserDAO implements ServiceUser {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public ModelUser getUserByUsername(String username) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM tbl_user WHERE username = ?";
+        ModelUser model = null;
+
+        try {
+            st = conn.prepareStatement(sql);
+            st.setString(1, username);
+            rs = st.executeQuery();
+            if (rs.next()) {
+                model = new ModelUser();
+                model.setIdUser(rs.getInt("id_user"));
+                model.setRfidUid(rs.getString("rfid_uid"));
+                model.setNama(rs.getString("nama"));
+                model.setUsername(rs.getString("username"));
+                // model.setPassword(rs.getString("password")); // optional, kalau perlu
+                model.setRole(rs.getString("role"));
+                model.setNo_telepon(rs.getString("no_telepon"));
+                model.setAlamat(rs.getString("alamat"));
+                model.setCreatedAt(rs.getTimestamp("created_at"));
+                model.setUpdatedAt(rs.getTimestamp("updated_at"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
     }
 
     @Override
@@ -311,7 +341,7 @@ public class UserDAO implements ServiceUser {
 
     public ModelUser loginByRFID(String rfid) throws SQLException {
         Connection conn = ConnectionDB.getConnection();
-        
+
         String sql = "SELECT * FROM tbl_user WHERE rfid = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setString(1, rfid);
