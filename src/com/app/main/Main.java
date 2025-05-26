@@ -86,7 +86,7 @@ public class Main extends JLayeredPane {
             } else if (index == 3) {
                 FormMenuUtama.showForm(new FormSupplier());
             } else if (index == 4) {
-                FormMenuUtama.showForm(new FormPembelian());
+                FormMenuUtama.showForm(new FormPembelian(model));
             } else if (index == 5) {
                 FormMenuUtama.showForm(new FormPenjualan());
             } else if (index == 6) {

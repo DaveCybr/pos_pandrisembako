@@ -4,59 +4,62 @@
  */
 package com.app.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 /**
  *
  * @author queen
  */
 public class ModelPembelian {
 
-    private char idPembelian;
-    private char idSupplier;
-    private String Uraian;
-    private String tglPembelian;
-    private double Nilai;
+    private String idPembelian;
+    private String idSupplier;
+    private String uraian; // huruf kecil di awal
+    private LocalDate tglPembelian; // pakai LocalDate lebih baik daripada String
+    private BigDecimal nilai; // ganti double untuk data uang
     private String statusPembayaran;
-    private double Bayar;
+    private BigDecimal bayar; // ganti double untuk data uang
     private ModelSupplier supplier;
-    
-    public char getIdPembelian() {
+
+    public String getIdPembelian() {
         return idPembelian;
     }
 
-    public void setIdPembelian(char idPembelian) {
+    public void setIdPembelian(String idPembelian) {
         this.idPembelian = idPembelian;
     }
 
-    public char getIdSupplier() {
+    public String getIdSupplier() {
         return idSupplier;
     }
 
-    public void setIdSupplier(char idSupplier) {
+    public void setIdSupplier(String idSupplier) {
         this.idSupplier = idSupplier;
     }
 
     public String getUraian() {
-        return Uraian;
+        return uraian;
     }
 
-    public void setUraian(String Uraian) {
-        this.Uraian = Uraian;
+    public void setUraian(String uraian) {
+        this.uraian = uraian;
     }
 
-    public String getTglPembelian() {
+    public LocalDate getTglPembelian() {
         return tglPembelian;
     }
 
-    public void setTglPembelian(String tglPembelian) {
+    public void setTglPembelian(LocalDate tglPembelian) {
         this.tglPembelian = tglPembelian;
     }
 
-    public double getNilai() {
-        return Nilai;
+    public BigDecimal getNilai() {
+        return nilai;
     }
 
-    public void setNilai(double Nilai) {
-        this.Nilai = Nilai;
+    public void setNilai(BigDecimal nilai) {
+        this.nilai = nilai;
     }
 
     public String getStatusPembayaran() {
@@ -67,12 +70,12 @@ public class ModelPembelian {
         this.statusPembayaran = statusPembayaran;
     }
 
-    public double getBayar() {
-        return Bayar;
+    public BigDecimal getBayar() {
+        return bayar;
     }
 
-    public void setBayar(double Bayar) {
-        this.Bayar = Bayar;
+    public void setBayar(BigDecimal bayar) {
+        this.bayar = bayar;
     }
 
     public ModelSupplier getSupplier() {
@@ -82,4 +85,5 @@ public class ModelPembelian {
     public void setSupplier(ModelSupplier supplier) {
         this.supplier = supplier;
     }
+
 }

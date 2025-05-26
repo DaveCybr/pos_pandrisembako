@@ -9,6 +9,9 @@ public interface ServicePembelian {
     void hapusData(String idPembelian);
     
     List<ModelPembelian> getAllData();
+    String noFakturPembelian();
     ModelPembelian getById(String idPembelian);
     List<ModelPembelian> cariData(String keyword);
+
+    public void printNota(String idPenjualan);
 }

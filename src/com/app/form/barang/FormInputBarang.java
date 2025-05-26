@@ -14,6 +14,7 @@ import com.app.service.ServiceUser;
 import com.app.tablemodel.TableModelBarang;
 import com.app.tablemodel.TableModelUser;
 import com.formdev.flatlaf.FlatClientProperties;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -299,7 +300,7 @@ public class FormInputBarang extends javax.swing.JDialog {
             idBarang = "BR" + (int)(Math.random() * 900 + 100);
             String nama = txt_nama.getText();
             String barcode = txt_barcode.getText();
-            int harga = Integer.parseInt (txt_harga.getText());
+            BigDecimal harga = new BigDecimal(txt_harga.getText());
             String satuan = cb_satuan.getSelectedItem().toString();
             double stok = Double.parseDouble(txt_stok.getText());
 

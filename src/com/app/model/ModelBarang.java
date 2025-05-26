@@ -4,6 +4,7 @@
  */
 package com.app.model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -14,7 +15,7 @@ public class ModelBarang {
     private String idBarang;
     private String nama_barang;
     private String barcode;
-    private int harga;
+    private BigDecimal harga;
     private String satuan;
     private double stok;
 
@@ -42,11 +43,11 @@ public class ModelBarang {
         this.barcode = barcode;
     }
     
-    public int getHarga() {
+    public BigDecimal getHarga() {
         return harga;
     }
 
-    public void setHarga(int harga) {
+    public void setHarga(BigDecimal harga) {
         this.harga = harga;
     }
 

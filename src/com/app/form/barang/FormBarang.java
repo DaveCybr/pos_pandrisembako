@@ -228,7 +228,7 @@ public class FormBarang extends javax.swing.JPanel {
 
     private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
         // TODO add your handling code here:
-        pencarianData();
+        pencarianData(txt_search.getText());
     }//GEN-LAST:event_txt_searchKeyReleased
 
     private void btn_detailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detailActionPerformed
@@ -296,8 +296,9 @@ public class FormBarang extends javax.swing.JPanel {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private void pencarianData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private void pencarianData(String keyword) {
+        List<ModelBarang> hasil = servis.pencarianData(keyword); // asumsi kamu punya method ini
+        tblModel.setData(hasil); // update tabel dengan hasil
     }
 
     void refreshTable() {
