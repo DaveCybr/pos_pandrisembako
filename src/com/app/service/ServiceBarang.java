@@ -17,6 +17,12 @@ public interface ServiceBarang {
     void hapusData (ModelBarang model);
     
     List<ModelBarang> tampilData();
+    
     List<ModelBarang> pencarianData(String id);
+    
+//    List<ModelMasterObat> ambilNamaObat();
+//    String ambilNamaObatId(int id);
+
+    public List<ModelBarang> searchByBarcode(String id);
     
 }
