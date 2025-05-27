@@ -78,27 +78,87 @@ public class Main extends JLayeredPane {
 
     private void initMenuEvent() {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
-            if (index == 0) {
-                FormMenuUtama.showForm(new FormDashboard());
-            } else if (index == 1) {
-                FormMenuUtama.showForm(new FormLaporan());
-            } else if (index == 2) {
-                FormMenuUtama.showForm(new FormBarang());
-            } else if (index == 3) {
-                FormMenuUtama.showForm(new FormSupplier());
-            } else if (index == 4) {
-                FormMenuUtama.showForm(new FormPembelian(model));
-            } else if (index == 5) {
-                FormMenuUtama.showForm(new FormPenjualan());
-            } else if (index == 6) {
-                FormMenuUtama.showForm(new FormUser());
-            } else if (index == 7) {
-                ModelUser loginUser = FormMenuUtama.getUserLogin();
-                FormMenuUtama.showForm(new GantiPassword(loginUser.getUsername()));
-            } else if (index == 8) {
-                FormMenuUtama.logout();
+            if (model != null && model.getRole() != null) {
+                String role = model.getRole();
+
+                switch (role) {
+                    case "admin":
+                        switch (index) {
+                            case 0: // Dashboard
+                                FormMenuUtama.showForm(new FormDashboard());
+                                break;
+                            case 1: // Laporan
+                                FormMenuUtama.showForm(new FormLaporan());
+                                break;
+                            case 2: // Produk
+                                FormMenuUtama.showForm(new FormBarang());
+                                break;
+                            case 3: // Supplier
+                                FormMenuUtama.showForm(new FormSupplier());
+                                break;
+                            case 4: // Pembelian
+                                FormMenuUtama.showForm(new FormPembelian(model));
+                                break;
+                            case 5: // Penjualan
+                                FormMenuUtama.showForm(new FormPenjualan());
+                                break;
+                            case 6: // User
+                                FormMenuUtama.showForm(new FormUser());
+                                break;
+                            case 7: // Ganti Password
+                                FormMenuUtama.showForm(new GantiPassword(role));
+                                break;
+                            case 8: // Keluar
+                                FormMenuUtama.logout();
+                                break;
+                            default:
+                                action.cancel();
+                        }
+                        break;
+
+                    case "kasir":
+                        switch (index) {
+                            case 0: // Dashboard
+                                FormMenuUtama.showForm(new FormDashboard());
+                                break;
+                            case 1: // Pembelian
+                                FormMenuUtama.showForm(new FormPembelian(model));
+                                break;
+                            case 2: // Penjualan
+                                FormMenuUtama.showForm(new FormPenjualan());
+                                break;
+                            case 3: // Keluar
+                                FormMenuUtama.logout();
+                                break;
+                            default:
+                                action.cancel();
+                        }
+                        break;
+
+                    case "gudang":
+                        switch (index) {
+                            case 0: // Dashboard
+                                FormMenuUtama.showForm(new FormDashboard());
+                                break;
+                            case 1: // Produk
+                                FormMenuUtama.showForm(new FormBarang());
+                                break;
+                            case 2: // Supplier
+                                FormMenuUtama.showForm(new FormSupplier());
+                                break;
+                            case 3: // Keluar
+                                FormMenuUtama.logout();
+                                break;
+                            default:
+                                action.cancel();
+                        }
+                        break;
+
+                    default:
+                        JOptionPane.showMessageDialog(null, "Role tidak dikenali!");
+                }
             } else {
-                action.cancel();
+                JOptionPane.showMessageDialog(null, "User belum login atau role tidak ditemukan!");
             }
         });
     }

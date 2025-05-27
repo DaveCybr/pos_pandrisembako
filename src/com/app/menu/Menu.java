@@ -19,11 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-
-
 public class Menu extends JPanel {
 
-   private ModelUser modelUser;
+    private ModelUser modelUser;
 
     public void setModelUser(ModelUser modelUser) {
         this.modelUser = modelUser;
@@ -123,9 +121,8 @@ public class Menu extends JPanel {
 
     private void createMenu() {
         panelMenu.removeAll(); // Hapus menu sebelumnya
-        int index = 0;
+        int visibleIndex = 0; // index menu yang benar-benar ditampilkan
 
-        // Iterasi melalui menuItems
         for (int i = 0; i < menuItems.length; i++) {
             String menuName = menuItems[i][0];
 
@@ -133,34 +130,29 @@ public class Menu extends JPanel {
             if (modelUser != null && modelUser.getRole() != null) {
                 String role = modelUser.getRole();
 
-                // Role "kasir" hanya bisa melihat Dashboard, Kasir, dan Keluar
                 if (role.equals("kasir")) {
-                    if (!(menuName.equals("Dashboard") || menuName.equals("Kasir") || menuName.equals("Keluar"))) {
-                        continue; // Sembunyikan menu yang tidak sesuai
+                    if (!(menuName.equals("Dashboard") || menuName.equals("Pembelian") || menuName.equals("Penjualan") || menuName.equals("Keluar"))) {
+                        continue;
                     }
-                } // Role "gudang" hanya bisa melihat Dashboard, Gudang, dan Keluar
-                else if (role.equals("gudang")) {
-                    if (!(menuName.equals("Dashboard") || menuName.equals("Gudang") || menuName.equals("Keluar"))) {
-                        continue; // Sembunyikan menu yang tidak sesuai
+                } else if (role.equals("gudang")) {
+                    if (!(menuName.equals("Dashboard") || menuName.equals("Produk") || menuName.equals("Supplier") || menuName.equals("Keluar"))) {
+                        continue;
                     }
                 }
-                // Role "admin" bisa melihat semua menu, tidak ada filter
             }
 
-            // Tambahkan menu sesuai kondisinya
+            // Tambahkan menu
             if (menuName.startsWith("~") && menuName.endsWith("~")) {
                 panelMenu.add(createTitle(menuName));
             } else {
-                MenuItem menuItem = new MenuItem(this, menuItems[i], index++, events);
+                MenuItem menuItem = new MenuItem(this, menuItems[i], visibleIndex++, events);
                 panelMenu.add(menuItem);
             }
         }
 
-        // Refresh tampilan menu
         panelMenu.revalidate();
         panelMenu.repaint();
     }
-
 
     private JLabel createTitle(String title) {
         String menuName = title.substring(1, title.length() - 1);
@@ -191,6 +183,7 @@ public class Menu extends JPanel {
     }
 
     protected void runEvent(int index, int subIndex) {
+        System.out.println("runEvent called: index = " + index + ", subIndex = " + subIndex);
         MenuAction menuAction = new MenuAction();
         for (MenuEvent event : events) {
             event.menuSelected(index, subIndex, menuAction);
@@ -278,7 +271,7 @@ public class Menu extends JPanel {
                 int hgap = menuFull ? sheaderFullHgap : 0;
                 int accentColorHeight = 0;
                 if (toolBarAccentColor.isVisible()) {
-                    accentColorHeight = toolBarAccentColor.getPreferredSize().height+gap;
+                    accentColorHeight = toolBarAccentColor.getPreferredSize().height + gap;
                 }
 
                 header.setBounds(x + hgap, y, iconWidth - (hgap * 2), iconHeight);
@@ -286,7 +279,7 @@ public class Menu extends JPanel {
                 int ldWidth = width - ldgap * 2;
                 int ldHeight = lightDarkMode.getPreferredSize().height;
                 int ldx = x + ldgap;
-                int ldy = y + height - ldHeight - ldgap  - accentColorHeight;
+                int ldy = y + height - ldHeight - ldgap - accentColorHeight;
 
                 int menux = x;
                 int menuy = y + iconHeight + gap;
