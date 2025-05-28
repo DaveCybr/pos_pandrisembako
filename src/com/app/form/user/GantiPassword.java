@@ -24,7 +24,7 @@ public class GantiPassword extends javax.swing.JPanel {
     public GantiPassword(String username) {
         initComponents();
         txtUsername.setText(username);
-        txtUsername.setEditable(false); // agar tidak bisa diganti
+        txtUsername.setEditable(false); 
         setLayoutForm();
     }
 

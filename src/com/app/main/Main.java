@@ -80,73 +80,71 @@ public class Main extends JLayeredPane {
         menu.addMenuEvent((int index, int subIndex, MenuAction action) -> {
             if (model != null && model.getRole() != null) {
                 String role = model.getRole();
-
                 switch (role) {
                     case "admin":
                         switch (index) {
-                            case 0: // Dashboard
+                            case 0:
                                 FormMenuUtama.showForm(new FormDashboard());
                                 break;
-                            case 1: // Laporan
+                            case 1:
                                 FormMenuUtama.showForm(new FormLaporan());
                                 break;
-                            case 2: // Produk
+                            case 2:
                                 FormMenuUtama.showForm(new FormBarang());
                                 break;
-                            case 3: // Supplier
+                            case 3:
                                 FormMenuUtama.showForm(new FormSupplier());
                                 break;
-                            case 4: // Pembelian
+                            case 4:
                                 FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
-                            case 5: // Penjualan
+                            case 5:
                                 FormMenuUtama.showForm(new FormPenjualan());
                                 break;
-                            case 6: // User
+                            case 6:
                                 FormMenuUtama.showForm(new FormUser());
                                 break;
-                            case 7: // Ganti Password
-                                FormMenuUtama.showForm(new GantiPassword(role));
+                            case 7:
+                                ModelUser loginUser = FormMenuUtama.getUserLogin();
+                                FormMenuUtama.showForm(new GantiPassword(loginUser.getUsername()));
                                 break;
-                            case 8: // Keluar
+                            case 8:
                                 FormMenuUtama.logout();
                                 break;
                             default:
                                 action.cancel();
                         }
                         break;
-
                     case "kasir":
                         switch (index) {
-                            case 0: // Dashboard
+                            case 0:
                                 FormMenuUtama.showForm(new FormDashboard());
                                 break;
-                            case 1: // Pembelian
+                            case 1:
                                 FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
-                            case 2: // Penjualan
+                            case 2:
                                 FormMenuUtama.showForm(new FormPenjualan());
                                 break;
-                            case 3: // Keluar
+                            case 3:
                                 FormMenuUtama.logout();
                                 break;
                             default:
                                 action.cancel();
                         }
                         break;
-
                     case "gudang":
                         switch (index) {
-                            case 0: // Dashboard
+                            case 0:
                                 FormMenuUtama.showForm(new FormDashboard());
                                 break;
-                            case 1: // Produk
+                            case 1:
                                 FormMenuUtama.showForm(new FormBarang());
                                 break;
-                            case 2: // Supplier
+                            case 2:
                                 FormMenuUtama.showForm(new FormSupplier());
                                 break;
-                            case 3: // Keluar
+                            case 3:
                                 FormMenuUtama.logout();
                                 break;
                             default:
