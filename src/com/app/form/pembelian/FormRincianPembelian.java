@@ -320,7 +320,7 @@ public class FormRincianPembelian extends javax.swing.JDialog {
     }//GEN-LAST:event_btnUpdateSmtActionPerformed
 
     private void btnHapusSmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSmtActionPerformed
-//        hapusRincian();
+        hapusRincian();
     }//GEN-LAST:event_btnHapusSmtActionPerformed
 
     private void btnBatalSmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalSmtActionPerformed
@@ -558,7 +558,7 @@ public class FormRincianPembelian extends javax.swing.JDialog {
             String satuan = txtSatuan.getText().replace(",", "");
             double jumlah = Double.parseDouble(txtQty.getText().replace(",", ""));
             BigDecimal subTotal = harga.multiply(BigDecimal.valueOf(jumlah));
-            
+
             ModelBarang pd = new ModelBarang();
             ModelPembelianRinci det = new ModelPembelianRinci();
 
@@ -575,11 +575,10 @@ public class FormRincianPembelian extends javax.swing.JDialog {
             det.setModelBarang(pd);
 //            det.setModelPembRinci(det);
 
-            servisPR.updateData(det.getId(),det.getQty(),det.getModelBarang().getHarga());
+            servisPR.updateData(det.getId(), det.getQty(), det.getModelBarang().getHarga());
             servisPR.sumTotal(det);
 
 //            DecimalFormat df1 = new DecimalFormat("#,##0");
-
 //            BigDecimal jumlahSubtotal = det.getNilai();
 //            String totalNoDecimal = df1.format(jumlahSubtotal);
 //            txtTotal.setText("Rp. " + totalNoDecimal);
@@ -591,6 +590,35 @@ public class FormRincianPembelian extends javax.swing.JDialog {
             btnCari.setEnabled(true);
         } else {
             JOptionPane.showMessageDialog(null, "Qty tidak boleh kosong!");
+        }
+    }
+
+    private void hapusRincian() {
+        int selectedRow = tabel.getSelectedRow();
+        if (selectedRow >= 0) {
+            // Konfirmasi penghapusan
+            ModelPembelianRinci model = tblModel.getData(selectedRow); // Ambil data dari model tabel
+
+            int confirm = JOptionPane.showConfirmDialog(null,
+                    "Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi Hapus",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Hapus data dari database menggunakan ID
+                boolean berhasil = servisPR.hapusData(tabel.getValueAt(selectedRow, 0).toString()); // Panggil DAO untuk hapus data
+                if (berhasil) {
+                    // Hapus data dari tabel sementara
+                    tblModel.deleteData(selectedRow);
+                    loadData(); // Muat ulang data ke tabel
+                    resetForm(); // Reset form input
+                    JOptionPane.showMessageDialog(null, "Data berhasil dihapus.");
+                } else {
+                    System.out.println(tabel.getValueAt(selectedRow, 0).toString());
+                    JOptionPane.showMessageDialog(null, "Gagal menghapus data.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus.");
         }
     }
 }

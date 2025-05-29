@@ -18,6 +18,8 @@ public interface ServicePembelianRinci {
     void tambah_detail_P(ModelPembelianRinci model);
     
     boolean updateData(String id, double qty, BigDecimal harga);
+    
+    boolean hapusData(String id);
 
     void sumTotal(ModelPembelianRinci model);
 

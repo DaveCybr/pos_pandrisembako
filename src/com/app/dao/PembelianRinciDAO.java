@@ -227,4 +227,31 @@ public class PembelianRinciDAO implements ServicePembelianRinci {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public boolean hapusData(String id) {
+        // Query untuk menghapus data pembelian rinci
+        String queryHapusRinci = "DELETE FROM tbl_pembelianrinci WHERE id_pembelianrinci = ?";
+
+        try (PreparedStatement stmtHapusRinci = conn.prepareStatement(queryHapusRinci)) {
+            // Set parameter untuk query
+            stmtHapusRinci.setString(1, id);
+
+            // Eksekusi query
+            int rowsAffected = stmtHapusRinci.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Data rincian pembelian berhasil dihapus. Stok barang diperbarui oleh trigger.");
+                return true;
+            } else {
+                System.out.println("Tidak ada data rincian pembelian yang ditemukan untuk dihapus.");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Gagal menghapus data rincian pembelian: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
