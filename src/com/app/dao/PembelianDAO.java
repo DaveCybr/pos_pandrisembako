@@ -4,6 +4,7 @@ import com.app.config.ConnectionDB;
 import com.app.main.FormMenuUtama;
 import com.app.model.ModelPembelian;
 import com.app.service.ServicePembelian;
+import com.mysql.cj.jdbc.CallableStatement;
 import java.awt.Dialog;
 import java.io.File;
 import java.sql.Connection;
@@ -73,71 +74,27 @@ public class PembelianDAO  implements ServicePembelian {
 
     @Override
     public boolean hapusData(String idPembelian) {
-        try {
-            // Step 1: Mulai transaksi
-            conn.setAutoCommit(false);
+        if (idPembelian == null || idPembelian.isEmpty()) {
+            System.out.println("ID pembelian tidak boleh kosong.");
+            return false;
+        }
 
-            // Query untuk mendapatkan detail pembelian rinci
-            String queryGetRinci = "SELECT id_barang, qty FROM tbl_pembelianrinci WHERE id_pembelian = ?";
+        String query = "{CALL hapus_pembelian(?)}"; // Nama stored procedure
 
-            // Query untuk menghapus data pembelian rinci
-            String queryHapusRinci = "DELETE FROM tbl_pembelianrinci WHERE id_pembelian = ?";
+        try (CallableStatement stmt = (CallableStatement) conn.prepareCall(query)) {
+            // Set parameter untuk stored procedure
+            stmt.setString(1, idPembelian);
 
-            // Query untuk menghapus data pembelian
-            String queryHapusPembelian = "DELETE FROM tbl_pembelian WHERE id_pembelian = ?";
+            // Eksekusi stored procedure
+            stmt.execute();
 
-            // Query untuk memperbarui stok barang
-            String queryPerbaruiStok = "UPDATE tbl_master_barang SET stok = stok - ? WHERE id_barang = ?";
-
-            // Step 2: Ambil data pembelian rinci
-            PreparedStatement stmtGetRinci = conn.prepareStatement(queryGetRinci);
-            stmtGetRinci.setString(1, idPembelian);
-            ResultSet rs = stmtGetRinci.executeQuery();
-
-            while (rs.next()) {
-                String idBarang = rs.getString("id_barang");
-                int qty = rs.getInt("qty");
-
-                // Step 3: Perbarui stok barang
-                PreparedStatement stmtPerbaruiStok = conn.prepareStatement(queryPerbaruiStok);
-                stmtPerbaruiStok.setInt(1, qty); // Jumlah barang yang dikurangi
-                stmtPerbaruiStok.setString(2, idBarang); // ID barang
-                stmtPerbaruiStok.executeUpdate();
-            }
-
-            // Step 4: Hapus data pembelian rinci
-            PreparedStatement stmtHapusRinci = conn.prepareStatement(queryHapusRinci);
-            stmtHapusRinci.setString(1, idPembelian);
-            stmtHapusRinci.executeUpdate();
-
-            // Step 5: Hapus data pembelian
-            PreparedStatement stmtHapusPembelian = conn.prepareStatement(queryHapusPembelian);
-            stmtHapusPembelian.setString(1, idPembelian);
-            stmtHapusPembelian.executeUpdate();
-
-            // Step 6: Commit transaksi
-            conn.commit();
-
-            System.out.println("Data pembelian berhasil dihapus dan stok barang diperbarui.");
+            System.out.println("Pembelian dengan ID " + idPembelian + " berhasil dihapus.");
             return true;
 
         } catch (SQLException e) {
-            try {
-                // Rollback jika ada kesalahan
-                conn.rollback();
-                System.out.println("Gagal menghapus data pembelian atau memperbarui stok barang. Transaksi dibatalkan.");
-            } catch (SQLException rollbackException) {
-                rollbackException.printStackTrace();
-            }
+            System.out.println("Gagal menghapus pembelian: " + e.getMessage());
             e.printStackTrace();
             return false;
-        } finally {
-            try {
-                // Kembalikan mode auto-commit
-                conn.setAutoCommit(true);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 

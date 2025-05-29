@@ -36,7 +36,9 @@ public class BarangDAO implements ServiceBarang {
         PreparedStatement st = null;
         ResultSet rs = null;
         List list = new ArrayList();
-        String sql = "SELECT * FROM tbl_master_barang";
+        String sql = "SELECT tbl_master_barang.id_barang, tbl_supplier.nama_supplier, tbl_master_barang.nama_barang, "
+                + "tbl_master_barang.barcode, tbl_master_barang.harga, ref_satuan.nama_satuan, tbl_master_barang.stok FROM "
+                + "tbl_master_barang JOIN tbl_supplier ON tbl_master_barang.id_supplier = tbl_supplier.id_supplier JOIN ref_satuan ON tbl_master_barang.id_satuan = ref_satuan.id_satuan";
 
         try {
             st = conn.prepareStatement(sql);
@@ -44,10 +46,11 @@ public class BarangDAO implements ServiceBarang {
             while (rs.next()) {
                 ModelBarang model = new ModelBarang();
                 model.setIdBarang(rs.getString("id_barang"));
+                model.setNama_supplier(rs.getString("nama_supplier"));
                 model.setNama_barang(rs.getString("nama_barang"));
                 model.setBarcode(rs.getString("barcode"));
                 model.setHarga(rs.getBigDecimal("harga"));
-                model.setSatuan(rs.getString("satuan"));
+                model.setSatuan(rs.getString("nama_satuan"));
                 model.setStok(rs.getDouble("stok"));
                 list.add(model);
             }
@@ -60,14 +63,16 @@ public class BarangDAO implements ServiceBarang {
     @Override
     public void tambahData(ModelBarang model) {
         try {
-            String sql = "INSERT INTO tbl_master_barang (id_barang, nama_barang, barcode, harga, satuan, stok) VALUES (?, ?, ?, ?, ?, ?)";
+            System.out.println(model.getSatuan());
+            String sql = "INSERT INTO tbl_master_barang (id_barang,id_supplier, nama_barang, barcode, harga, id_satuan, stok) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, model.getIdBarang());
-            stmt.setString(2, model.getNama_barang());
-            stmt.setString(3, model.getBarcode());
-            stmt.setBigDecimal(4, model.getHarga());
-            stmt.setString(5, model.getSatuan());
-            stmt.setDouble(6, model.getStok());
+            stmt.setString(2, model.getNama_supplier());
+            stmt.setString(3, model.getNama_barang());
+            stmt.setString(4, model.getBarcode());
+            stmt.setBigDecimal(5, model.getHarga());
+            stmt.setString(6, model.getSatuan());
+            stmt.setDouble(7, model.getStok());
 
             stmt.executeUpdate();
             stmt.close();
@@ -81,16 +86,22 @@ public class BarangDAO implements ServiceBarang {
     public void perbaruiData(ModelBarang model) {
         PreparedStatement st = null;
         try {
-            String sql = "UPDATE tbl_master_barang SET nama_barang=?, harga=?, satuan=?, WHERE id_barang";
-
+            String sql = "UPDATE tbl_master_barang SET id_supplier = ?, nama_barang = ?, barcode = ?, harga = ?, id_satuan = ?, stok = ? WHERE id_barang = ?";
             st = conn.prepareStatement(sql);
-            st.setString(1, model.getNama_barang());
-            st.setBigDecimal(2, model.getHarga());
-            st.setString(3, model.getSatuan());
+            st.setString(1, model.getNama_supplier());
+            st.setString(2, model.getNama_barang());
+            st.setString(3, model.getBarcode());
+            st.setBigDecimal(4, model.getHarga());
+            st.setString(5, model.getSatuan());
+            st.setDouble(6, model.getStok());
+            st.setString(7, model.getIdBarang());
+
             st.executeUpdate();
             st.close();
+
+            System.out.println("Data berhasil diperbarui.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Gagal memperbarui data: " + e.getMessage());
         }
     }
 
@@ -184,6 +195,7 @@ public class BarangDAO implements ServiceBarang {
 
         return listObat;
     }
+
     @Override
     public List<ModelBarang> searchByBarcode(String barcode) {
         List<ModelBarang> list = new ArrayList<>();

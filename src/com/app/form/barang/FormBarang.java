@@ -57,7 +57,7 @@ public class FormBarang extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_data = new com.raven.swing.Table();
         txt_search = new com.raven.swing.TextField();
-        btn_detail = new com.raven.swing.ButtonGradient();
+        btn_satuan = new com.raven.swing.ButtonGradient();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(70, 70));
@@ -156,11 +156,11 @@ public class FormBarang extends javax.swing.JPanel {
             }
         });
 
-        btn_detail.setText("DETAIL");
-        btn_detail.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btn_detail.addActionListener(new java.awt.event.ActionListener() {
+        btn_satuan.setText("SATUAN");
+        btn_satuan.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_satuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_detailActionPerformed(evt);
+                btn_satuanActionPerformed(evt);
             }
         });
 
@@ -168,7 +168,7 @@ public class FormBarang extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 913, Short.MAX_VALUE)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -180,7 +180,7 @@ public class FormBarang extends javax.swing.JPanel {
                         .addGap(25, 25, 25)
                         .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(btn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -204,7 +204,7 @@ public class FormBarang extends javax.swing.JPanel {
                         .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -231,17 +231,17 @@ public class FormBarang extends javax.swing.JPanel {
         pencarianData(txt_search.getText());
     }//GEN-LAST:event_txt_searchKeyReleased
 
-    private void btn_detailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_detailActionPerformed
+    private void btn_satuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_satuanActionPerformed
         // TODO add your handling code here:
-        detailuser();
-    }//GEN-LAST:event_btn_detailActionPerformed
+        satuan();
+    }//GEN-LAST:event_btn_satuanActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.raven.swing.ButtonGradient btn_detail;
     private com.raven.swing.ButtonGradient btn_hapus;
     private com.raven.swing.ButtonGradient btn_perbarui;
+    private com.raven.swing.ButtonGradient btn_satuan;
     private com.raven.swing.ButtonGradient btn_tambah;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -273,14 +273,23 @@ public class FormBarang extends javax.swing.JPanel {
 
     private void perbaruiData() {
         
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         int row = tbl_data.getSelectedRow();
+        if(row != -1){
+            ModelBarang model = tblModel.getData(row);
+            FormInputBarang formInput = new FormInputBarang(null, true, row, model, this);
+            formInput.setVisible(true);
+            loadData();
+        }else{
+            JOptionPane.showMessageDialog(null, "Pilih data yang akan diperbarui");
+        }
     }
+
 
      private void hapusData() {
         int row = tbl_data.getSelectedRow();
         if(row != -1){
             ModelBarang model = tblModel.getData(row);
-            if(JOptionPane.showConfirmDialog(null, "Yakin Ingin Menhapus Data ini? ",
+            if(JOptionPane.showConfirmDialog(null, "Yakin Ingin Menghapus Data ini? ",
                     "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
             {
                 servis.hapusData(model);
@@ -292,9 +301,7 @@ public class FormBarang extends javax.swing.JPanel {
         }
     }
 
-    private void detailuser() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+  
 
     private void pencarianData(String keyword) {
         List<ModelBarang> hasil = servis.pencarianData(keyword); // asumsi kamu punya method ini
@@ -303,5 +310,10 @@ public class FormBarang extends javax.swing.JPanel {
 
     void refreshTable() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void satuan() {
+          FormSatuan formInput = new FormSatuan();
+        formInput.setVisible(true);
     }
 }

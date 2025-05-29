@@ -12,7 +12,22 @@ import java.sql.Timestamp;
  * @author queen
  */
 public class ModelBarang {
+
+    /**
+     * @return the nama_supplier
+     */
+    public String getNama_supplier() {
+        return nama_supplier;
+    }
+
+    /**
+     * @param nama_supplier the nama_supplier to set
+     */
+    public void setNama_supplier(String nama_supplier) {
+        this.nama_supplier = nama_supplier;
+    }
     private String idBarang;
+    private String nama_supplier;
     private String nama_barang;
     private String barcode;
     private BigDecimal harga;
