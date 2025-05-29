@@ -14,6 +14,7 @@ import com.app.service.ServiceUser;
 import com.app.tablemodel.TableModelBarang;
 import com.app.tablemodel.TableModelUser;
 import com.formdev.flatlaf.FlatClientProperties;
+import com.mysql.cj.jdbc.PreparedStatementWrapper;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,11 @@ import java.util.UUID;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import com.app.config.ConnectionDB;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  *
@@ -37,6 +43,8 @@ public class FormInputBarang extends javax.swing.JDialog {
     private String idBarang;
     private int row;
     private FormBarang formBarang;
+    private Connection conn;
+    private PreparedStatement st;
 
     public FormInputBarang(java.awt.Frame parent, boolean modal, int row, ModelBarang barang, FormBarang formbarang) {
         super(parent, modal);
@@ -44,11 +52,14 @@ public class FormInputBarang extends javax.swing.JDialog {
         this.row = row;
         this.formBarang = formBarang;
         initComponents();
+        conn = ConnectionDB.getConnection();
         if (barang != null) {
             dataTable();
         }
         loaddata();
         setLayoutForm();
+        comboSupplier();
+        comboSatuan();
     }
 
     private void setLayoutForm() {
@@ -80,6 +91,8 @@ public class FormInputBarang extends javax.swing.JDialog {
         txt_harga = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        cb_supplier = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -137,8 +150,13 @@ public class FormInputBarang extends javax.swing.JDialog {
         jLabel3.setText("Stok");
 
         cb_satuan.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        cb_satuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pilih Satuan", "Pack", "Renteng" }));
+        cb_satuan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih Satuan --" }));
         cb_satuan.setToolTipText("");
+        cb_satuan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_satuanActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel6.setText("Nama Barang");
@@ -152,6 +170,18 @@ public class FormInputBarang extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel8.setText("Harga");
 
+        cb_supplier.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        cb_supplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Pilih Supplier -- " }));
+        cb_supplier.setToolTipText("");
+        cb_supplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_supplierActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        jLabel10.setText("Nama Supplier");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,22 +191,24 @@ public class FormInputBarang extends javax.swing.JDialog {
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel8))
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_stok, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 131, Short.MAX_VALUE))
+                    .addComponent(cb_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb_supplier, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,23 +218,27 @@ public class FormInputBarang extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cb_supplier, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_barcode, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_satuan, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(21, 21, 21)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_stok, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -218,7 +254,7 @@ public class FormInputBarang extends javax.swing.JDialog {
         if (btn_simpan.getText().equals("SIMPAN")) {
             simpanData();
         } else if (btn_simpan.getText().equals("PERBARUI")) {
-//            perbaruiData();
+           perbaruiData();
         }
     }//GEN-LAST:event_btn_simpanActionPerformed
 
@@ -230,6 +266,14 @@ public class FormInputBarang extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_btn_batalActionPerformed
+
+    private void cb_satuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_satuanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_satuanActionPerformed
+
+    private void cb_supplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_supplierActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_supplierActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,7 +298,9 @@ public class FormInputBarang extends javax.swing.JDialog {
     private com.raven.swing.ButtonGradient btn_batal;
     private com.raven.swing.ButtonGradient btn_simpan;
     private javax.swing.JComboBox<String> cb_satuan;
+    private javax.swing.JComboBox<String> cb_supplier;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
@@ -283,13 +329,28 @@ public class FormInputBarang extends javax.swing.JDialog {
         boolean valid = false;
 
         if (txt_nama.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Nama Tidak Boleh Kosong");
-            System.out.println("Validasi gagal: Nama kosong");
+            JOptionPane.showMessageDialog(this, "Nama Barang Tidak Boleh Kosong");
+        } else if (txt_barcode.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Barcode Tidak Boleh Kosong");
+        } else if (txt_harga.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Harga Tidak Boleh Kosong");
         } else if (txt_stok.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Username Tidak Boleh Kosong");
-            System.out.println("Validasi gagal: Username kosong");
+            JOptionPane.showMessageDialog(this, "Stok Tidak Boleh Kosong");
+        } else if (cb_supplier.getSelectedItem().toString().equals("-- Pilih Supplier --")
+                || cb_supplier.getSelectedItem().toString().equals("Pilih Supplier")) {
+            JOptionPane.showMessageDialog(this, "Silakan Pilih Supplier");
+        } else if (cb_satuan.getSelectedItem().toString().equals("-- Pilih Satuan --")) {
+            JOptionPane.showMessageDialog(this, "Silakan Pilih Satuan");
         } else {
-            valid = true;
+            try {
+                // Validasi format harga
+                new BigDecimal(txt_harga.getText().trim());
+                // Validasi format stok
+                Integer.parseInt(txt_stok.getText().trim());
+                valid = true;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Format Harga atau Stok tidak valid!");
+            }
         }
 
         return valid;
@@ -297,21 +358,24 @@ public class FormInputBarang extends javax.swing.JDialog {
 
     private void simpanData() {
         if (validasiInput()) {
-            idBarang = "BR" + (int)(Math.random() * 900 + 100);
+
+            idBarang = "BR" + (int) (Math.random() * 900 + 100);
             String nama = txt_nama.getText();
             String barcode = txt_barcode.getText();
             BigDecimal harga = new BigDecimal(txt_harga.getText());
-            String satuan = cb_satuan.getSelectedItem().toString();
+//            String satuan = cb_satuan.getSelectedItem().toString();
             double stok = Double.parseDouble(txt_stok.getText());
-
+            String[] id_supplier = cb_supplier.getSelectedItem().toString().split("\\ ");
+            String[] id_satuan = cb_satuan.getSelectedItem().toString().split("\\ ");
             ModelBarang model = new ModelBarang();
-            model.setIdBarang (idBarang);
+            model.setIdBarang(idBarang);
+            model.setNama_supplier(id_supplier[0]);
             model.setNama_barang(nama);
             model.setBarcode(barcode);
             model.setHarga(harga);
-            model.setSatuan(satuan);
+            model.setSatuan(id_satuan[0]);
             model.setStok(stok);
-         
+
             servis.tambahData(model); // Menambahkan data ke database
             tblModel.insertData(model); // Menambahkan data ke tabel model
             refreshTable(); // Menyegarkan tabel
@@ -325,41 +389,79 @@ public class FormInputBarang extends javax.swing.JDialog {
 
         idBarang = barang.getIdBarang();
         String stok = String.valueOf(barang.getStok());
-        
+        String harga = barang.getHarga().toString();
+
         txt_nama.setText(barang.getNama_barang());
+        txt_barcode.setText(barang.getBarcode());
+        txt_harga.setText(harga);
         txt_stok.setText(stok);
-        cb_satuan.setSelectedItem(barang.getSatuan());
+        cb_supplier.setSelectedItem(barang.getNama_supplier() + " - " + barang.getNama_supplier()); // sesuaikan format jika ada
+        cb_satuan.setSelectedItem(barang.getSatuan() + " - " + barang.getSatuan()); // sesuaikan format jika ada
 
         jLabel1.setText("MASTER > Barang > Perbarui");
         jLabel2.setText("PERBARUI DATA BARANG");
     }
 
-//    private void perbaruiData() {
-//        String nama = txt_nama.getText();
-//        String rfid = txt_rfid.getText(); // Tidak mengubah RFID yang sudah ada
-//        String barangname = txt_stok.getText();
-//        String alamat = txt_alamat.getText();
-//        String no_telepon = txt_notelp.getText();
-//        String Role = cb_satuan.getSelectedItem().toString();
-//
-//        ModelUser model = new ModelUser();
-//        model.setIdUser(idUser); // Pastikan ID sudah di-set
-//        model.setNama(nama);
-//        model.setRfidUid(rfid); // Jangan mengubah RFID
-//        model.setUsername(barangname);
-//        model.setNo_telepon(no_telepon);
-//        model.setAlamat(alamat);
-//        model.setRole(Role);
-//
-//        servis.perbaruiData(model); // Perbarui data di database
-//        tblModel.updateData(row, model); // Perbarui data di tabel model
-//        resetForm(); // Reset form input
-//        dispose(); // Menutup form
-//    }
-    
+    private void perbaruiData() {
+        String nama = txt_nama.getText();
+        String barcode = txt_barcode.getText();
+        BigDecimal harga = new BigDecimal(txt_harga.getText());
+//            String satuan = cb_satuan.getSelectedItem().toString();
+        double stok = Double.parseDouble(txt_stok.getText());
+        String[] id_supplier = cb_supplier.getSelectedItem().toString().split("\\ ");
+        String[] id_satuan = cb_satuan.getSelectedItem().toString().split("\\ ");
+        ModelBarang model = new ModelBarang();
+        model.setIdBarang(idBarang);
+        model.setNama_supplier(id_supplier[0]);
+        model.setNama_barang(nama);
+        model.setBarcode(barcode);
+        model.setHarga(harga);
+        model.setSatuan(id_satuan[0]);
+        model.setStok(stok);
+
+        servis.perbaruiData(model); // Perbarui data di database
+        tblModel.updateData(row, model); // Perbarui data di tabel model
+        resetForm(); // Reset form input
+        dispose(); // Menutup form
+    }
+
+    private void comboSupplier() {
+        conn = ConnectionDB.getConnection();
+
+        try {
+            String sql = "SELECT * FROM tbl_supplier";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+            model.addElement("Pilih Supplier");
+
+            while (rs.next()) {
+//                String Supplier = rs.getString("nama_supplier");
+//                cb_supplier.();
+                cb_supplier.addItem(rs.getString(1) + " | " + rs.getString(2));
+            }
+        } catch (Exception e) {
+            System.out.println("gabisa");
+        }
+    }
+
+    private void comboSatuan() {
+        try {
+            String q = "SELECT * FROM ref_satuan";
+            PreparedStatement ps = conn.prepareStatement(q);
+            ResultSet rs = ps.executeQuery();
+//            cb_satuan.removeAllItems();
+            while (rs.next()) {
+                cb_satuan.addItem(rs.getString(1) + " | " + rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     void refreshTable() {
         loaddata();
     }
 
-  
 }
