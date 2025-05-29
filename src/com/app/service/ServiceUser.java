@@ -26,4 +26,6 @@ public interface ServiceUser {
     
     boolean validasiPasswordLama(String username, String passwordLama);
     boolean pergantianPassword(String username, String passwordLama, String passwordBaru);
+    boolean isUsernameExist(String username);
+    boolean updatePassword(String username, String newPassword);
 }

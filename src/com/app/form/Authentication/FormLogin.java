@@ -37,6 +37,15 @@ public class FormLogin extends javax.swing.JPanel {
     public FormLogin() {
         initComponents();
         setLayoutForm();
+
+        Lblupapassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // ubah kursor jadi tangan
+        Lblupapassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LupaPassword lupa = new LupaPassword(null, true); // panggil JDialog-nya
+                lupa.setVisible(true); // tampilkan dialog
+            }
+        });
     }
 
     private void resetForm() {
@@ -119,6 +128,7 @@ public class FormLogin extends javax.swing.JPanel {
         txtPassword = new javax.swing.JPasswordField();
         btn_logrfid = new com.raven.swing.ButtonGradient();
         btnLogin = new com.raven.swing.ButtonGradient();
+        Lblupapassword = new javax.swing.JLabel();
 
         txtUsername.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
@@ -158,6 +168,10 @@ public class FormLogin extends javax.swing.JPanel {
             }
         });
 
+        Lblupapassword.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        Lblupapassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Lblupapassword.setText("Lupa Password");
+
         javax.swing.GroupLayout panelLoginLayout = new javax.swing.GroupLayout(panelLogin);
         panelLogin.setLayout(panelLoginLayout);
         panelLoginLayout.setHorizontalGroup(
@@ -165,6 +179,7 @@ public class FormLogin extends javax.swing.JPanel {
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Lblupapassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtUsername)
@@ -197,7 +212,9 @@ public class FormLogin extends javax.swing.JPanel {
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_logrfid, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Lblupapassword)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,7 +231,7 @@ public class FormLogin extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -240,6 +257,7 @@ public class FormLogin extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Lblupapassword;
     private com.raven.swing.ButtonGradient btnLogin;
     private com.raven.swing.ButtonGradient btn_logrfid;
     private javax.swing.JLabel lbLogo;
@@ -360,6 +378,8 @@ public class FormLogin extends javax.swing.JPanel {
                 height += UIScale.scale(buttonGap);
                 height += btn_logrfid.getPreferredSize().height;
                 height += UIScale.scale(buttonGap);
+                height += Lblupapassword.getPreferredSize().height;
+                height += UIScale.scale(buttonGap);
 
                 return new Dimension(0, height);
             }
@@ -408,6 +428,9 @@ public class FormLogin extends javax.swing.JPanel {
 
                 // Layout btn_logrfid
                 btn_logrfid.setBounds(x, y, width, btn_logrfid.getPreferredSize().height);
+                y += btn_logrfid.getPreferredSize().height + UIScale.scale(buttonGap);
+
+                Lblupapassword.setBounds(x, y, width, Lblupapassword.getPreferredSize().height);
             }
         }
 

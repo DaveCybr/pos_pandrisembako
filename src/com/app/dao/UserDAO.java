@@ -366,4 +366,31 @@ public class UserDAO implements ServiceUser {
         return user;
     }
 
+    public boolean isUsernameExist(String username) {
+        try {
+            String sql = "SELECT 1 FROM tbl_user WHERE username = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            return rs.next(); // true jika ada datanya
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updatePassword(String username, String newPassword) {
+        try {
+            String hashedPassword = generateSHA256(newPassword);
+            String sql = "UPDATE tbl_user SET password = ? WHERE username = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, hashedPassword);
+            pst.setString(2, username);
+            return pst.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
