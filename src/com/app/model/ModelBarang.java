@@ -19,6 +19,15 @@ public class ModelBarang {
     private String satuan;
     private double stok;
 
+    public ModelSupplier getModelSupplier() {
+        return modelSupplier;
+    }
+
+    public void setModelSupplier(ModelSupplier modelSupplier) {
+        this.modelSupplier = modelSupplier;
+    }
+    private ModelSupplier modelSupplier;
+
     public String getIdBarang() {
         return idBarang;
     }

@@ -280,7 +280,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="66" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="POS &gt; Penjualan &gt; Tambah"/>
+                <Property name="text" type="java.lang.String" value="Beli barang supplier"/>
               </Properties>
             </Component>
             <Component class="com.raven.swing.ButtonGradient" name="btnBatal">
@@ -497,7 +497,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtStok" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtSatuan" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -538,7 +538,7 @@
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtQty" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtStok" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSatuan" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtNama" alignment="3" max="32767" attributes="0"/>
                               <Component id="btnCari" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtBarcode" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -576,7 +576,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtNama">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtStok">
+                <Component class="javax.swing.JTextField" name="txtSatuan">
                 </Component>
                 <Component class="javax.swing.JTextField" name="txtQty">
                   <Events>
@@ -595,7 +595,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Stok"/>
+                    <Property name="text" type="java.lang.String" value="Satuan"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel11">

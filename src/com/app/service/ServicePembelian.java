@@ -6,7 +6,7 @@ import java.util.List;
 public interface ServicePembelian {
     void tambahData(ModelPembelian pembelian);
     void perbaruiData(ModelPembelian pembelian);
-    void hapusData(String idPembelian);
+    boolean hapusData(String idPembelian);
     
     List<ModelPembelian> getAllData();
     String noFakturPembelian();

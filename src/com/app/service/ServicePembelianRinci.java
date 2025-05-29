@@ -6,6 +6,7 @@
 package com.app.service;
 
 import com.app.model.ModelPembelianRinci;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,6 +16,8 @@ import java.util.List;
 public interface ServicePembelianRinci {
 
     void tambah_detail_P(ModelPembelianRinci model);
+    
+    boolean updateData(String id, double qty, BigDecimal harga);
 
     void sumTotal(ModelPembelianRinci model);
 

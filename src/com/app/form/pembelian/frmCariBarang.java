@@ -114,6 +114,7 @@ public class frmCariBarang extends javax.swing.JDialog {
         String nama = tabel.getValueAt(row, 1).toString();
         BigDecimal harga = new BigDecimal(tabel.getValueAt(row, 3).toString());
         String satuan = tabel.getValueAt(row, 4).toString();
+        System.out.println(satuan);
 //        double stok = Double.parseDouble(tabel.getValueAt(row, 4).toString().replace(",", ""));
         
         
