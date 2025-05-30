@@ -71,16 +71,17 @@ public class PembelianRinciDAO implements ServicePembelianRinci {
     @Override
     public void tambah_detail_P(ModelPembelianRinci model) {
         String sql
-                = "INSERT INTO tbl_pembelianrinci (id_pembelian, id_barang, nama_barang, qty, harga, satuan, nilai) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                = "INSERT INTO tbl_pembelianrinci (id_pembelianrinci, id_pembelian, id_barang, nama_barang, qty, harga, satuan, nilai) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         System.out.println(model.getModelBarang().getSatuan());
         try (PreparedStatement st = conn.prepareStatement(sql)) {
-            st.setString(1, model.getModelPemb().getIdPembelian());
-            st.setString(2, model.getModelBarang().getIdBarang());
-            st.setString(3, model.getModelBarang().getNama_barang());
-            st.setDouble(4, model.getQty());
-            st.setBigDecimal(5, model.getModelBarang().getHarga());
-            st.setString(6, model.getModelBarang().getSatuan());
-            st.setBigDecimal(7, model.getNilai());
+            st.setString(1, model.getId());
+            st.setString(2, model.getModelPemb().getIdPembelian());
+            st.setString(3, model.getModelBarang().getIdBarang());
+            st.setString(4, model.getModelBarang().getNama_barang());
+            st.setDouble(5, model.getQty());
+            st.setBigDecimal(6, model.getModelBarang().getHarga());
+            st.setString(7, model.getModelBarang().getSatuan());
+            st.setBigDecimal(8, model.getNilai());
             st.executeUpdate();
 
             // Update stok setelah menambahkan detail penjualan

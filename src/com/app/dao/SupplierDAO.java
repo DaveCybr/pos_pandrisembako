@@ -90,7 +90,7 @@ public class SupplierDAO implements ServiceSupplier {
             while (rs.next()) {
                 ModelSupplier model = new ModelSupplier();
                 model.setId_supplier(rs.getInt("id_supplier"));
-                model.setNama(rs.getString("nama"));
+                model.setNama(rs.getString("nama_supplier"));
                 model.setAlamat(rs.getString("alamat"));
                 model.setNo_hp(rs.getString("no_hp"));
 

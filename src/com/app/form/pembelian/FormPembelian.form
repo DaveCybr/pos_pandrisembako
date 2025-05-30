@@ -53,15 +53,13 @@
                                       <Component id="btnDetail" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnHapus" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="btnPrint" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="txtSearch" min="-2" pref="156" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="861" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -84,7 +82,6 @@
                               <Component id="btnDetail" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnTambah1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnHapus" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnPrint" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
@@ -153,14 +150,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="com.raven.swing.ButtonGradient" name="btnPrint">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="CETAK"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrintActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">

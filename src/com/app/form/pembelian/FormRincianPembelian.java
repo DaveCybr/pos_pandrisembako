@@ -24,6 +24,7 @@ import com.app.tablemodel.TableModelPembelianSmt;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -34,6 +35,7 @@ import javax.swing.Timer;
 public class FormRincianPembelian extends javax.swing.JDialog {
 
     private final TableModelPembelianRinci tblModel = new TableModelPembelianRinci();
+    private final TableModelPembelian tblP = new TableModelPembelian();
 
     private ServicePembelianRinci servisPR = new PembelianRinciDAO();
     private ServicePembelian servisP = new PembelianDAO();
@@ -65,6 +67,8 @@ public class FormRincianPembelian extends javax.swing.JDialog {
     private void loadData() {
         List<ModelPembelianRinci> list = servisPR.tampil_detail_P(id);
         tblModel.setData(list);
+        List<ModelPembelian> listP = servisP.getAllData();
+        tblP.setData(listP);
     }
 
     /**
@@ -274,13 +278,14 @@ public class FormRincianPembelian extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel18)))
                 .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,8 +329,8 @@ public class FormRincianPembelian extends javax.swing.JDialog {
     }//GEN-LAST:event_btnHapusSmtActionPerformed
 
     private void btnBatalSmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalSmtActionPerformed
-//        loadDataRincia();
-//        resetForm();
+        loadData();
+        resetForm();
     }//GEN-LAST:event_btnBatalSmtActionPerformed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
@@ -442,6 +447,7 @@ public class FormRincianPembelian extends javax.swing.JDialog {
     }
 
     private void resetForm() {
+        btnCari.setEnabled(true);
         txtRef.setText("");
         txtBarcode.setText("");
         txtBarcode.requestFocus();
@@ -462,6 +468,17 @@ public class FormRincianPembelian extends javax.swing.JDialog {
         btnUpdateSmt.setEnabled(false);
         btnBatalSmt.setEnabled(false);
     }
+    
+    public static String generateRandomID() {
+        // Membuat objek Random
+        Random random = new Random();
+
+        // Menghasilkan angka acak 6 digit (antara 100000 dan 999999)
+        int randomNumber = 100000 + random.nextInt(900000);
+
+        // Menggabungkan prefix "RINC" dengan angka acak
+        return "RINC" + randomNumber;
+    }
 
     private void pencarianObatFD() {
         frmCariBarang modelForm = new frmCariBarang(null, true, "Transaksi");
@@ -470,12 +487,15 @@ public class FormRincianPembelian extends javax.swing.JDialog {
 
         if (modelForm.modelDialog.getBarcode() != null) {
 //            System.out.println("Memilih"+ modelForm.modelDialog.getNama_barang());
+//            String ref = generateId(lbNoFak.getText(),1);
+            txtRef.setText(generateRandomID());
             idBarang = modelForm.modelDialog.getIdBarang();
             txtNama.setText(modelForm.modelDialog.getNama_barang());
             txtHarga.setText(modelForm.modelDialog.getHarga().toPlainString());
             txtSatuan.setText(modelForm.modelDialog.getSatuan());
             txtBarcode.setText(modelForm.modelDialog.getBarcode());
 
+            String idPembelianrinci = txtRef.getText();
             String barcode = txtBarcode.getText();
             String namaProduk = txtNama.getText();
             BigDecimal harga = new BigDecimal(txtHarga.getText());
@@ -491,11 +511,15 @@ public class FormRincianPembelian extends javax.swing.JDialog {
                     break;
                 }
             }
-
+            System.out.println("low");
             if (!obatSudahAda) {
+                System.out.println("cek");
 //                ModelPembelianSmt smt = new ModelPembelianSmt();
                 ModelBarang pd = new ModelBarang();
                 ModelPembelianRinci det = new ModelPembelianRinci();
+                ModelPembelian mp = new ModelPembelian();
+                
+                mp.setIdPembelian(lbNoFak.getText());
 
                 pd.setIdBarang(idBarang);
                 pd.setBarcode(barcode);
@@ -504,21 +528,15 @@ public class FormRincianPembelian extends javax.swing.JDialog {
                 pd.setSatuan(satuan);
                 pd.setBarcode(barcode);
 
+                det.setId(idPembelianrinci);
                 det.setQty(jumlah);
                 det.setNilai(subTotal);
-
+                det.setModelPemb(mp);
                 det.setModelBarang(pd);
 //                det.setModelPembRinci(det);
 
                 servisPR.tambah_detail_P(det);
                 servisPR.sumTotal(det);
-
-                DecimalFormat df1 = new DecimalFormat("#,##0");
-
-                BigDecimal jumlahSubtotal = det.getNilai();
-                String totalNoDecimal = df1.format(jumlahSubtotal);
-//                txtTotal.setText("Rp. " + totalNoDecimal);
-
                 loadData();
                 resetForm();
                 txtBarcode.setEditable(true);
@@ -538,12 +556,10 @@ public class FormRincianPembelian extends javax.swing.JDialog {
 
         det.setQty(jumlahBaru);
         det.setNilai(subtotal);
-//        servisPR.updateData(tblModel.getData(rowIndex));
+        servisPR.updateData(det.getId(), det.getQty(), det.getModelBarang().getHarga());
         servisPR.sumTotal(det);
 
-        DecimalFormat df1 = new DecimalFormat("#,##0");
-//        txtTotal.setText("Rp. " + df1.format(det.getNilai()));
-
+        
         loadData();
         tblModel.fireTableRowsUpdated(rowIndex, rowIndex);
         resetForm();
