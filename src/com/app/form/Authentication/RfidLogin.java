@@ -214,7 +214,7 @@ public class RfidLogin extends javax.swing.JDialog {
             if (rs.next()) {
                 // Ambil data user
                 ModelUser user = new ModelUser();
-                user.setIdUser(rs.getInt("id_user"));
+                user.setIdUser(rs.getString("id_user"));
                 user.setNama(rs.getString("nama"));
                 user.setUsername(rs.getString("username"));
                 user.setRole(rs.getString("role"));

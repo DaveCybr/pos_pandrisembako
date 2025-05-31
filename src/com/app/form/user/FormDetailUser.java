@@ -28,7 +28,7 @@ public class FormDetailUser extends javax.swing.JDialog {
     private TableModelUser tblModel = new TableModelUser();
     private ServiceUser servis = new UserDAO();
     private ModelUser user;
-    private int idUser;
+    private String idUser;
     private int row;
     private FormUser formuser;
 

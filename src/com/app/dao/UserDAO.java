@@ -31,16 +31,16 @@ public class UserDAO implements ServiceUser {
     public void tambahData(ModelUser model) {
         PreparedStatement st = null;
         try {
-            String sql = "INSERT INTO tbl_user(nama, rfid_uid, username, password, no_telepon, alamat, role) VALUES (?,?,?,?,?,?,?)";
-
+            String sql = "INSERT INTO tbl_user(id_user, nama, rfid_uid, username, password, no_telepon, alamat, role) VALUES (?,?,?,?,?,?,?,?)";
             st = conn.prepareStatement(sql);
-            st.setString(1, model.getNama());
-            st.setString(2, model.getRfidUid());
-            st.setString(3, model.getUsername());
-            st.setString(4, generateSHA256(model.getPassword()));
-            st.setString(5, model.getNo_telepon());
-            st.setString(6, model.getAlamat());
-            st.setString(7, model.getRole());
+            st.setString(1, model.getIdUser());
+            st.setString(2, model.getNama());
+            st.setString(3, model.getRfidUid());
+            st.setString(4, model.getUsername());
+            st.setString(5, generateSHA256(model.getPassword())); // atau langsung model.getPassword() jika tidak pakai hashing
+            st.setString(6, model.getNo_telepon());
+            st.setString(7, model.getAlamat());
+            st.setString(8, model.getRole());
 
             st.executeUpdate();
             st.close();
@@ -48,7 +48,7 @@ public class UserDAO implements ServiceUser {
             e.printStackTrace();
         }
     }
-
+    
     @Override
     public void perbaruiData(ModelUser model) {
         PreparedStatement st = null;
@@ -62,7 +62,7 @@ public class UserDAO implements ServiceUser {
             st.setString(4, model.getNo_telepon());
             st.setString(5, model.getAlamat());
             st.setString(6, model.getRole());
-            st.setInt(7, model.getIdUser());
+            st.setString(7, model.getIdUser());
 
             st.executeUpdate();
             st.close();
@@ -77,7 +77,7 @@ public class UserDAO implements ServiceUser {
         String sql = "DELETE FROM tbl_user WHERE id_user=?";
         try {
             st = conn.prepareStatement(sql);
-            st.setInt(1, model.getIdUser());
+            st.setString(1, model.getIdUser());
             st.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +96,7 @@ public class UserDAO implements ServiceUser {
             rs = st.executeQuery();
             while (rs.next()) {
                 ModelUser model = new ModelUser();
-                model.setIdUser(rs.getInt("id_user"));
+                model.setIdUser(rs.getString("id_user"));
                 model.setRfidUid(rs.getString("rfid_uid"));
                 model.setNama(rs.getString("nama"));
                 model.setUsername(rs.getString("username"));
@@ -127,7 +127,7 @@ public class UserDAO implements ServiceUser {
             rs = st.executeQuery();
             if (rs.next()) {
                 model = new ModelUser();
-                model.setIdUser(rs.getInt("id_user"));
+                model.setIdUser(rs.getString("id_user"));
                 model.setRfidUid(rs.getString("rfid_uid"));
                 model.setNama(rs.getString("nama"));
                 model.setUsername(rs.getString("username"));
@@ -166,7 +166,7 @@ public class UserDAO implements ServiceUser {
             rs = st.executeQuery();
             while (rs.next()) {
                 ModelUser model = new ModelUser();
-                model.setIdUser(rs.getInt("id_user"));
+                model.setIdUser(rs.getString("id_user"));
                 model.setRfidUid(rs.getString("rfid_uid"));
                 model.setNama(rs.getString("nama"));
                 model.setUsername(rs.getString("username"));
@@ -222,7 +222,7 @@ public class UserDAO implements ServiceUser {
 
             if (rs.next()) {
                 modelUs = new ModelUser();
-                modelUs.setIdUser(rs.getInt("id_user"));
+                modelUs.setIdUser(rs.getString("id_user"));
                 modelUs.setNama(rs.getString("nama"));
                 modelUs.setUsername(rs.getString("username"));
                 modelUs.setRole(rs.getString("role"));
@@ -351,7 +351,7 @@ public class UserDAO implements ServiceUser {
 
         if (rs.next()) {
             user = new ModelUser();
-            user.setIdUser(rs.getInt("id_user"));
+            user.setIdUser(rs.getString("id_user"));
             user.setNama(rs.getString("nama"));
             user.setUsername(rs.getString("username"));
             user.setRole(rs.getString("role"));
@@ -393,4 +393,33 @@ public class UserDAO implements ServiceUser {
         }
     }
 
+    public String generateFormattedId(String role) {
+        String prefix;
+        switch (role.toLowerCase()) {
+            case "admin": prefix = "adm"; break;
+            case "kasir": prefix = "ksr"; break;
+            case "gudang": prefix = "gdg"; break;
+            default: prefix = "usr"; break;
+        }
+
+        String lastId = null;
+        int nextNumber = 1;
+        try {
+            String sql = "SELECT id_user FROM tbl_user WHERE id_user LIKE ? ORDER BY id_user DESC LIMIT 1";
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, prefix + "%");
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                lastId = rs.getString("id_user");
+                String num = lastId.substring(3); // ambil angka belakang
+                nextNumber = Integer.parseInt(num) + 1;
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return String.format("%s%03d", prefix, nextNumber);
+    }
 }

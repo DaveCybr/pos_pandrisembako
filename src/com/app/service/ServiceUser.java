@@ -28,4 +28,6 @@ public interface ServiceUser {
     boolean pergantianPassword(String username, String passwordLama, String passwordBaru);
     boolean isUsernameExist(String username);
     boolean updatePassword(String username, String newPassword);
+
+    public String generateFormattedId(String role);
 }

@@ -27,7 +27,7 @@ public class FormInputUser extends javax.swing.JDialog {
     private TableModelUser tblModel = new TableModelUser();
     private ServiceUser servis = new UserDAO();
     private ModelUser user;
-    private int idUser;
+    private String idUser;
     private int row;
     private FormUser formuser;
 
@@ -348,22 +348,30 @@ public class FormInputUser extends javax.swing.JDialog {
             String password = j_password.getText();
             String no_telepon = txt_notelp.getText();
             String alamat = txt_alamat.getText();
-            String Role = cb_role.getSelectedItem().toString();
+            String role = cb_role.getSelectedItem().toString().toLowerCase();
 
+            // Buat objek user
             ModelUser model = new ModelUser();
             model.setNama(nama);
-            model.setRfidUid(rfid); 
+            model.setRfidUid(rfid);
             model.setUsername(username);
             model.setPassword(password);
             model.setNo_telepon(no_telepon);
             model.setAlamat(alamat);
-            model.setRole(Role);
+            model.setRole(role);
 
-            servis.tambahData(model); 
-            tblModel.insertData(model); 
-            formuser.refreshTable(); 
-            resetForm(); 
-            dispose(); 
+            // Generate dan set id_user berdasarkan role
+            String generatedId = servis.generateFormattedId(role);
+            model.setIdUser(generatedId);
+
+            // Simpan ke DB dan ke tabel
+            servis.tambahData(model);
+            tblModel.insertData(model); // pastikan tblModel pakai model.getId_user()
+            formuser.refreshTable();
+
+//            JOptionPane.showMessageDialog(this, "Data berhasil disimpan dengan ID: " + generatedId);
+            resetForm();
+            dispose();
         }
     }
 
@@ -387,25 +395,25 @@ public class FormInputUser extends javax.swing.JDialog {
 
     private void perbaruiData() {
         String nama = txt_nama.getText();
-        String rfid = txt_rfid.getText(); 
+        String rfid = txt_rfid.getText();
         String username = txt_username.getText();
         String alamat = txt_alamat.getText();
         String no_telepon = txt_notelp.getText();
         String Role = cb_role.getSelectedItem().toString();
 
         ModelUser model = new ModelUser();
-        model.setIdUser(idUser); 
+        model.setIdUser(idUser);
         model.setNama(nama);
-        model.setRfidUid(rfid); 
+        model.setRfidUid(rfid);
         model.setUsername(username);
         model.setNo_telepon(no_telepon);
         model.setAlamat(alamat);
         model.setRole(Role);
 
-        servis.perbaruiData(model); 
-        tblModel.updateData(row, model); 
-        resetForm(); 
-        dispose(); 
+        servis.perbaruiData(model);
+        tblModel.updateData(row, model);
+        resetForm();
+        dispose();
     }
 
     public void setRole(String role) {
