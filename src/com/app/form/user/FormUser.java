@@ -4,13 +4,20 @@
  */
 package com.app.form.user;
 
+import com.app.config.ConnectionDB;
 import com.app.dao.UserDAO;
 import com.app.model.ModelUser;
 import com.app.service.ServiceUser;
 import com.app.tablemodel.TableModelUser;
+import java.io.File;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+import java.sql.Connection;
 
 /**
  *
@@ -21,22 +28,28 @@ public class FormUser extends javax.swing.JPanel {
     /**
      * Creates new form FormUser
      */
-    
     private final TableModelUser tblModel = new TableModelUser();
     private final ServiceUser servis = new UserDAO();
-    
+    private final Connection conn;
+
     public FormUser() {
         initComponents();
         tbl_datauser.setModel(tblModel);
         loadData();
         setLebarKolom();
+        conn = ConnectionDB.getConnection();
     }
-    
+
     private void setLebarKolom() {
         TableColumnModel kolom = tbl_datauser.getColumnModel();
-        kolom.getColumn(0).setPreferredWidth(50);
-        kolom.getColumn(0).setMaxWidth(50);
-        kolom.getColumn(0).setMinWidth(50);
+
+        kolom.getColumn(0).setPreferredWidth(200);
+        kolom.getColumn(0).setMaxWidth(300);
+        kolom.getColumn(0).setMinWidth(150);
+
+        kolom.getColumn(1).setPreferredWidth(150);
+
+        kolom.getColumn(2).setPreferredWidth(100);
     }
 
     /**
@@ -154,7 +167,7 @@ public class FormUser extends javax.swing.JPanel {
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -182,14 +195,14 @@ public class FormUser extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(btn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(btn_detail, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -205,7 +218,7 @@ public class FormUser extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
@@ -249,7 +262,6 @@ public class FormUser extends javax.swing.JPanel {
     }//GEN-LAST:event_tbl_datauserMouseClicked
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.ButtonGradient btn_detail;
     private com.raven.swing.ButtonGradient btn_hapus;
@@ -266,12 +278,11 @@ public class FormUser extends javax.swing.JPanel {
     private com.raven.swing.TextField txt_search;
     // End of variables declaration//GEN-END:variables
 
-
     private void loadData() {
         List<ModelUser> list = servis.tampilData();
         tblModel.setData(list);
     }
-    
+
     private void pencarianData() {
         List<ModelUser> list = servis.pencarianData(txt_search.getText());
         tblModel.setData(list);
@@ -285,35 +296,34 @@ public class FormUser extends javax.swing.JPanel {
 
     private void perbaruiData() {
         int row = tbl_datauser.getSelectedRow();
-        if(row != -1){
+        if (row != -1) {
             ModelUser model = tblModel.getData(row);
             FormInputUser formInput = new FormInputUser(null, true, row, model, this);
             formInput.setVisible(true);
             loadData();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Pilih data yang akan diperbarui");
         }
     }
 
     private void hapusData() {
         int row = tbl_datauser.getSelectedRow();
-        if(row != -1){
+        if (row != -1) {
             ModelUser model = tblModel.getData(row);
-            if(JOptionPane.showConfirmDialog(null, "Yakin Ingin Menhapus Data ini? ",
-                    "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
-            {
+            if (JOptionPane.showConfirmDialog(null, "Yakin Ingin Menhapus Data ini? ",
+                    "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
                 servis.hapusData(model);
                 tblModel.deleteData(row);
                 loadData();
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus");
         }
     }
-    
+
     private void detailuser() {
         int row = tbl_datauser.getSelectedRow();
-        if(row != -1){
+        if (row != -1) {
             ModelUser model = tblModel.getData(row);
             FormDetailUser formDetail = new FormDetailUser(null, true, row, model, this);
             formDetail.setVisible(true);
@@ -322,7 +332,7 @@ public class FormUser extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Pilih data terlebih dahulu");
         }
     }
-    
+
     void refreshTable() {
         loadData();
     }

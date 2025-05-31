@@ -87,28 +87,25 @@ public class Main extends JLayeredPane {
                                 FormMenuUtama.showForm(new FormDashboard());
                                 break;
                             case 1:
-                                FormMenuUtama.showForm(new FormLaporan());
-                                break;
-                            case 2:
                                 FormMenuUtama.showForm(new FormBarang());
                                 break;
-                            case 3:
+                            case 2:
                                 FormMenuUtama.showForm(new FormSupplier());
                                 break;
-                            case 4:
+                            case 3:
                                 FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
-                            case 5:
+                            case 4:
                                 FormMenuUtama.showForm(new FormPenjualan());
                                 break;
-                            case 6:
+                            case 5:
                                 FormMenuUtama.showForm(new FormUser());
                                 break;
-                            case 7:
+                            case 6:
                                 ModelUser loginUser = FormMenuUtama.getUserLogin();
                                 FormMenuUtama.showForm(new GantiPassword(loginUser.getUsername()));
                                 break;
-                            case 8:
+                            case 7:
                                 FormMenuUtama.logout();
                                 break;
                             default:

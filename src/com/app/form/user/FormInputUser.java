@@ -352,18 +352,18 @@ public class FormInputUser extends javax.swing.JDialog {
 
             ModelUser model = new ModelUser();
             model.setNama(nama);
-            model.setRfidUid(rfid); // Gunakan RFID otomatis jika kosong
+            model.setRfidUid(rfid); 
             model.setUsername(username);
             model.setPassword(password);
             model.setNo_telepon(no_telepon);
             model.setAlamat(alamat);
             model.setRole(Role);
 
-            servis.tambahData(model); // Menambahkan data ke database
-            tblModel.insertData(model); // Menambahkan data ke tabel model
-            formuser.refreshTable(); // Menyegarkan tabel
-            resetForm(); // Reset form input
-            dispose(); // Menutup form
+            servis.tambahData(model); 
+            tblModel.insertData(model); 
+            formuser.refreshTable(); 
+            resetForm(); 
+            dispose(); 
         }
     }
 
@@ -387,25 +387,25 @@ public class FormInputUser extends javax.swing.JDialog {
 
     private void perbaruiData() {
         String nama = txt_nama.getText();
-        String rfid = txt_rfid.getText(); // Tidak mengubah RFID yang sudah ada
+        String rfid = txt_rfid.getText(); 
         String username = txt_username.getText();
         String alamat = txt_alamat.getText();
         String no_telepon = txt_notelp.getText();
         String Role = cb_role.getSelectedItem().toString();
 
         ModelUser model = new ModelUser();
-        model.setIdUser(idUser); // Pastikan ID sudah di-set
+        model.setIdUser(idUser); 
         model.setNama(nama);
-        model.setRfidUid(rfid); // Jangan mengubah RFID
+        model.setRfidUid(rfid); 
         model.setUsername(username);
         model.setNo_telepon(no_telepon);
         model.setAlamat(alamat);
         model.setRole(Role);
 
-        servis.perbaruiData(model); // Perbarui data di database
-        tblModel.updateData(row, model); // Perbarui data di tabel model
-        resetForm(); // Reset form input
-        dispose(); // Menutup form
+        servis.perbaruiData(model); 
+        tblModel.updateData(row, model); 
+        resetForm(); 
+        dispose(); 
     }
 
     public void setRole(String role) {

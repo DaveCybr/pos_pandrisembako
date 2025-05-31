@@ -52,7 +52,7 @@ public class TableModelUser extends AbstractTableModel {
         JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
     }
 
-    private final String[] columnNames = {"ID", "Nama", "Username", "Role"};
+    private final String[] columnNames = {"Nama", "Username", "Role"};
 
     @Override
     public int getRowCount() {
@@ -70,23 +70,23 @@ public class TableModelUser extends AbstractTableModel {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         switch (columnIndex) {
+//            case 0:
+//                return "    " + model.getIdUser();
             case 0:
-                return "    " + model.getIdUser();
-            case 1:
                 return model.getNama();
-            case 2:
+            case 1:
                 return model.getUsername();
-            case 3:
+            case 2:
                 return model.getRole();
-            case 4:
+            case 3:
                 return model.getRfidUid();
-            case 5:
+            case 4:
                 return model.getNo_telepon();
-            case 6:
+            case 5:
                 return model.getAlamat();
-            case 7:
+            case 6:
                 return model.getCreatedAt() != null ? sdf.format(model.getCreatedAt()) : "";
-            case 8:
+            case 7:
                 return model.getUpdatedAt() != null ? sdf.format(model.getUpdatedAt()) : "";
             default:
                 return null;

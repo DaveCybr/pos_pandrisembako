@@ -30,7 +30,7 @@ public class LupaPassword extends javax.swing.JDialog {
         conn = ConnectionDB.getConnection();
         setLayoutForm();
     }
-    
+
     private void setLayoutForm() {
         txt_password.putClientProperty(FlatClientProperties.STYLE, ""
                 + "showRevealButton:true;"
@@ -38,11 +38,10 @@ public class LupaPassword extends javax.swing.JDialog {
         txt_konfirmpass.putClientProperty(FlatClientProperties.STYLE, ""
                 + "showRevealButton:true;"
                 + "showCapsLock:true");
-        
-        
-        txt_username.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukan username");
-        txt_password.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukan Password Lama");
-        txt_konfirmpass.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukan Password Baru");
+
+        txt_username.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan username");
+        txt_password.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Masukkan Password Baru");
+        txt_konfirmpass.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Konfirmasi Password Baru");
     }
 
     /**
@@ -64,6 +63,7 @@ public class LupaPassword extends javax.swing.JDialog {
         btn_simpan = new com.raven.swing.ButtonGradient();
         txt_password = new javax.swing.JPasswordField();
         txt_konfirmpass = new javax.swing.JPasswordField();
+        btn_batal = new com.raven.swing.ButtonGradient();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,16 +73,28 @@ public class LupaPassword extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("Form Lupa Password");
 
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel2.setText("Username");
 
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel3.setText("Password");
 
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel4.setText("Konfirm Password Baru");
 
         btn_simpan.setText("SIMPAN");
+        btn_simpan.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btn_simpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_simpanActionPerformed(evt);
+            }
+        });
+
+        btn_batal.setText("BATAL");
+        btn_batal.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        btn_batal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_batalActionPerformed(evt);
             }
         });
 
@@ -90,15 +102,17 @@ public class LupaPassword extends javax.swing.JDialog {
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(128, Short.MAX_VALUE)
+                .addContainerGap(143, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(122, 122, 122))
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -110,12 +124,16 @@ public class LupaPassword extends javax.swing.JDialog {
                             .addComponent(txt_password)
                             .addComponent(txt_konfirmpass, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE))))
                 .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
-                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
@@ -125,15 +143,17 @@ public class LupaPassword extends javax.swing.JDialog {
                         .addGap(19, 19, 19)
                         .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(20, 20, 20)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(20, 20, 20)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_konfirmpass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -157,6 +177,13 @@ public class LupaPassword extends javax.swing.JDialog {
         // TODO add your handling code here:
         simpanPasswordBaru();
     }//GEN-LAST:event_btn_simpanActionPerformed
+
+    private void btn_batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_batalActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        FormLogin formlogin = new FormLogin();
+        formlogin.setVisible(true);
+    }//GEN-LAST:event_btn_batalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,8 +232,18 @@ public class LupaPassword extends javax.swing.JDialog {
         String password = txt_password.getText().trim();
         String konfirmPassword = txt_konfirmpass.getText().trim();
 
+        if (username.isEmpty() || password.isEmpty() || konfirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Semua kolom harus diisi!");
+            return;
+        }
+
         if (!servis.isUsernameExist(username)) {
             JOptionPane.showMessageDialog(this, "Username tidak ditemukan!");
+            return;
+        }
+
+        if (!password.equals(konfirmPassword)) {
+            JOptionPane.showMessageDialog(this, "Password dan Konfirmasi Password tidak sama!");
             return;
         }
 
@@ -217,10 +254,11 @@ public class LupaPassword extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Gagal mengubah password. Silakan coba lagi.");
         }
-
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.raven.swing.ButtonGradient btn_batal;
     private com.raven.swing.ButtonGradient btn_simpan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
