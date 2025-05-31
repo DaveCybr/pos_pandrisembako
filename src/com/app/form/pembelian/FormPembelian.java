@@ -97,7 +97,6 @@ public class FormPembelian extends javax.swing.JPanel {
         btnTambah1 = new com.raven.swing.ButtonGradient();
         btnDetail = new com.raven.swing.ButtonGradient();
         btnHapus = new com.raven.swing.ButtonGradient();
-        btnPrint = new com.raven.swing.ButtonGradient();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -117,7 +116,7 @@ public class FormPembelian extends javax.swing.JPanel {
         txtBarcode = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
         txtNama = new javax.swing.JTextField();
-        txtStok = new javax.swing.JTextField();
+        txtSatuan = new javax.swing.JTextField();
         txtQty = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -186,13 +185,6 @@ public class FormPembelian extends javax.swing.JPanel {
             }
         });
 
-        btnPrint.setText("CETAK");
-        btnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrintActionPerformed(evt);
-            }
-        });
-
         jLabel4.setBackground(new java.awt.Color(102, 102, 102));
         jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
@@ -221,14 +213,12 @@ public class FormPembelian extends javax.swing.JPanel {
                                 .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 861, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         viewPanelLayout.setVerticalGroup(
@@ -245,8 +235,7 @@ public class FormPembelian extends javax.swing.JPanel {
                     .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnTambah1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtSearch)))
@@ -263,7 +252,7 @@ public class FormPembelian extends javax.swing.JPanel {
         jLabel5.setBackground(new java.awt.Color(102, 102, 102));
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("POS > Penjualan > Tambah");
+        jLabel5.setText("Beli barang supplier");
 
         btnBatal.setText("BATAL");
         btnBatal.addActionListener(new java.awt.event.ActionListener() {
@@ -395,7 +384,7 @@ public class FormPembelian extends javax.swing.JPanel {
 
         jLabel9.setText("Nama");
 
-        jLabel10.setText("Stok");
+        jLabel10.setText("Satuan");
 
         jLabel11.setText("Qty");
 
@@ -467,7 +456,7 @@ public class FormPembelian extends javax.swing.JPanel {
                             .addComponent(jLabel18))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStok)
+                            .addComponent(txtSatuan)
                             .addComponent(jLabel10))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,7 +488,7 @@ public class FormPembelian extends javax.swing.JPanel {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSatuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNama)
                     .addComponent(btnCari)
                     .addComponent(txtBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -605,21 +594,17 @@ public class FormPembelian extends javax.swing.JPanel {
         hapusData();
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        printNota();
-    }//GEN-LAST:event_btnPrintActionPerformed
-
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         simpanData();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnBatalSmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalSmtActionPerformed
-        //        loadDataSmt();
-        //        resetForm();
+        loadDataSmt();
+        resetForm();
     }//GEN-LAST:event_btnBatalSmtActionPerformed
 
     private void btnHapusSmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusSmtActionPerformed
-        //        hapusSmt();
+        hapusSmt();
     }//GEN-LAST:event_btnHapusSmtActionPerformed
 
     private void btnUpdateSmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSmtActionPerformed
@@ -627,16 +612,12 @@ public class FormPembelian extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateSmtActionPerformed
 
     private void tblSmtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSmtMouseClicked
-        //        dataTableSmt();
+        dataTableSmt();
     }//GEN-LAST:event_tblSmtMouseClicked
 
     private void txtQtyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQtyActionPerformed
         updateSmt();
     }//GEN-LAST:event_txtQtyActionPerformed
-
-    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-                pencarianObatFD();
-    }//GEN-LAST:event_btnCariActionPerformed
 
     private void txtBarcodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBarcodeKeyReleased
         pencarianBarang();
@@ -655,6 +636,10 @@ public class FormPembelian extends javax.swing.JPanel {
         loadData();
     }//GEN-LAST:event_btnBatalActionPerformed
 
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+        pencarianObatFD();
+    }//GEN-LAST:event_btnCariActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addPanel;
@@ -664,7 +649,6 @@ public class FormPembelian extends javax.swing.JPanel {
     private com.raven.swing.ButtonGradient btnDetail;
     private com.raven.swing.ButtonGradient btnHapus;
     private javax.swing.JButton btnHapusSmt;
-    private com.raven.swing.ButtonGradient btnPrint;
     private com.raven.swing.ButtonGradient btnSimpan;
     private com.raven.swing.ButtonGradient btnTambah1;
     private javax.swing.JButton btnUpdateSmt;
@@ -699,8 +683,8 @@ public class FormPembelian extends javax.swing.JPanel {
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtNoFak;
     private javax.swing.JTextField txtQty;
+    private javax.swing.JTextField txtSatuan;
     private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtStok;
     private javax.swing.JLabel txtTotal;
     private javax.swing.JPanel viewPanel;
     // End of variables declaration//GEN-END:variables
@@ -730,17 +714,31 @@ public class FormPembelian extends javax.swing.JPanel {
         mainPanel.repaint();
         mainPanel.revalidate();
     }
-
+    
     private void detailPembelianData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int row = tblData.getSelectedRow();
+        if (row != -1) {
+            String id = tblData.getValueAt(row, 0).toString();
+            FormRincianPembelian dataDetail = new FormRincianPembelian(null,true,id);
+            dataDetail.setVisible(true);
+            loadData();
+        } else {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu!");
+        }
     }
 
     private void hapusData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void updateSmt() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int row = tblData.getSelectedRow();
+        if (row != -1) {
+            ModelPembelian pbl = tblPembelian.getData(row);
+            if(JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus data?", "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION){
+                servis.hapusData(pbl.getIdPembelian());
+                tblPembelian.deleteData(row);
+                loadData();
+            } 
+        } else {
+                JOptionPane.showMessageDialog(null, "Silahkan pilih data yang ingin di hapus!");
+        }
     }
 
    private void showPanel() {
@@ -756,18 +754,18 @@ public class FormPembelian extends javax.swing.JPanel {
         modelForm.setVisible(true);
 
         if (modelForm.modelDialog.getBarcode() != null) {
-            System.out.println("Memilih"+ modelForm.modelDialog.getNama_barang());
+//            System.out.println("Memilih"+ modelForm.modelDialog.getNama_barang());
             idBarang = modelForm.modelDialog.getIdBarang();
             txtNama.setText(modelForm.modelDialog.getNama_barang());
             txtHarga.setText(modelForm.modelDialog.getHarga().toPlainString());
-            txtStok.setText(Double.toString(modelForm.modelDialog.getStok()));
+            txtSatuan.setText(modelForm.modelDialog.getSatuan());
             txtBarcode.setText(modelForm.modelDialog.getBarcode());
-//            txtSatuan.
-//
+            
+
             String barcode = txtBarcode.getText();
             String namaProduk = txtNama.getText();
             BigDecimal harga = new BigDecimal(txtHarga.getText());
-            double stok = Double.parseDouble(txtStok.getText());
+            String satuan = modelForm.modelDialog.getSatuan();
             int jumlah = 1;
             BigDecimal subTotal = harga.multiply(BigDecimal.valueOf(jumlah));
 
@@ -789,7 +787,8 @@ public class FormPembelian extends javax.swing.JPanel {
                 pd.setBarcode(barcode);
                 pd.setNama_barang(namaProduk);
                 pd.setHarga(harga);
-                pd.setStok(stok);
+                pd.setSatuan(satuan);
+                pd.setBarcode(barcode);
 
                 det.setQty(jumlah);
                 det.setNilai(subTotal);
@@ -819,14 +818,15 @@ public class FormPembelian extends javax.swing.JPanel {
     private void pencarianBarang() {
         String barcodeInput = txtBarcode.getText().trim();
         if (barcodeInput.isEmpty()) {
+            System.out.println("cari3");
             return;
         }
 
         List<ModelBarang> list = servisBarang.searchByBarcode(barcodeInput);
-
+        System.out.println("cari1");
         if (!list.isEmpty()) {
             ModelBarang barang = list.get(0);
-
+            System.out.println("cari2");
             // Cek apakah barang sudah ada di tabel sementara
             boolean barangSudahAda = false;
             for (int i = 0; i < tblModelSmt.getRowCount(); i++) {
@@ -874,10 +874,11 @@ public class FormPembelian extends javax.swing.JPanel {
                 txtTotal.setText("Rp. " + df1.format(detail.getNilai()));
 
                 loadDataSmt();
+                txtBarcode.setText("");
+                System.out.println("cari");
             }
         }
-        txtBarcode.setText("");
-        txtBarcode.requestFocus();
+//        txtBarcode.requestFocus();
     }
 
     private void updateQty(int rowIndex, BigDecimal harga, int jumlah) {
@@ -904,7 +905,7 @@ public class FormPembelian extends javax.swing.JPanel {
         txtKasir.setEditable(false);
         txtNama.setEditable(false);
         txtHarga.setEditable(false);
-        txtStok.setEditable(false);
+        txtSatuan.setEditable(false);
         txtQty.setEditable(false);
 
         btnCari.setEnabled(false);
@@ -918,7 +919,7 @@ public class FormPembelian extends javax.swing.JPanel {
         txtBarcode.requestFocus();
         txtNama.setText("");
         txtHarga.setText("");
-        txtStok.setText("");
+        txtSatuan.setText("");
         txtQty.setText("");
     }
 
@@ -987,6 +988,95 @@ public class FormPembelian extends javax.swing.JPanel {
             servis.printNota(id);
         } else {
             JOptionPane.showMessageDialog(null, "Silahkan pilih data terlebih dahulu!");
+        }
+    }
+
+    private void dataTableSmt() {
+        int row = tblSmt.getSelectedRow();
+        idBarang = tblSmt.getValueAt(row, 2).toString().trim();
+        txtBarcode.setText(tblSmt.getValueAt(row, 1).toString());
+        txtNama.setText(tblSmt.getValueAt(row, 3).toString());
+        txtHarga.setText(tblSmt.getValueAt(row, 4).toString());
+        txtQty.setText(tblSmt.getValueAt(row, 5).toString());
+        txtSatuan.setText(tblSmt.getValueAt(row, 6).toString());
+
+        nonAktif();
+        txtQty.setEditable(true);
+        btnUpdateSmt.setEnabled(true);
+        btnHapusSmt.setEnabled(true);
+        btnBatalSmt.setEnabled(true);
+    }
+    
+    private void updateSmt() {
+        if (!txtQty.getText().equals("")) {
+            String barcode = txtBarcode.getText();
+            String namaBarang = txtNama.getText();
+            BigDecimal harga = new BigDecimal(txtHarga.getText().replace(",", ""));
+            String satuan = txtSatuan.getText().replace(",", "");
+            double jumlah = Double.parseDouble(txtQty.getText().replace(",", ""));
+            BigDecimal subTotal = harga.multiply(BigDecimal.valueOf(jumlah));
+
+            ModelPembelianSmt smt = new ModelPembelianSmt();
+            ModelBarang pd = new ModelBarang();
+            ModelPembelianRinci det = new ModelPembelianRinci();
+
+            pd.setIdBarang(idBarang);
+            pd.setBarcode(barcode);
+            pd.setNama_barang(namaBarang);
+            pd.setHarga(harga);
+            pd.setSatuan(satuan);
+
+            det.setQty(jumlah);
+            det.setNilai(subTotal);
+
+            smt.setModelBarang(pd);
+            smt.setModelPembRinci(det);
+
+            servisSmt.updateData(smt);
+            servisRinci.sumTotal(det);
+
+            DecimalFormat df1 = new DecimalFormat("#,##0");
+
+            BigDecimal jumlahSubtotal = det.getNilai();
+            String totalNoDecimal = df1.format(jumlahSubtotal);
+            txtTotal.setText("Rp. " + totalNoDecimal);
+            
+            loadDataSmt();
+            resetForm();
+            txtBarcode.setEnabled(true);
+            txtBarcode.setEditable(true);
+            btnCari.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Qty tidak boleh kosong!");
+        }
+    }
+    
+    private void hapusSmt() {
+        // Cek apakah ada baris yang dipilih
+        int selectedRow = tblSmt.getSelectedRow();
+        if (selectedRow >= 0) {
+            // Konfirmasi penghapusan
+            ModelPembelianSmt model = tblModelSmt.getData(selectedRow);
+            int confirm = JOptionPane.showConfirmDialog(null,
+                    "Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi Hapus",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Hapus data dari tabel sementara
+                int grandTotal = Integer.parseInt(txtTotal.getText().replaceAll("[^\\d]", ""));
+                int subtotal = Integer.parseInt(tblSmt.getValueAt(selectedRow, 7).toString().replace(",", ""));
+                int hasilAkhir = grandTotal - subtotal;
+                DecimalFormat df1 = new DecimalFormat("#,##0");
+                String Total = df1.format(hasilAkhir);
+                txtTotal.setText("Rp ." + Total);
+                System.out.println("Berhasil");
+                servisSmt.hapusData(model);
+                tblModelSmt.deleteData(selectedRow);
+                loadDataSmt();
+                resetForm();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Pilih data yang ingin dihapus.");
         }
     }
 

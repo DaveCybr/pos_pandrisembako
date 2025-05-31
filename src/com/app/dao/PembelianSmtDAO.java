@@ -79,13 +79,16 @@ public class PembelianSmtDAO implements ServicePembelianSmt{
     // Mengupdate data penjualan sementara
     @Override
     public void updateData(ModelPembelianSmt model) {
-        String sql = "UPDATE tbl_pembeliansmt SET nama = ?, harga = ?, qty = ?, subtotal = ? WHERE id_barang = ?";
+        String sql = "UPDATE tbl_pembeliansmt SET id_barang = ?, barcode = ?, nama = ?, harga = ?, qty = ?, subtotal = ?, satuan = ? WHERE id_barang = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, model.getModelBarang().getNama_barang()); // Nama Obat
-            stmt.setBigDecimal(2, model.getModelBarang().getHarga()); // Harga Obat
-            stmt.setDouble(3, model.getModelPembRinci().getQty());  // Kuantitas
-            stmt.setBigDecimal(4, model.getModelPembRinci().getNilai()); // Subtotal
-            stmt.setString(5, model.getModelBarang().getIdBarang());  // Kode Obat
+            stmt.setString(1, model.getModelBarang().getIdBarang()); // Nama Obat
+            stmt.setString(2, model.getModelBarang().getBarcode()); // Nama Obat
+            stmt.setString(3, model.getModelBarang().getNama_barang()); // Nama Obat
+            stmt.setBigDecimal(4, model.getModelBarang().getHarga()); // Harga Obat
+            stmt.setDouble(5, model.getModelPembRinci().getQty());  // Kuantitas
+            stmt.setBigDecimal(6, model.getModelPembRinci().getNilai()); // Subtotal
+            stmt.setString(7, model.getModelBarang().getSatuan()); // Subtotal
+            stmt.setString(8, model.getModelBarang().getIdBarang());  // Kode Obat
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Error while updating data: " + e.getMessage());
@@ -95,7 +98,7 @@ public class PembelianSmtDAO implements ServicePembelianSmt{
     // Menghapus data penjualan sementara
     @Override
     public void hapusData(ModelPembelianSmt model) {
-        String sql = "DELETE FROM tbl_transaksismt WHERE id_barang = ?";
+        String sql = "DELETE FROM tbl_pembeliansmt WHERE id_barang = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, model.getModelBarang().getIdBarang());  // Kode Obat
             stmt.executeUpdate();

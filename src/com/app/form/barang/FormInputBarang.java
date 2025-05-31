@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import com.app.config.ConnectionDB;
+import com.app.model.ModelSupplier;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -254,7 +255,7 @@ public class FormInputBarang extends javax.swing.JDialog {
         if (btn_simpan.getText().equals("SIMPAN")) {
             simpanData();
         } else if (btn_simpan.getText().equals("PERBARUI")) {
-           perbaruiData();
+            perbaruiData();
         }
     }//GEN-LAST:event_btn_simpanActionPerformed
 
@@ -369,12 +370,15 @@ public class FormInputBarang extends javax.swing.JDialog {
             String[] id_satuan = cb_satuan.getSelectedItem().toString().split("\\ ");
             ModelBarang model = new ModelBarang();
             model.setIdBarang(idBarang);
-            model.setNama_supplier(id_supplier[0]);
             model.setNama_barang(nama);
             model.setBarcode(barcode);
             model.setHarga(harga);
             model.setSatuan(id_satuan[0]);
             model.setStok(stok);
+
+            ModelSupplier supl = new ModelSupplier();
+            supl.setNama(id_supplier[0]);
+            model.setModelSupplier(supl);
 
             servis.tambahData(model); // Menambahkan data ke database
             tblModel.insertData(model); // Menambahkan data ke tabel model
@@ -395,7 +399,7 @@ public class FormInputBarang extends javax.swing.JDialog {
         txt_barcode.setText(barang.getBarcode());
         txt_harga.setText(harga);
         txt_stok.setText(stok);
-        cb_supplier.setSelectedItem(barang.getNama_supplier() + " - " + barang.getNama_supplier()); // sesuaikan format jika ada
+        cb_supplier.setSelectedItem(barang.getModelSupplier().getId_supplier()+ " - " + barang.getModelSupplier().getNama()); // sesuaikan format jika ada
         cb_satuan.setSelectedItem(barang.getSatuan() + " - " + barang.getSatuan()); // sesuaikan format jika ada
 
         jLabel1.setText("MASTER > Barang > Perbarui");
@@ -412,12 +416,15 @@ public class FormInputBarang extends javax.swing.JDialog {
         String[] id_satuan = cb_satuan.getSelectedItem().toString().split("\\ ");
         ModelBarang model = new ModelBarang();
         model.setIdBarang(idBarang);
-        model.setNama_supplier(id_supplier[0]);
         model.setNama_barang(nama);
         model.setBarcode(barcode);
         model.setHarga(harga);
         model.setSatuan(id_satuan[0]);
         model.setStok(stok);
+
+        ModelSupplier supl = new ModelSupplier();
+        supl.setNama(id_supplier[0]);
+        model.setModelSupplier(supl);
 
         servis.perbaruiData(model); // Perbarui data di database
         tblModel.updateData(row, model); // Perbarui data di tabel model

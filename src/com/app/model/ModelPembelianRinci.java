@@ -13,8 +13,17 @@ import java.math.BigDecimal;
 public class ModelPembelianRinci {
     private ModelBarang modelBarang;
     private ModelPembelian modelPemb;
+    private String id;
     private double qty;
     private BigDecimal nilai;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     
      public ModelPembelianRinci() {
         this.modelBarang = new ModelBarang(); // Pastikan ini ada

@@ -109,11 +109,11 @@ public class frmCariBarang extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int row = tabel.getSelectedRow();
-        String barcode = tabel.getValueAt(row, 2).toString();
+        String barcode = tabel.getValueAt(row, 3).toString();
         String kode = tabel.getValueAt(row, 0).toString();
-        String nama = tabel.getValueAt(row, 1).toString();
-        BigDecimal harga = new BigDecimal(tabel.getValueAt(row, 3).toString());
-        String satuan = tabel.getValueAt(row, 4).toString();
+        String nama = tabel.getValueAt(row, 2).toString();
+        BigDecimal harga = new BigDecimal(tabel.getValueAt(row, 4).toString());
+        String satuan = tabel.getValueAt(row, 5).toString();
 //        double stok = Double.parseDouble(tabel.getValueAt(row, 4).toString().replace(",", ""));
         
         

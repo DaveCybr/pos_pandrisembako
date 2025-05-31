@@ -71,7 +71,7 @@ public class TableModelBarang extends AbstractTableModel {
             case 0:
                 return model.getIdBarang();
             case 1:
-                return model.getNama_supplier();
+                return model.getModelSupplier().getNama();
             case 2:
                 return model.getNama_barang();
             case 3:

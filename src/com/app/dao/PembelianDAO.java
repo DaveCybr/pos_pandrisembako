@@ -4,6 +4,7 @@ import com.app.config.ConnectionDB;
 import com.app.main.FormMenuUtama;
 import com.app.model.ModelPembelian;
 import com.app.service.ServicePembelian;
+import com.mysql.cj.jdbc.CallableStatement;
 import java.awt.Dialog;
 import java.io.File;
 import java.sql.Connection;
@@ -72,8 +73,29 @@ public class PembelianDAO  implements ServicePembelian {
     }
 
     @Override
-    public void hapusData(String idPembelian) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean hapusData(String idPembelian) {
+        if (idPembelian == null || idPembelian.isEmpty()) {
+            System.out.println("ID pembelian tidak boleh kosong.");
+            return false;
+        }
+
+        String query = "{CALL hapus_pembelian(?)}"; // Nama stored procedure
+
+        try (CallableStatement stmt = (CallableStatement) conn.prepareCall(query)) {
+            // Set parameter untuk stored procedure
+            stmt.setString(1, idPembelian);
+
+            // Eksekusi stored procedure
+            stmt.execute();
+
+            System.out.println("Pembelian dengan ID " + idPembelian + " berhasil dihapus.");
+            return true;
+
+        } catch (SQLException e) {
+            System.out.println("Gagal menghapus pembelian: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override

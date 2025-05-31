@@ -38,15 +38,20 @@ public class BarangDAO implements ServiceBarang {
         List list = new ArrayList();
         String sql = "SELECT tbl_master_barang.id_barang, tbl_supplier.nama_supplier, tbl_master_barang.nama_barang, "
                 + "tbl_master_barang.barcode, tbl_master_barang.harga, ref_satuan.nama_satuan, tbl_master_barang.stok FROM "
-                + "tbl_master_barang JOIN tbl_supplier ON tbl_master_barang.id_supplier = tbl_supplier.id_supplier JOIN ref_satuan ON tbl_master_barang.id_satuan = ref_satuan.id_satuan";
+                + "tbl_master_barang LEFT JOIN tbl_supplier ON tbl_master_barang.id_supplier = tbl_supplier.id_supplier LEFT JOIN ref_satuan ON tbl_master_barang.id_satuan = ref_satuan.id_satuan";
 
         try {
             st = conn.prepareStatement(sql);
             rs = st.executeQuery();
             while (rs.next()) {
                 ModelBarang model = new ModelBarang();
+                ModelSupplier supl = new ModelSupplier();
                 model.setIdBarang(rs.getString("id_barang"));
-                model.setNama_supplier(rs.getString("nama_supplier"));
+                String namaSupplier = rs.getString("nama_supplier");
+                if (namaSupplier != null) { 
+                    supl.setNama(namaSupplier);
+                }
+                model.setModelSupplier(supl);
                 model.setNama_barang(rs.getString("nama_barang"));
                 model.setBarcode(rs.getString("barcode"));
                 model.setHarga(rs.getBigDecimal("harga"));
@@ -67,7 +72,7 @@ public class BarangDAO implements ServiceBarang {
             String sql = "INSERT INTO tbl_master_barang (id_barang,id_supplier, nama_barang, barcode, harga, id_satuan, stok) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, model.getIdBarang());
-            stmt.setString(2, model.getNama_supplier());
+            stmt.setString(2, model.getModelSupplier().getNama());
             stmt.setString(3, model.getNama_barang());
             stmt.setString(4, model.getBarcode());
             stmt.setBigDecimal(5, model.getHarga());
@@ -88,7 +93,7 @@ public class BarangDAO implements ServiceBarang {
         try {
             String sql = "UPDATE tbl_master_barang SET id_supplier = ?, nama_barang = ?, barcode = ?, harga = ?, id_satuan = ?, stok = ? WHERE id_barang = ?";
             st = conn.prepareStatement(sql);
-            st.setString(1, model.getNama_supplier());
+            st.setString(1, model.getModelSupplier().getNama());
             st.setString(2, model.getNama_barang());
             st.setString(3, model.getBarcode());
             st.setBigDecimal(4, model.getHarga());
