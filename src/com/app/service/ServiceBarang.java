@@ -20,6 +20,8 @@ public interface ServiceBarang {
     
     List<ModelBarang> pencarianData(String id);
     
+    List<ModelBarang> getDataByid(String id);
+    
 //    List<ModelMasterObat> ambilNamaObat();
 //    String ambilNamaObatId(int id);
 

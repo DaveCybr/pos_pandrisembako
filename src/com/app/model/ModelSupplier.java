@@ -13,6 +13,15 @@ public class ModelSupplier {
     private String nama;
     private String alamat;
     private String no_hp;
+    private String namaPemilik;
+
+    public String getNamaPemilik() {
+        return namaPemilik;
+    }
+
+    public void setNamaPemilik(String namaPemilik) {
+        this.namaPemilik = namaPemilik;
+    }
 
     public int getId_supplier() {
         return id_supplier;

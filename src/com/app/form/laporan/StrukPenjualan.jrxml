@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="StrukKasir" language="groovy" pageWidth="164" pageHeight="842" columnWidth="144" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" isIgnorePagination="true" uuid="49761ce3-4cb3-4eb2-9419-63e50d5e86cc">
+	<property name="ireport.zoom" value="2.4200000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="215"/>
+	<parameter name="id_penjualan" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+    p.id_penjualan AS id_penjualan,
+    p.tgl_penjualan AS tanggal_penjualan,
+    pr.id_barang AS id_barang,
+    b.nama_barang AS nama_barang,
+    pr.qty AS jumlah_barang,
+    pr.harga AS harga_per_unit,
+    pr.nilai AS total_barang,
+    p.bayar AS bayar,
+    p.kembalian AS kembalian,
+    p.nilai AS total_penjualan,
+    (SELECT SUM(pr2.qty) 
+     FROM tbl_penjualanrinci pr2 
+     WHERE pr2.id_penjualan = p.id_penjualan) AS total_jumlah_barang
+FROM 
+    tbl_penjualan p
+JOIN 
+    tbl_penjualanrinci pr ON p.id_penjualan = pr.id_penjualan
+JOIN 
+    tbl_master_barang b ON pr.id_barang = b.id_barang
+WHERE 
+    p.id_penjualan = $P{id_penjualan};]]>
+	</queryString>
+	<field name="id_penjualan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal_penjualan" class="java.sql.Date"/>
+	<field name="id_barang" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_barang" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jumlah_barang" class="java.math.BigDecimal"/>
+	<field name="harga_per_unit" class="java.math.BigDecimal"/>
+	<field name="total_barang" class="java.math.BigDecimal"/>
+	<field name="bayar" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kembalian" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_penjualan" class="java.lang.Double"/>
+	<field name="total_jumlah_barang" class="java.math.BigDecimal"/>
+	<variable name="subtotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_barang}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="18" width="144" height="15" uuid="35b92e15-5c30-4505-8c67-3d337a6d5659"/>
+				<textElement textAlignment="Center">
+					<font fontName="Consolas" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bursa Sembako Bu Pandri]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="144" height="13" uuid="423ccc2e-7690-4494-9df6-de853afd7d24"/>
+				<textElement textAlignment="Center">
+					<font fontName="Consolas" size="5"/>
+				</textElement>
+				<text><![CDATA[Jl. Griya Mangli Indah, Wonosari, Mangli, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="46" width="144" height="10" uuid="51274279-26d4-4504-93df-84d5792bedfc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<text><![CDATA[Telp. 0851 9728 9505]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="69" width="144" height="1" uuid="ebc56b3d-4d0b-4414-92f5-9decf4d6e8ec"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="10" width="75" height="10" uuid="84a2b0e0-6566-4b79-b750-c96562c4cf73"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_penjualan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="69" height="10" uuid="a77cde45-9a3c-4452-95d6-0c70d065b709"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_penjualan}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="40" width="144" height="1" uuid="0f947a6b-11d2-4f48-a16f-29f6af231615"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="69" height="10" uuid="45f87237-84b2-442c-83ec-f89c085b80c5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="10" width="69" height="10" uuid="8215de9a-b0ca-41b6-9e5f-d740dfd4268e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rp. " + $F{total_barang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="10" width="23" height="10" uuid="3d812357-b1ee-471c-8c45-e0ec17dba3e6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlah_barang}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="23" y="10" width="12" height="10" uuid="4f2dad46-1dd3-4f4d-aa7f-ff8ad703b20d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<text><![CDATA[x]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="35" y="10" width="34" height="10" uuid="3effe722-7149-4a7a-a3cd-86d8fa924863"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{harga_per_unit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="94" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="144" height="1" uuid="15d56713-2fee-4b06-8a92-0e7e2c79ac26"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="8" width="69" height="10" uuid="c47b89c2-72fd-451a-ab08-f8da8ba6d413"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total QTY :" + $F{total_jumlah_barang}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="22" width="69" height="10" uuid="d33fe8b6-cfd3-4397-9ede-7f0f35dacc75"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="32" width="69" height="10" uuid="f49b7ae6-96ce-40f6-8851-b59fb7c222d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<text><![CDATA[Bayar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="42" width="69" height="10" uuid="413f858c-6408-43a7-b703-5871c115de9e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<text><![CDATA[Kembalian]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="32" width="69" height="10" uuid="2f648c14-9dd4-44aa-a678-e131bfaaeba2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rp. " + $F{bayar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="42" width="69" height="10" uuid="3093d4cf-92c6-4f7c-b885-013cc27936d3"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rp. " + $F{kembalian}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="58" width="144" height="10" uuid="60a0a436-db33-44de-91ad-9357852fd108"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<text><![CDATA[Terima Kasih Telah Berbelanja ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="68" width="144" height="10" uuid="dbd232f3-d254-4cd9-ba2f-689b5da1c3ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<text><![CDATA[Link Kritik dan Saran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="78" width="144" height="10" uuid="9fe06bfe-632d-406b-ba87-72c4ec688cd4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<text><![CDATA[https://www.instagram.com/pandrisembako]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="86" y="22" width="58" height="10" uuid="ce1fc3f6-7ed0-4156-a2b5-7672b19a55b4"/>
+				<textElement textAlignment="Right">
+					<font fontName="Consolas" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rp. " + $F{total_penjualan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

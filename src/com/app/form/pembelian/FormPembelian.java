@@ -845,7 +845,7 @@ public class FormPembelian extends javax.swing.JPanel {
                 String barcode = barang.getBarcode();
                 String nama = barang.getNama_barang();
                 BigDecimal harga = barang.getHarga();
-                double stok = barang.getStok();
+                BigDecimal stok = barang.getStok();
                 String satuan = barang.getSatuan();
 
                 double jumlah = 1;

@@ -48,7 +48,7 @@ public class BarangDAO implements ServiceBarang {
                 ModelSupplier supl = new ModelSupplier();
                 model.setIdBarang(rs.getString("id_barang"));
                 String namaSupplier = rs.getString("nama_supplier");
-                if (namaSupplier != null) { 
+                if (namaSupplier != null) {
                     supl.setNama(namaSupplier);
                 }
                 model.setModelSupplier(supl);
@@ -56,7 +56,7 @@ public class BarangDAO implements ServiceBarang {
                 model.setBarcode(rs.getString("barcode"));
                 model.setHarga(rs.getBigDecimal("harga"));
                 model.setSatuan(rs.getString("nama_satuan"));
-                model.setStok(rs.getDouble("stok"));
+                model.setStok(rs.getBigDecimal("stok"));
                 list.add(model);
             }
         } catch (SQLException e) {
@@ -77,7 +77,7 @@ public class BarangDAO implements ServiceBarang {
             stmt.setString(4, model.getBarcode());
             stmt.setBigDecimal(5, model.getHarga());
             stmt.setString(6, model.getSatuan());
-            stmt.setDouble(7, model.getStok());
+            stmt.setBigDecimal(7, model.getStok());
 
             stmt.executeUpdate();
             stmt.close();
@@ -98,7 +98,7 @@ public class BarangDAO implements ServiceBarang {
             st.setString(3, model.getBarcode());
             st.setBigDecimal(4, model.getHarga());
             st.setString(5, model.getSatuan());
-            st.setDouble(6, model.getStok());
+            st.setBigDecimal(6, model.getStok());
             st.setString(7, model.getIdBarang());
 
             st.executeUpdate();
@@ -180,7 +180,7 @@ public class BarangDAO implements ServiceBarang {
                 obat.setIdBarang(rs.getString("id_barang"));
                 obat.setNama_barang(rs.getString("nama_barang"));
                 obat.setHarga(rs.getBigDecimal("harga"));
-                obat.setStok(rs.getDouble("stok"));
+                obat.setStok(rs.getBigDecimal("stok"));
                 obat.setSatuan(rs.getString("satuan"));
                 obat.setBarcode(rs.getString("barcode"));
                 listObat.add(obat);
@@ -216,12 +216,55 @@ public class BarangDAO implements ServiceBarang {
                     barang.setBarcode(rs.getString("barcode"));
                     barang.setHarga(rs.getBigDecimal("harga"));
                     barang.setSatuan(rs.getString("satuan"));
-                    barang.setStok(rs.getDouble("stok"));
+                    barang.setStok(rs.getBigDecimal("stok"));
 
                     list.add(barang);
                 }
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<ModelBarang> getDataByid(String id) {
+        List<ModelBarang> list = new ArrayList<>();
+        String query = "SELECT * FROM tbl_master_barang "
+                + "LEFT JOIN tbl_supplier ON tbl_supplier.id_supplier = tbl_master_barang.id_supplier "
+                + "LEFT JOIN ref_satuan ON ref_satuan.id_satuan = tbl_master_barang.id_satuan "
+                + "WHERE id_barang = ?";
+
+        try (PreparedStatement st = conn.prepareStatement(query)) {
+            st.setString(1, id);
+            try (ResultSet rs = st.executeQuery()) {
+                while (rs.next()) {
+                    // Membuat objek ModelBarang
+                    ModelBarang barang = new ModelBarang();
+                    barang.setIdBarang(rs.getString("id_barang"));
+                    barang.setNama_barang(rs.getString("nama_barang"));
+                    barang.setBarcode(rs.getString("barcode"));
+                    barang.setHarga(rs.getBigDecimal("harga"));
+                    barang.setSatuan(rs.getString("satuan"));
+                    barang.setStok(rs.getBigDecimal("stok"));
+
+                    // Mengisi data supplier
+                    ModelSupplier ms = new ModelSupplier();
+                    ms.setId_supplier(rs.getInt("id_supplier"));
+                    ms.setNama(rs.getString("nama_supplier")); // Asumsi ada kolom nama_supplier
+                    barang.setModelSupplier(ms);
+
+                    // Mengisi data satuan
+                    barang.setId_satuan(rs.getString("id_satuan"));
+                    barang.setSatuan(rs.getString("nama_satuan")); // Asumsi ada kolom nama_satuan
+
+                    // Menambahkan barang ke daftar
+                    list.add(barang);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error while fetching data by ID: " + e.getMessage());
             e.printStackTrace();
         }
 

@@ -273,7 +273,7 @@ public class FormBarang extends javax.swing.JPanel {
 
     private void perbaruiData() {
         
-         int row = tbl_data.getSelectedRow();
+        int row = tbl_data.getSelectedRow();
         if(row != -1){
             ModelBarang model = tblModel.getData(row);
             FormInputBarang formInput = new FormInputBarang(null, true, row, model, this);
@@ -313,7 +313,7 @@ public class FormBarang extends javax.swing.JPanel {
     }
 
     private void satuan() {
-          FormSatuan formInput = new FormSatuan();
+        FormSatuan formInput = new FormSatuan();
         formInput.setVisible(true);
     }
 }
