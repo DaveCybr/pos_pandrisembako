@@ -38,12 +38,12 @@ public class FormLogin extends javax.swing.JPanel {
         initComponents();
         setLayoutForm();
 
-        Lblupapassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); // ubah kursor jadi tangan
+        Lblupapassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); 
         Lblupapassword.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LupaPassword lupa = new LupaPassword(null, true); // panggil JDialog-nya
-                lupa.setVisible(true); // tampilkan dialog
+                LupaPassword lupa = new LupaPassword(null, true); 
+                lupa.setVisible(true); 
             }
         });
     }
