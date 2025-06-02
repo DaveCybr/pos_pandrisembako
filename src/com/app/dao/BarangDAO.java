@@ -69,15 +69,16 @@ public class BarangDAO implements ServiceBarang {
     public void tambahData(ModelBarang model) {
         try {
             System.out.println(model.getSatuan());
-            String sql = "INSERT INTO tbl_master_barang (id_barang,id_supplier, nama_barang, barcode, harga, id_satuan, stok) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO tbl_master_barang (id_barang, id_supplier, id_satuan, nama_barang, barcode, harga, satuan, stok) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, model.getIdBarang());
-            stmt.setString(2, model.getModelSupplier().getNama());
-            stmt.setString(3, model.getNama_barang());
-            stmt.setString(4, model.getBarcode());
-            stmt.setBigDecimal(5, model.getHarga());
-            stmt.setString(6, model.getSatuan());
-            stmt.setBigDecimal(7, model.getStok());
+            stmt.setInt(2, model.getModelSupplier().getId_supplier());
+            stmt.setString(3, model.getId_satuan());
+            stmt.setString(4, model.getNama_barang());
+            stmt.setString(5, model.getBarcode());
+            stmt.setBigDecimal(6, model.getHarga());
+            stmt.setString(7, model.getSatuan());
+            stmt.setBigDecimal(8, model.getStok());
 
             stmt.executeUpdate();
             stmt.close();
@@ -88,18 +89,20 @@ public class BarangDAO implements ServiceBarang {
         }
     }
 
+    @Override
     public void perbaruiData(ModelBarang model) {
         PreparedStatement st = null;
         try {
-            String sql = "UPDATE tbl_master_barang SET id_supplier = ?, nama_barang = ?, barcode = ?, harga = ?, id_satuan = ?, stok = ? WHERE id_barang = ?";
+            String sql = "UPDATE tbl_master_barang SET id_supplier = ?, nama_barang = ?, barcode = ?, harga = ?, id_satuan = ?, satuan = ?, stok = ? WHERE id_barang = ?";
             st = conn.prepareStatement(sql);
-            st.setString(1, model.getModelSupplier().getNama());
+            st.setInt(1, model.getModelSupplier().getId_supplier());
             st.setString(2, model.getNama_barang());
             st.setString(3, model.getBarcode());
             st.setBigDecimal(4, model.getHarga());
-            st.setString(5, model.getSatuan());
-            st.setBigDecimal(6, model.getStok());
-            st.setString(7, model.getIdBarang());
+            st.setString(5, model.getId_satuan());
+            st.setString(6, model.getSatuan());
+            st.setBigDecimal(7, model.getStok());
+            st.setString(8, model.getIdBarang());
 
             st.executeUpdate();
             st.close();

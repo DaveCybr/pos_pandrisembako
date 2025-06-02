@@ -48,6 +48,7 @@ import javax.swing.Timer;
  * @author queen
  */
 public class FormPenjualan extends javax.swing.JPanel {
+
     private TablePenjualan tblModelPen = new TablePenjualan();
     private TablePenjualanSmt tblModelSmt = new TablePenjualanSmt();
 
@@ -950,7 +951,7 @@ public class FormPenjualan extends javax.swing.JPanel {
             for (int i = 0; i < tblModelSmt.getRowCount(); i++) {
                 if (tblModelSmt.getData(i).getModelBarang().getBarcode().equals(obat.getBarcode())) {
                     obatSudahAda = true;
-                    updateQty(i,obat.getHarga(),BigDecimal.ONE);
+                    updateQty(i, obat.getHarga(), 1);
                     System.out.println("disini2");
                     break;
                 }
@@ -1020,21 +1021,20 @@ public class FormPenjualan extends javax.swing.JPanel {
             txtStok.setText(modelForm.modelDialog.getStok().toString());
             txtBarcode.setText(modelForm.modelDialog.getBarcode());
             txtSatuan.setText(modelForm.modelDialog.getSatuan());
-            
 
             String barcode = txtBarcode.getText();
             String namaProduk = txtNama.getText();
             String satuan = txtSatuan.getText();
             BigDecimal harga = new BigDecimal(txtHarga.getText());
             BigDecimal stok = new BigDecimal(txtStok.getText());
-            BigDecimal jumlah = BigDecimal.ONE;
-            BigDecimal subTotal = harga.multiply(jumlah);
+            int jumlah = 1;
+            BigDecimal subTotal = harga.multiply(BigDecimal.valueOf(jumlah));
 
             boolean obatSudahAda = false;
             for (int i = 0; i < tblModelSmt.getRowCount(); i++) {
                 if (tblModelSmt.getData(i).getModelBarang().getBarcode().equals(barcode)) {
                     obatSudahAda = true;
-                    updateQty(i, harga, jumlah);
+                    updateQty(i, harga, 1);
                     break;
                 }
             }
@@ -1051,7 +1051,7 @@ public class FormPenjualan extends javax.swing.JPanel {
                 pd.setStok(stok);
                 pd.setSatuan(satuan);
 
-                det.setQty(jumlah);
+                det.setQty(BigDecimal.valueOf(jumlah));
                 det.setNilai(subTotal);
 
                 smt.setModelBarang(pd);
@@ -1080,20 +1080,22 @@ public class FormPenjualan extends javax.swing.JPanel {
         }
     }
 
-    private void updateQty(int rowIndex, BigDecimal harga, BigDecimal jumlah) {
+    private void updateQty(int rowIndex, BigDecimal harga, int jumlah) {
         ModelPenjualanRinci det = tblModelSmt.getData(rowIndex).getModelPenjualanRinci();
-        BigDecimal jumlahLama = det.getQty();
-        BigDecimal jumlahBaru = jumlahLama.add(jumlah);
-        BigDecimal subtotal = jumlahBaru.multiply(harga);
-        det.setQty(jumlahBaru);
+        double jumlahLama = det.getQty().doubleValue();
+        double jumlahBaru = jumlahLama + jumlah;
+        BigDecimal subtotal = harga.multiply(BigDecimal.valueOf(jumlahBaru));
+        det.setQty(BigDecimal.valueOf(jumlahBaru));
         det.setNilai(subtotal);
         servisSmt.updateData(tblModelSmt.getData(rowIndex));
         servisDetail.sumTotal(det);
 
-        txtSubtotal.setText(String.valueOf(det.getNilai()));
-        String total = txtSubtotal.getText();
-        txtGrandTotal.setText(total);
-        txtTotal.setText("Rp. " + total);
+        DecimalFormat df1 = new DecimalFormat("#,##0");
+        BigDecimal jumlahSubtotal = det.getNilai();
+        String totalNoDecimal = df1.format(jumlahSubtotal);
+        txtSubtotal.setText(totalNoDecimal);
+        txtGrandTotal.setText(totalNoDecimal);
+        txtTotal.setText("Rp. " + totalNoDecimal);
         loadDataSmt();
         resetForm();
         tblModelSmt.fireTableRowsUpdated(rowIndex, rowIndex);
@@ -1247,7 +1249,7 @@ public class FormPenjualan extends javax.swing.JPanel {
             pJ.setKembalian(kembali);
 //            pJ.setIdUser(idUser);
 
-            if(txtBayar.getText().trim().equals("")){
+            if (txtBayar.getText().trim().equals("")) {
                 JOptionPane.showMessageDialog(null, "Input Bayar belum diisi");
             }
             servis.tambahPenjualan(pJ);
