@@ -1,6 +1,5 @@
 package com.app.main;
 
-import com.app.form.FormDashboard;
 import com.app.form.barang.FormBarang;
 import com.app.form.laporan.FormLaporan;
 import com.app.form.pembelian.FormPembelian;
@@ -84,28 +83,25 @@ public class Main extends JLayeredPane {
                     case "admin":
                         switch (index) {
                             case 0:
-                                FormMenuUtama.showForm(new FormDashboard());
-                                break;
-                            case 1:
                                 FormMenuUtama.showForm(new FormBarang());
                                 break;
-                            case 2:
+                            case 1:
                                 FormMenuUtama.showForm(new FormSupplier());
                                 break;
-                            case 3:
+                            case 2:
                                 FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
-                            case 4:
+                            case 3:
                                 FormMenuUtama.showForm(new FormPenjualan(model));
                                 break;
-                            case 5:
+                            case 4:
                                 FormMenuUtama.showForm(new FormUser());
                                 break;
-                            case 6:
+                            case 5:
                                 ModelUser loginUser = FormMenuUtama.getUserLogin();
                                 FormMenuUtama.showForm(new GantiPassword(loginUser.getUsername()));
                                 break;
-                            case 7:
+                            case 6:
                                 FormMenuUtama.logout();
                                 break;
                             default:
@@ -115,15 +111,12 @@ public class Main extends JLayeredPane {
                     case "kasir":
                         switch (index) {
                             case 0:
-                                FormMenuUtama.showForm(new FormDashboard());
-                                break;
-                            case 1:
                                 FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
-                            case 2:
+                            case 1:
                                 FormMenuUtama.showForm(new FormPenjualan(model));
                                 break;
-                            case 3:
+                            case 2:
                                 FormMenuUtama.logout();
                                 break;
                             default:
@@ -133,15 +126,12 @@ public class Main extends JLayeredPane {
                     case "gudang":
                         switch (index) {
                             case 0:
-                                FormMenuUtama.showForm(new FormDashboard());
-                                break;
-                            case 1:
                                 FormMenuUtama.showForm(new FormBarang());
                                 break;
-                            case 2:
+                            case 1:
                                 FormMenuUtama.showForm(new FormSupplier());
                                 break;
-                            case 3:
+                            case 2:
                                 FormMenuUtama.logout();
                                 break;
                             default:

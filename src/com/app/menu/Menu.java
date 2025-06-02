@@ -29,8 +29,6 @@ public class Menu extends JPanel {
     }
 
     public final String menuItems[][] = {
-        {"~MAIN~"},
-        {"Dashboard"},
         {"~WEB APP~"},
         {"Produk"},
         {"Supplier"},
@@ -130,11 +128,11 @@ public class Menu extends JPanel {
                 String role = modelUser.getRole();
 
                 if (role.equals("kasir")) {
-                    if (!(menuName.equals("Dashboard") || menuName.equals("Pembelian") || menuName.equals("Penjualan") || menuName.equals("Keluar"))) {
+                    if (!(menuName.equals("Pembelian") || menuName.equals("Penjualan") || menuName.equals("Keluar"))) {
                         continue;
                     }
                 } else if (role.equals("gudang")) {
-                    if (!(menuName.equals("Dashboard") || menuName.equals("Produk") || menuName.equals("Supplier") || menuName.equals("Keluar"))) {
+                    if (!(menuName.equals("Produk") || menuName.equals("Supplier") || menuName.equals("Keluar"))) {
                         continue;
                     }
                 }
