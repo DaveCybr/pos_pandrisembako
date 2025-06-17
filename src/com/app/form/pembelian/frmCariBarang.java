@@ -114,7 +114,7 @@ public class frmCariBarang extends javax.swing.JDialog {
         String nama = tabel.getValueAt(row, 2).toString();
         BigDecimal harga = new BigDecimal(tabel.getValueAt(row, 4).toString());
         String satuan = tabel.getValueAt(row, 5).toString();
-//        double stok = Double.parseDouble(tabel.getValueAt(row, 4).toString().replace(",", ""));
+        BigDecimal stok = new BigDecimal(tabel.getValueAt(row, 6).toString().replace(",", ""));
         
         
 
@@ -123,6 +123,7 @@ public class frmCariBarang extends javax.swing.JDialog {
         modelDialog.setNama_barang(nama);
         modelDialog.setHarga(harga);
         modelDialog.setSatuan(satuan);
+        modelDialog.setStok(stok);
         
 
         dispose();

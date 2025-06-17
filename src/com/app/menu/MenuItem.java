@@ -18,9 +18,11 @@ import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Path2D;
 import java.util.List;
+import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 /**
  *
@@ -72,6 +74,7 @@ public class MenuItem extends JPanel {
         this.menuIndex = menuIndex;
         this.events = events;
         init();
+        setOpaque(false);
     }
 
     private Icon getIcon() {
@@ -90,7 +93,7 @@ public class MenuItem extends JPanel {
                 + "background:$Menu.background;"
                 + "foreground:$Menu.lineColor");
         for (int i = 0; i < menus.length; i++) {
-            JButton menuItem = createButtonItem(menus[i]);
+            JToggleButton menuItem = createButtonItem(menus[i]);
             menuItem.setHorizontalAlignment(menuItem.getComponentOrientation().isLeftToRight() ? JButton.LEADING : JButton.TRAILING);
             if (i == 0) {
                 menuItem.setIcon(getIcon());
@@ -118,22 +121,19 @@ public class MenuItem extends JPanel {
 
     protected void setSelectedIndex(int index) {
         int size = getComponentCount();
-        boolean selected = false;
         for (int i = 0; i < size; i++) {
             Component com = getComponent(i);
-            if (com instanceof JButton) {
-                ((JButton) com).setSelected(i == index);
-                if (i == index) {
-                    selected = true;
-                }
+            if (com instanceof AbstractButton) {
+                AbstractButton btn = (AbstractButton) com;
+                btn.setSelected(i == index); // hanya satu yg true
             }
         }
-        ((JButton) getComponent(0)).setSelected(selected);
+
         popup.setSelectedIndex(index);
     }
 
-    private JButton createButtonItem(String text) {
-        JButton button = new JButton(text);
+    private JToggleButton createButtonItem(String text) {
+        JToggleButton button = new JToggleButton(text);
         button.putClientProperty(FlatClientProperties.STYLE, ""
                 + "background:$Menu.background;"
                 + "foreground:$Menu.foreground;"
@@ -147,6 +147,7 @@ public class MenuItem extends JPanel {
                 + "margin:3,11,3,11");
         return button;
     }
+
 
     public void hideMenuItem() {
         animate = 0;

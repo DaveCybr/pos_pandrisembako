@@ -19,7 +19,7 @@ import javax.swing.table.TableColumnModel;
  */
 public class FormSatuan extends javax.swing.JDialog {
 
-    private final TableModelSatuan tblModel = new TableModelSatuan();
+    private final TableModelSatuan tb = new TableModelSatuan();
     private final ServiceSatuan servis = new SatuanDAO();
 
     /**
@@ -28,14 +28,14 @@ public class FormSatuan extends javax.swing.JDialog {
     public FormSatuan() {
     
         initComponents();
-        tbl_data.setModel(tblModel);
+        tb_dt.setModel(tb);
         loadData();
         setLebarKolom();
 //        hapusData();
     }
 
     private void setLebarKolom() {
-        TableColumnModel kolom = tbl_data.getColumnModel();
+        TableColumnModel kolom = tb_dt.getColumnModel();
         kolom.getColumn(0).setPreferredWidth(50);
         kolom.getColumn(0).setMaxWidth(50);
         kolom.getColumn(0).setMinWidth(50);
@@ -51,14 +51,15 @@ public class FormSatuan extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_data = new com.raven.swing.Table();
+        tb_dt = new com.raven.swing.Table();
         btn_tambah = new com.raven.swing.ButtonGradient();
         btn_perbarui = new com.raven.swing.ButtonGradient();
         btn_hapus = new com.raven.swing.ButtonGradient();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        tbl_data.setModel(new javax.swing.table.DefaultTableModel(
+        tb_dt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -69,7 +70,7 @@ public class FormSatuan extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tbl_data);
+        jScrollPane1.setViewportView(tb_dt);
 
         btn_tambah.setText("Tambah");
         btn_tambah.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +93,9 @@ public class FormSatuan extends javax.swing.JDialog {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        jLabel6.setText("Tabel data Satuan");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,25 +103,30 @@ public class FormSatuan extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                    .addComponent(btn_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_perbarui, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -140,7 +149,7 @@ public class FormSatuan extends javax.swing.JDialog {
 
     private void loadData() {
         List<ModelSatuan> list = servis.tampilData();
-        tblModel.setData(list);
+        tb.setData(list);
     }
     
     private void tambahData(){
@@ -191,9 +200,9 @@ public class FormSatuan extends javax.swing.JDialog {
 //        });
 //    }
        private void perbaruiData() {
-        int row = tbl_data.getSelectedRow();
+        int row = tb_dt.getSelectedRow();
         if(row != -1){
-            ModelSatuan model = tblModel.getData(row);
+            ModelSatuan model = tb.getData(row);
             FormInputSatuan formInput = new FormInputSatuan(null, true, row, model, this);
             formInput.setVisible(true);
             loadData();
@@ -203,14 +212,14 @@ public class FormSatuan extends javax.swing.JDialog {
     }
 
      private void hapusData() {
-        int row = tbl_data.getSelectedRow();
+        int row = tb_dt.getSelectedRow();
         if(row != -1){
-            ModelSatuan model = tblModel.getData(row);
+            ModelSatuan model = tb.getData(row);
             if(JOptionPane.showConfirmDialog(null, "Yakin Ingin Menghapus Data ini? ",
                     "Konfirmasi", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
             {
                 servis.hapusData(model);
-                tblModel.deleteData(row);
+                tb.deleteData(row);
                 loadData();
             }
         }else{
@@ -225,7 +234,8 @@ public class FormSatuan extends javax.swing.JDialog {
     private com.raven.swing.ButtonGradient btn_hapus;
     private com.raven.swing.ButtonGradient btn_perbarui;
     private com.raven.swing.ButtonGradient btn_tambah;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.raven.swing.Table tbl_data;
+    private com.raven.swing.Table tb_dt;
     // End of variables declaration//GEN-END:variables
 }

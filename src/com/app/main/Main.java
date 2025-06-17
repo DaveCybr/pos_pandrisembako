@@ -96,7 +96,7 @@ public class Main extends JLayeredPane {
                                 FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
                             case 4:
-                                FormMenuUtama.showForm(new FormPenjualan());
+                                FormMenuUtama.showForm(new FormPenjualan(model));
                                 break;
                             case 5:
                                 FormMenuUtama.showForm(new FormUser());
@@ -115,13 +115,13 @@ public class Main extends JLayeredPane {
                     case "kasir":
                         switch (index) {
                             case 0:
-                                FormMenuUtama.showForm(new FormDashboard());
+                                FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
                             case 1:
                                 FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
                             case 2:
-                                FormMenuUtama.showForm(new FormPenjualan());
+                                FormMenuUtama.showForm(new FormPenjualan(model));
                                 break;
                             case 3:
                                 FormMenuUtama.logout();

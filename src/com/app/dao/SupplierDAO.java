@@ -31,7 +31,7 @@ public class SupplierDAO implements ServiceSupplier {
     public void tambahData(ModelSupplier model) {
         PreparedStatement st = null;
         try {
-            String sql = "INSERT INTO tbl_supplier(nama, alamat, no_hp) VALUES (?,?,?)";
+            String sql = "INSERT INTO tbl_supplier(nama_supplier, alamat, nomor_telepon) VALUES (?,?,?)";
 
             st = conn.prepareStatement(sql);
             st.setString(1, model.getNama());
@@ -49,7 +49,7 @@ public class SupplierDAO implements ServiceSupplier {
     public void perbaruiData(ModelSupplier model) {
         PreparedStatement st = null;
         try {
-            String sql = "UPDATE tbl_supplier SET nama=?, alamat=?, no_hp=? WHERE id_supplier=?";
+            String sql = "UPDATE tbl_supplier SET nama_supplier=?, alamat=?, nomor_telepon=? WHERE id_supplier=?";
 
             st = conn.prepareStatement(sql);
             st.setString(1, model.getNama());
@@ -92,7 +92,7 @@ public class SupplierDAO implements ServiceSupplier {
                 model.setId_supplier(rs.getInt("id_supplier"));
                 model.setNama(rs.getString("nama_supplier"));
                 model.setAlamat(rs.getString("alamat"));
-                model.setNo_hp(rs.getString("no_hp"));
+                model.setNo_hp(rs.getString("nomor_telepon"));
 
                 list.add(model);
             }
@@ -108,18 +108,18 @@ public class SupplierDAO implements ServiceSupplier {
         ResultSet rs = null;
         List list = new ArrayList();
         String sql = "SELECT * FROM tbl_supplier WHERE id_supplier LIKE '%" + id + "%' "
-                + "OR nama LIKE '%" + id + "%' "
+                + "OR nama_supplier LIKE '%" + id + "%' "
                 + "OR alamat LIKE '%" + id + "%' "
-                + "OR no_hp LIKE '%" + id + "%' ";
+                + "OR nomor_telepon LIKE '%" + id + "%' ";
         try {
             st = conn.prepareStatement(sql);
             rs = st.executeQuery();
             while (rs.next()) {
                 ModelSupplier model = new ModelSupplier();
                 model.setId_supplier(rs.getInt("id_supplier"));
-                model.setNama(rs.getString("nama"));
+                model.setNama(rs.getString("nama_supplier"));
                 model.setAlamat(rs.getString("alamat"));
-                model.setNo_hp(rs.getString("no_hp"));
+                model.setNo_hp(rs.getString("nomor_telepon"));
 
                 list.add(model);
             }
@@ -136,7 +136,7 @@ public class SupplierDAO implements ServiceSupplier {
         PreparedStatement st = null;
         ResultSet rs = null;
         String sql = "SELECT * FROM tbl_supplier "
-                + "WHERE nama = ? AND id_supplier != ?";
+                + "WHERE nama_supplier = ? AND id_supplier != ?";
         try {
             ModelSupplier model = new ModelSupplier();
             st = conn.prepareStatement(sql);

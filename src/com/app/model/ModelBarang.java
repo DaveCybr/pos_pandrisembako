@@ -19,7 +19,16 @@ public class ModelBarang {
     private String barcode;
     private BigDecimal harga;
     private String satuan;
-    private double stok;
+    private String id_satuan;
+    private BigDecimal stok;
+
+    public String getId_satuan() {
+        return id_satuan;
+    }
+
+    public void setId_satuan(String id_satuan) {
+        this.id_satuan = id_satuan;
+    }
 
     public ModelSupplier getModelSupplier() {
         return modelSupplier;
@@ -73,11 +82,11 @@ public class ModelBarang {
         this.satuan = satuan;
     }
 
-    public double getStok() {
+    public BigDecimal getStok() {
         return stok;
     }
 
-    public void setStok(double stok) {
+    public void setStok(BigDecimal stok) {
         this.stok = stok;
     }
 }

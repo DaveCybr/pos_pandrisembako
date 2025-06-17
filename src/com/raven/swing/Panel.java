@@ -73,4 +73,5 @@ public class Panel extends JPanel {
         g2.dispose();
         super.paintComponent(g);
     }
+   
 }

@@ -74,7 +74,8 @@ public class PembelianRinciDAO implements ServicePembelianRinci {
                 = "INSERT INTO tbl_pembelianrinci (id_pembelianrinci, id_pembelian, id_barang, nama_barang, qty, harga, satuan, nilai) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         System.out.println(model.getModelBarang().getSatuan());
         try (PreparedStatement st = conn.prepareStatement(sql)) {
-            st.setString(1, model.getId());
+            String id_pr = "RINC" + (int) (Math.random() * 900 + 100);
+            st.setString(1, id_pr);
             st.setString(2, model.getModelPemb().getIdPembelian());
             st.setString(3, model.getModelBarang().getIdBarang());
             st.setString(4, model.getModelBarang().getNama_barang());
