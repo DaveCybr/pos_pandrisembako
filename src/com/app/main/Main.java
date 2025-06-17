@@ -115,7 +115,7 @@ public class Main extends JLayeredPane {
                     case "kasir":
                         switch (index) {
                             case 0:
-                                FormMenuUtama.showForm(new FormDashboard());
+                                FormMenuUtama.showForm(new FormPembelian(model));
                                 break;
                             case 1:
                                 FormMenuUtama.showForm(new FormPembelian(model));

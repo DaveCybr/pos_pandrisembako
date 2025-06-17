@@ -1,6 +1,6 @@
 package com.app.menu;
 
-import com.app.menu.mode.LightDarkMode;
+import com.app.main.GradientPanel;
 import com.app.menu.mode.ToolBarAccentColor;
 import com.app.model.ModelUser;
 import com.formdev.flatlaf.FlatClientProperties;
@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-public class Menu extends JPanel {
+public class Menu extends GradientPanel {
 
     private ModelUser modelUser;
 
@@ -48,10 +48,8 @@ public class Menu extends JPanel {
     public void setMenuFull(boolean menuFull) {
         this.menuFull = menuFull;
         if (menuFull) {
-            header.setText(headerName);
             header.setHorizontalAlignment(getComponentOrientation().isLeftToRight() ? JLabel.LEFT : JLabel.RIGHT);
         } else {
-            header.setText("");
             header.setHorizontalAlignment(JLabel.CENTER);
         }
         for (Component com : panelMenu.getComponents()) {
@@ -59,18 +57,16 @@ public class Menu extends JPanel {
                 ((MenuItem) com).setFull(menuFull);
             }
         }
-        lightDarkMode.setMenuFull(menuFull);
         toolBarAccentColor.setMenuFull(menuFull);
     }
 
     private final List<MenuEvent> events = new ArrayList<>();
     private boolean menuFull = true;
-    private final String headerName = "PANDRI SEMBAKO";
 
     protected final boolean hideMenuTitleOnMinimum = true;
     protected final int menuTitleLeftInset = 5;
     protected final int menuTitleVgap = 5;
-    protected final int menuMaxWidth = 250;
+    protected final int menuMaxWidth = 230;
     protected final int menuMinWidth = 60;
     protected final int headerFullHgap = 5;
 
@@ -81,25 +77,31 @@ public class Menu extends JPanel {
     private void init() {
         setLayout(new MenuLayout());
         putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:20,2,2,2;"
-                + "background:$Menu.background;"
-                + "arc:10");
-        header = new JLabel(headerName);
-        header.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/Logopandrinew2.jpg")));
+                + "border:10,10,10,10;" // aman di semua sisi
+                + "arc:10;"
+                + "background:transparent;"); // biar gradient kelihatan
+
+        header = new JLabel();
+        header.setIcon(new ImageIcon(getClass().getResource("/com/app/icon/Logopandrinew1.png")));
+        header.setHorizontalAlignment(JLabel.CENTER);
+        header.setVerticalAlignment(JLabel.CENTER);
         header.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:$Menu.header.font;"
                 + "foreground:$Menu.foreground");
 
-        //  Menu
         scroll = new JScrollPane();
+        scroll.setOpaque(false);
+        scroll.getViewport().setOpaque(false);
+
         panelMenu = new JPanel(new MenuItemLayout1(this));
+        panelMenu.setOpaque(false);
         panelMenu.putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:5,5,5,5;"
-                + "background:$Menu.background");
+                + "border:5,5,5,5;");
 
         scroll.setViewportView(panelMenu);
         scroll.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:null");
+
         JScrollBar vscroll = scroll.getVerticalScrollBar();
         vscroll.setUnitIncrement(10);
         vscroll.putClientProperty(FlatClientProperties.STYLE, ""
@@ -108,13 +110,13 @@ public class Menu extends JPanel {
                 + "thumbInsets:$Menu.scroll.thumbInsets;"
                 + "background:$Menu.ScrollBar.background;"
                 + "thumb:$Menu.ScrollBar.thumb");
+
         createMenu();
-        lightDarkMode = new LightDarkMode();
         toolBarAccentColor = new ToolBarAccentColor(this);
         toolBarAccentColor.setVisible(FlatUIUtils.getUIBoolean("AccentControl.show", false));
+
         add(header);
         add(scroll);
-        add(lightDarkMode);
         add(toolBarAccentColor);
     }
 
@@ -130,11 +132,11 @@ public class Menu extends JPanel {
                 String role = modelUser.getRole();
 
                 if (role.equals("kasir")) {
-                    if (!(menuName.equals("Dashboard") || menuName.equals("Pembelian") || menuName.equals("Penjualan") || menuName.equals("Keluar"))) {
+                    if (!(menuName.equals("Pembelian") || menuName.equals("Penjualan") || menuName.equals("Keluar"))) {
                         continue;
                     }
                 } else if (role.equals("gudang")) {
-                    if (!(menuName.equals("Dashboard") || menuName.equals("Produk") || menuName.equals("Supplier") || menuName.equals("Keluar"))) {
+                    if (!(menuName.equals("Produk") || menuName.equals("Supplier") || menuName.equals("Keluar"))) {
                         continue;
                     }
                 }
@@ -228,7 +230,6 @@ public class Menu extends JPanel {
     private JLabel header;
     private JScrollPane scroll;
     private JPanel panelMenu;
-    private LightDarkMode lightDarkMode;
     private ToolBarAccentColor toolBarAccentColor;
 
     private class MenuLayout implements LayoutManager {
@@ -276,17 +277,16 @@ public class Menu extends JPanel {
                 header.setBounds(x + hgap, y, iconWidth - (hgap * 2), iconHeight);
                 int ldgap = UIScale.scale(10);
                 int ldWidth = width - ldgap * 2;
-                int ldHeight = lightDarkMode.getPreferredSize().height;
+                int ldHeight = 0;
                 int ldx = x + ldgap;
-                int ldy = y + height - ldHeight - ldgap - accentColorHeight;
+                int ldy = 0;
 
                 int menux = x;
                 int menuy = y + iconHeight + gap;
                 int menuWidth = width;
-                int menuHeight = height - (iconHeight + gap) - (ldHeight + ldgap * 2) - (accentColorHeight);
+                int menuHeight = height - (iconHeight + gap) - (ldgap * 2) - (accentColorHeight);
                 scroll.setBounds(menux, menuy, menuWidth, menuHeight);
 
-                lightDarkMode.setBounds(ldx, ldy, ldWidth, ldHeight);
 
                 if (toolBarAccentColor.isVisible()) {
                     int tbheight = toolBarAccentColor.getPreferredSize().height;

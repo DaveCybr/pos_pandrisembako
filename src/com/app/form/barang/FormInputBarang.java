@@ -374,11 +374,13 @@ public class FormInputBarang extends javax.swing.JDialog {
             model.setNama_barang(nama);
             model.setBarcode(barcode);
             model.setHarga(harga);
-            model.setSatuan(id_satuan[0]);
+            model.setSatuan(id_satuan[1]);
+            model.setId_satuan(id_satuan[0]);
             model.setStok(stok);
 
             ModelSupplier supl = new ModelSupplier();
-            supl.setNama(id_supplier[0]);
+            supl.setNama(id_supplier[1]);
+            supl.setId_supplier(Integer.parseInt(id_supplier[0]));
             model.setModelSupplier(supl);
 
             servis.tambahData(model); // Menambahkan data ke database
@@ -443,11 +445,13 @@ public class FormInputBarang extends javax.swing.JDialog {
         model.setNama_barang(nama);
         model.setBarcode(barcode);
         model.setHarga(harga);
-        model.setSatuan(id_satuan[0]);
+        model.setSatuan(id_satuan[1]);
+        model.setId_satuan(id_satuan[0]);
         model.setStok(stok);
 
         ModelSupplier supl = new ModelSupplier();
-        supl.setNama(id_supplier[0]);
+        supl.setNama(id_supplier[1]);
+        supl.setId_supplier(Integer.parseInt(id_supplier[0]));
         model.setModelSupplier(supl);
 
         servis.perbaruiData(model); // Perbarui data di database

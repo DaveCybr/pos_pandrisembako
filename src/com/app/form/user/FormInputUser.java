@@ -305,6 +305,7 @@ public class FormInputUser extends javax.swing.JDialog {
 
     private void resetForm() {
         txt_nama.setText("");
+        txt_rfid.setText("");
         txt_username.setText("");
         j_password.setText("");
         txt_notelp.setText("");
@@ -350,7 +351,6 @@ public class FormInputUser extends javax.swing.JDialog {
             String alamat = txt_alamat.getText();
             String role = cb_role.getSelectedItem().toString().toLowerCase();
 
-            // Buat objek user
             ModelUser model = new ModelUser();
             model.setNama(nama);
             model.setRfidUid(rfid);
@@ -364,12 +364,10 @@ public class FormInputUser extends javax.swing.JDialog {
             String generatedId = servis.generateFormattedId(role);
             model.setIdUser(generatedId);
 
-            // Simpan ke DB dan ke tabel
             servis.tambahData(model);
-            tblModel.insertData(model); // pastikan tblModel pakai model.getId_user()
+            tblModel.insertData(model); 
             formuser.refreshTable();
 
-//            JOptionPane.showMessageDialog(this, "Data berhasil disimpan dengan ID: " + generatedId);
             resetForm();
             dispose();
         }

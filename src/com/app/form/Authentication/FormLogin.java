@@ -7,6 +7,7 @@ package com.app.form.Authentication;
 import com.app.config.ConnectionDB;
 import com.app.dao.UserDAO;
 import com.app.main.FormMenuUtama;
+import com.app.main.GradientPanel;
 import com.app.model.ModelUser;
 import com.app.service.ServiceUser;
 import com.formdev.flatlaf.FlatClientProperties;
@@ -30,7 +31,7 @@ import javax.swing.JOptionPane;
  *
  * @author queen
  */
-public class FormLogin extends javax.swing.JPanel {
+public class FormLogin extends GradientPanel {
 
     private ServiceUser servis = new UserDAO();
 
@@ -38,12 +39,12 @@ public class FormLogin extends javax.swing.JPanel {
         initComponents();
         setLayoutForm();
 
-        Lblupapassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR)); 
+        Lblupapassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Lblupapassword.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LupaPassword lupa = new LupaPassword(null, true); 
-                lupa.setVisible(true); 
+                LupaPassword lupa = new LupaPassword(null, true);
+                lupa.setVisible(true);
             }
         });
     }
@@ -132,14 +133,14 @@ public class FormLogin extends javax.swing.JPanel {
 
         txtUsername.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
 
-        lbUsername.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbUsername.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         lbUsername.setText("Username");
 
         lbTitle.setFont(new java.awt.Font("SansSerif", 2, 14)); // NOI18N
         lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbTitle.setText("Login");
 
-        lbPassword.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbPassword.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         lbPassword.setText("Password");
 
         lbLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,7 +169,7 @@ public class FormLogin extends javax.swing.JPanel {
             }
         });
 
-        Lblupapassword.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        Lblupapassword.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         Lblupapassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Lblupapassword.setText("Lupa Password");
 
@@ -197,7 +198,7 @@ public class FormLogin extends javax.swing.JPanel {
             panelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoginLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTitle)
                 .addGap(12, 12, 12)
@@ -208,11 +209,11 @@ public class FormLogin extends javax.swing.JPanel {
                 .addComponent(lbPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_logrfid, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_logrfid, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Lblupapassword)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
@@ -229,7 +230,7 @@ public class FormLogin extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
@@ -272,9 +273,12 @@ public class FormLogin extends javax.swing.JPanel {
         setLayout(new FormLoginLayout());
         panelLogin.setLayout(new LayoutLogin());
         panelLogin.putClientProperty(FlatClientProperties.STYLE, ""
-                + "background:$Login.background;"
+                + "background:#FFFFFF;" // putih
                 + "arc:20;"
-                + "border:30,40,50,30;");
+                + "border:30,40,50,30;"
+                + "shadowColor:#00000020;" // Bayangan tipis
+                + "shadowWidth:10;" // Lebar bayangan
+                + "shadowOpacity:60;");       
         txtPassword.putClientProperty(FlatClientProperties.STYLE, ""
                 + "showRevealButton:true;"
                 + "showCapsLock:true");
@@ -327,7 +331,7 @@ public class FormLogin extends javax.swing.JPanel {
                 int width = parent.getWidth();
                 int height = parent.getHeight();
 
-                int loginWidth = Math.min(UIScale.scale(350), width - 40); // responsive dengan batas minimum margin
+                int loginWidth = Math.min(UIScale.scale(350), width - 40);
                 int loginHeight = panelLogin.getPreferredSize().height;
 
                 int x = (width - loginWidth) / 2;
